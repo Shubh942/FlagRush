@@ -50,7 +50,7 @@ const Header = () => {
   return (
     <div className="header">
       <Link to="/" className="logo">
-        {"<CodeNova />"}
+        {"FlagRush"}
       </Link>
       <Menu />
       {/* <Link

@@ -82,7 +82,7 @@ const SignUp = () => {
     if (pics.type === "image/jpeg" || pics.type === "/image/png") {
       const data = new FormData();
       data.append("file", pics);
-      data.append("upload_preset", "codenova");
+      data.append("upload_preset", "flagrush");
       data.append("cloud_name", "df4t1zu7e");
       fetch("https://api.cloudinary.com/v1_1/df4t1zu7e/image/upload", {
         method: "post",

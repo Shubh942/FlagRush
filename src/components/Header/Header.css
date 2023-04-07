@@ -21,7 +21,7 @@
   padding: 5px;
   gap: 20px;
   background: rgba(3, 137, 255, 0.1);
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .menu-link {
@@ -39,7 +39,7 @@
 
 .menu-link:hover {
   background: #036ac4;
-  border-radius: 5px;
+  border-radius: 2px;
   color: white;
 }
 
