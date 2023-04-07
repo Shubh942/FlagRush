@@ -6,8 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DiscussionCard from "../../components/DiscussionCard/DiscussionCard";
 
 const Discussion = () => {
+
   const [newDiscussion, setNewDiscussion] = useState("");
   const [discussion, setDiscussion] = useState([]);
   const [discussionName, setDiscussionName] = useState("");
@@ -130,12 +132,12 @@ const Discussion = () => {
               setCode(e.target.value);
             }}
           />
-          <a className="btn-cta-blue" onClick={handleClick}>
+          <a className="btn-cta-orange" onClick={handleClick}>
             Create Discussion
           </a>
         </div>
       </div>
-      {/* <div className="discussion">
+      <div className="discussion">
         {discussion ? (
           discussion.map((item) => (
             <DiscussionCard item={item} key={item._id ? item._id : ""} />
@@ -143,8 +145,8 @@ const Discussion = () => {
         ) : (
           <p>Loading...</p>
         )}
-        <DiscussionCard/>
-      </div> */}
+        {/* <DiscussionCard/> */}
+      </div>
       <ToastContainer
         position="bottom-right"
         autoClose={1000}
