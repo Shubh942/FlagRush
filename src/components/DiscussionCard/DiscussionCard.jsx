@@ -37,7 +37,7 @@ const DiscussionCard = ({ item }) => {
       };
 
       const { data } = await axios.post(
-        "https://codenova-api.onrender.com/api/v1/admin/delete-discussion",
+        "http://localhost:5000/api/v1/admin/delete-discussion",
         { chatId: item._id },
         config
       );
@@ -118,7 +118,7 @@ const DiscussionCard = ({ item }) => {
           </div>
         </div>
 
-        <Link to={item ? item.slug : "/"} className="btn-cta-orange">
+        <Link to={item ? item.slug : "/"} className="btn-cta-blue">
           Join Discussion
         </Link>
       </div>

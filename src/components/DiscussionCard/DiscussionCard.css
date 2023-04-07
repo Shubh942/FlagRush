@@ -56,7 +56,7 @@
 .discussion-card-ques img {
   height: 28px;
   border-radius: 50%;
-  border: 0.5px solid #fa9236;
+  border: 0.5px solid #038aff;
 }
 
 .discussion-card-datas {
@@ -127,7 +127,7 @@
   height: 24px;
   border-radius: 50%;
   margin-right: -10px;
-  border: 0.5px solid #fa9236;
+  border: 0.5px solid #038aff;
 }
 
 .discussion-icon {
