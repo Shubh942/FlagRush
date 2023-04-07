@@ -100,7 +100,7 @@ const Login = () => {
             />
           </div>
         </div>
-        <a type="submit" className="btn-cta-orange" onClick={login}>
+        <a type="submit" className="btn-cta-blue" onClick={login}>
           {loading ? <BeatLoader color="#fff" /> : "Login"}
         </a>
         <div className="login-options">

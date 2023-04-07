@@ -10,6 +10,8 @@ html {
 
 body {
   font-family: "Nunito", sans-serif;
+  background-color: #121212;
+  color: #fff;
 }
 
 a,
@@ -33,7 +35,7 @@ Link {
 
 .btn-cta-orange:hover,
 .active:hover {
-  background-color: #dc7418;
+  background-color: #038aff;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
 
@@ -61,16 +63,16 @@ Link {
   align-items: center;
   padding: 8px 10px;
   background: #fff;
-  border: 1.5px solid #dc7418;
+  border: 1.5px solid #1e8bc3;
   border-radius: 5px;
-  color: #dc7418;
+  color: #1e8bc3;
   font-weight: 600;
   transition: all 0.3s;
   cursor: pointer;
 }
 
 .btn-cta-light:hover {
-  background-color: #dc7418;
+  background-color: #16648c;
   color: #fff;
   border: 1.5px solid #fff;
 }
@@ -78,13 +80,35 @@ Link {
 .btn-round {
   padding: 6px 12px;
   color: #fff;
-  background: #fa9236;
+  background: #16648c;
   border-radius: 30px;
   transition: all 0.3s;
 }
 
 .btn-round:hover {
-  background: #dc7418;
+  background: #038aff;
+}
+
+/* blue button */
+
+.btn-cta-blue,
+.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  background: #038aff;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn-cta-blue:hover,
+.active:hover {
+  background-color: #036ac4;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 button {
@@ -98,7 +122,7 @@ button {
   font-weight: 500;
   transition: all 0.3s;
   cursor: pointer;
-  border: 1.5px solid #dc7418;
+  border: 1.5px solid #038aff;
 }
 
 html {
