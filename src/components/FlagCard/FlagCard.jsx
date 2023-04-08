@@ -40,7 +40,7 @@ const FlagCard = ({ object }) => {
           autoClose: 2500,
         });
       } else {
-        toast.error(data.message, {
+        toast.error(data.data.message, {
           autoClose: 1000,
         });
       }
