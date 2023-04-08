@@ -11,9 +11,7 @@ const SocialCard = ({ user }) => {
       </div>
       <div className="socialcard-details">
         <div className="socialcard-user">{user.name}</div>
-        <div className="socialcard-user-rating">
-          
-        </div>
+        <div className="socialcard-user-rating"></div>
         <Link
           to={`/profile/${user.name ? user.name : ""}`}
           className="btn-round"

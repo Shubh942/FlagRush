@@ -10,8 +10,8 @@
   height: 40px;
   left: 233px;
   top: 150px;
-  background: #ffffff;
-  border: 1px solid #e6e6e6;
+  background: #3b3b3b;
+  border: 1px solid #474747;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 40px;
   cursor: pointer;
@@ -52,7 +52,7 @@
   padding: 10px;
   gap: 10px;
   width: 560px;
-  background: rgba(230, 230, 230, 0.4);
+  background: rgba(99, 99, 99, 0.4);
   border-radius: 5px;
   position: relative;
   cursor: pointer;
@@ -77,8 +77,9 @@
 
 .discussion-answer-self {
   padding: 10px;
-  background-color: #fff;
-  border: 2px solid #e6e6e6;
+  background-color: #121212;
+  color: #fff;
+  border: 2px solid #404040;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
