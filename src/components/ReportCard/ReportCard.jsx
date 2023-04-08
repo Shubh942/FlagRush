@@ -70,11 +70,11 @@ const ReportCard = ({ item }) => {
         {color ? (
           <button className="btn-cta-green">Solved</button>
         ) : (
-          <button className="btn-cta-orange" onClick={handleClick}>
+          <button className="btn-cta-blue" onClick={handleClick}>
             ReSolve
           </button>
         )}
-        {/* <button className="btn-cta-orange">Resolved</button> */}
+        {/* <button className="btn-cta-blue">Resolved</button> */}
       </div>
     </div>
   );

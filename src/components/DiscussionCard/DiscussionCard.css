@@ -5,10 +5,10 @@
   padding: 18px 20px;
   gap: 14px;
   width: 590px;
-  background: #ffffff;
-  border: 1px solid #e6e6e6;
+  background: #262525;
+  border: 1px solid #4b4b4b;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.07);
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .discussion-card-content {
@@ -28,7 +28,7 @@
 
 .discussion-card-text {
   font-size: 14px;
-  color: rgba(18, 18, 18, 0.7);
+  color: rgba(230, 230, 230, 0.9);
 }
 
 .discussion-card-question {
@@ -45,7 +45,7 @@
 
 .discussion-card-line {
   width: 550px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .discussion-card-ques div h4 {
@@ -55,8 +55,9 @@
 
 .discussion-card-ques img {
   height: 28px;
+  width: 28px;
   border-radius: 50%;
-  border: 0.5px solid #fa9236;
+  border: 0.5px solid #038aff;
 }
 
 .discussion-card-datas {
@@ -85,6 +86,7 @@
   background: #ffffe0;
   border-radius: 50px;
   cursor: pointer;
+  color: #121212;
   transition: all 0.2s ease-in;
 }
 
@@ -101,6 +103,7 @@
   background: #efefed;
   border-radius: 50px;
   cursor: pointer;
+  color: #121212;
   transition: all 0.2s ease-in;
 }
 
@@ -125,9 +128,10 @@
 
 .discussion-card-comment img {
   height: 24px;
+  width: 24px;
   border-radius: 50%;
   margin-right: -10px;
-  border: 0.5px solid #fa9236;
+  border: 0.5px solid #038aff;
 }
 
 .discussion-icon {
@@ -152,8 +156,8 @@ BiUpvote {
   position: absolute;
   top: 0px;
   right: 20px;
-  background: #ffffff;
-  border: 1.5px solid #dcdcdc;
+  background: #383838;
+  border: 1.5px solid #494949;
   border-radius: 4px;
 }
 
@@ -166,5 +170,5 @@ BiUpvote {
 }
 
 .discussion-dropdown div:hover {
-  background-color: #dcdcdc;
+  background-color: rgb(57, 57, 57);
 }

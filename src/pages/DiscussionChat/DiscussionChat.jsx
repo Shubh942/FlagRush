@@ -273,7 +273,7 @@ const DiscussionChat = () => {
             className="discussion-question-input"
           />
         </div>
-        <div onClick={handleClick} className="btn-cta-orange">
+        <div onClick={handleClick} className="btn-cta-blue">
           Post Answer
         </div>
       </div>

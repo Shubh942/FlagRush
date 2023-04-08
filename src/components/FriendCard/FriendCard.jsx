@@ -17,7 +17,7 @@ const FriendCard = ({ item }) => {
         },
       };
       const { data } = await axios.post(
-        `https://codenova-api.onrender.com/api/v1/chat`,
+        `http://localhost:5000/api/v1/chat`,
         { userId: item._id },
         config
       );
@@ -38,14 +38,6 @@ const FriendCard = ({ item }) => {
           <img src={item.photo ? item.photo : ""} alt="user-image" />
         </div>
         <h3>{item.name ? item.name : ""}</h3>
-        <img src={leetcode} alt="leetcode" />
-        {/* 310 Problems */}
-        {item.leetcodeQuestion ? (
-          <p>{`${item.leetcodeQuestion} Problems`}</p>
-        ) : (
-          "  Handle not Provided"
-        )}{" "}
-        <img src={codeforces} alt="codeforces" />
         <div>
           {item.codeforcesRating ? (
             <p>{`${item.codeforcesRating} rating`}</p>
@@ -53,7 +45,7 @@ const FriendCard = ({ item }) => {
             "Handle not Provided"
           )}{" "}
         </div>
-        <button className="btn-cta-orange" onClick={handleChat}>
+        <button className="btn-cta-blue" onClick={handleChat}>
           Chat
         </button>
       </div>

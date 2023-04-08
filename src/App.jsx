@@ -30,9 +30,7 @@ function App() {
         <Route path="social" element={<Social />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="registration" element={<Registration />} />
-        <Route path="profile/:slug" element={<Me />}>
-          
-        </Route>
+        <Route path="profile/:slug" element={<Me />} />
         <Route path="*" element={<Error />} />
       </Routes>
       {/* </BrowserRouter> */}

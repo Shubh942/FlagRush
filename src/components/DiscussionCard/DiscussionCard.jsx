@@ -17,7 +17,7 @@ import { ChatState } from "../../context/ChatProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReportPopup from "../ReportPopup/ReportPopup";
- 
+
 const DiscussionCard = ({ item }) => {
   const { user, setUser } = ChatState();
   const [report, setReport] = useState(false);
@@ -172,7 +172,7 @@ const DiscussionCard = ({ item }) => {
           </div>
         </div>
 
-        <Link to={item ? item.slug : "/"} className="btn-cta-orange">
+        <Link to={item ? item.slug : "/"} className="btn-cta-blue">
           Join Discussion
         </Link>
       </div>
