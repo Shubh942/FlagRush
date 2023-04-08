@@ -31,7 +31,7 @@ const Registration = () => {
       console.log(college);
       // console.log("---------------------------------");
       const { data } = await axios.post(
-        "http://localhost:5001/api/v1/users/register",
+        "http://localhost:5000/api/v1/users/register",
         {
           college: college,
           githubHandle: githubHandle,
