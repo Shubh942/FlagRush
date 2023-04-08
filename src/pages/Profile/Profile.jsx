@@ -112,7 +112,6 @@ const Me = () => {
           )}
 
           <h1>{viewUser ? viewUser.name : ""}</h1>
-          <h2>{viewUser ? viewUser.college : ""}</h2>
           <div className="profile-content-friend">
             <FaUserFriends />
             <h3>Friend of {viewUser ? viewUser.friends.length : ""} user</h3>
@@ -157,13 +156,15 @@ const Me = () => {
       <br />
       {JSON.parse(localStorage.getItem("userInfo")).data.user._id ===
       (viewUser ? viewUser._id : "") ? (
-        <div className="friends">
-          <h3>Friends</h3>
-          {viewUser
-            ? viewUser.friends.map((item) => (
-                <FriendCard item={item} key={item._id} />
-              ))
-            : ""}
+        <div className="friends-container">
+          <h2>Friends</h2>
+          <div className="friends">
+            {viewUser
+              ? viewUser.friends.map((item) => (
+                  <FriendCard item={item} key={item._id} />
+                ))
+              : ""}
+          </div>
         </div>
       ) : (
         ""
@@ -173,18 +174,20 @@ const Me = () => {
 
       {JSON.parse(localStorage.getItem("userInfo")).data.user._id ===
       (viewUser ? viewUser._id : "") ? (
-        <div className="friendRequests">
+        <div className="friendrequest-container">
           <h2>Request Pendings</h2>
-          {viewUser.friendsRequest
-            ? viewUser.friendsRequest.map((item) => (
-                <FriendRequest
-                  item={item}
-                  key={item._id ? item._id : ""}
-                  setClick={setClick}
-                  click={click}
-                />
-              ))
-            : ""}
+          <div className="friendrequest-content">
+            {viewUser.friendsRequest
+              ? viewUser.friendsRequest.map((item) => (
+                  <FriendRequest
+                    item={item}
+                    key={item._id ? item._id : ""}
+                    setClick={setClick}
+                    click={click}
+                  />
+                ))
+              : ""}
+          </div>
         </div>
       ) : (
         ""

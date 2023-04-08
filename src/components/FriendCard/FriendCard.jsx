@@ -31,17 +31,15 @@ const FriendCard = ({ item }) => {
   //   const [color, setColor] = useState(item.isResolved ? item.isResolved : false);
 
   return (
-    <div className="question">
-      <div className="question-txt">
-        {/* <p>Requested By:</p> */}
-        <div className="profile-pic-2">
-          <img src={item.photo ? item.photo : ""} alt="user-image" />
-        </div>
-        <h3>{item.name ? item.name : ""}</h3>
-        <button className="btn-cta-blue" onClick={handleChat}>
-          Chat
-        </button>
+    <div className="friends-card">
+      {/* <p>Requested By:</p> */}
+      <div className="friends-pic">
+        <img src={item.photo ? item.photo : ""} alt="user-image" />
       </div>
+      <h3>{item.name ? item.name : ""}</h3>
+      <button className="btn-cta-blue" onClick={handleChat}>
+        Chat
+      </button>
     </div>
   );
 };
