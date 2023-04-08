@@ -57,33 +57,34 @@ const FlagCard = ({ object }) => {
         ""
       )}
       <h2>{object ? object.heading : ""}</h2>
-      <div>Discription: {object ? object.description : ""}</div>
-      <div>Link: {object ? object.link : ""}</div>
-      <div>
-        Author:{object ? object.host.name : ""}
-        {object ? (
-          <div className="author-photo">
-            <img src={object.host.photo} />
-          </div>
-        ) : (
-          ""
-        )}
+      <div className="flagBox-contents">
+        <div>Discription: {object ? object.description : ""}</div>
+        <div className="flag-card-link">
+          Link: <p> {object ? object.link : ""} </p>
+        </div>
+        <div className="flagBox-author">
+          {object ? <img src={object.host.photo} /> : ""}
+          <p>Author:{object ? object.host.name : ""}</p>
+        </div>
+        <div>Hint: {object && object.hint ? object.hint : "NO HINTS"}</div>
       </div>
-      <div>Hint: {object && object.hint ? object.hint : "NO HINTS"}</div>
-      <TextField
-        id="filled-multiline-static"
-        label="Flag you inserted in CTF"
-        multiline
-        variant="filled"
-        value={flag}
-        className="discussion-question-input"
-        onChange={(e) => {
-          setFlag(e.target.value);
-        }}
-      />
-      <button onClick={submitFlag}>
-        {!loading ? "Submit Flag Id" : <BeatLoader color="#fff" />}
-      </button>
+      <div className="flagBox-input">
+        <TextField
+          id="filled-multiline-static"
+          label="Flag you inserted in CTF"
+          multiline
+          variant="filled"
+          value={flag}
+          className="discussion-question-input"
+          onChange={(e) => {
+            setFlag(e.target.value);
+          }}
+          style={{ width: "420px" }}
+        />
+        <button className="btn-cta-blue" onClick={submitFlag}>
+          {!loading ? "Submit Flag Id" : <BeatLoader color="#fff" />}
+        </button>
+      </div>
 
       <ToastContainer
         position="bottom-right"

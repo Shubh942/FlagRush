@@ -111,7 +111,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="home">
       <Helmet>
         <title>FlagRush | Home</title>
       </Helmet>
