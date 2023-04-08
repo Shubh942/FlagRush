@@ -14,6 +14,7 @@ import utkarsh from "../../assets/utkarsh.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const DiscussionChat = () => {
   const { slug } = useParams();
@@ -174,6 +175,9 @@ const DiscussionChat = () => {
 
   return (
     <div className="discussion-chat">
+      <Helmet>
+        <title>FlagRush | Discussion Chat</title>
+      </Helmet>
       <div className="back-button" onClick={back}>
         <MdArrowBackIos />
       </div>

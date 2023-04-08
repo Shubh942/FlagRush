@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import error from "../../assets/error.png";
 import "./Error.css";
+import { Helmet } from "react-helmet";
 
 const Error = () => {
   const navigate = useNavigate();
@@ -12,6 +13,9 @@ const Error = () => {
 
   return (
     <div className="error">
+      <Helmet>
+        <title>FlagRush | Error</title>
+      </Helmet>
       <h1>Error 404 page not found</h1>
       <div className="btn-cta-blue" onClick={back}>
         Go Back
