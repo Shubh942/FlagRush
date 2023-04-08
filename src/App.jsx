@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Link, Router, Routes } from "react-router-dom";
 import Me from "./pages/Profile/Profile";
 import Header from "./components/Header/Header";
-import Home from "./pages/Home/Home";
 import Chat from "./pages/Chat/Chat";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
@@ -12,6 +11,7 @@ import AdminChat from "./pages/AdminChat/AdminChat";
 import DiscussionChat from "./pages/DiscussionChat/DiscussionChat";
 import Error from "./pages/Error/Error";
 import Reports from "./pages/Reports/Reports";
+import Home from "./pages/Home/Home";
 import Registration from "./pages/Registration/Registration";
 
 function App() {
