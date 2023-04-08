@@ -1,9 +1,9 @@
 import { React, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { MdArrowBackIos } from "react-icons/md ";
 import { BiUpvote, BiDownvote, BiComment } from "react-icons/bi";
 import { BsThreeDotsVertical, BsShare, BsBookmark } from "react-icons/bs";
-// import { TfiAngleLeft } from "react-icons/tfi ";
 import { GoReport } from "react-icons/go";
 import { RxCross1 } from "react-icons/rx";
 import "./DiscussionChat.css";
@@ -175,8 +175,7 @@ const DiscussionChat = () => {
   return (
     <div className="discussion-chat">
       <div className="back-button" onClick={back}>
-        {/* <TfiAngleLeft /> */}
-        back
+        <MdArrowBackIos />
       </div>
 
       {report ? <ReportPopup item={discussionData} /> : ""}

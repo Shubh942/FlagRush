@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ChatState } from "../../context/ChatProvider";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import "./Discussion.css";
@@ -9,6 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 import DiscussionCard from "../../components/DiscussionCard/DiscussionCard";
 
 const Discussion = () => {
+  const { user, setUser, isUserLoggedIn } = ChatState();
+
   const [newDiscussion, setNewDiscussion] = useState("");
   const [discussion, setDiscussion] = useState([]);
   const [discussionName, setDiscussionName] = useState("");
@@ -29,7 +32,7 @@ const Discussion = () => {
           },
         };
         const { data } = await axios.post(
-          `http://localhost:5000/api/v1/chat/create-discussion`,
+          `localhost:5000/api/v1/chat/create-discussion`,
           {
             chatName: discussionName,
             discription: discription,
@@ -67,7 +70,7 @@ const Discussion = () => {
         },
       };
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/chat/discussion`,
+        `localhost:5000/api/v1/chat/discussion`,
         config
       );
       setDiscussion(data);
@@ -79,17 +82,17 @@ const Discussion = () => {
 
   // window.addEventListener("beforeunload", pageLoad);
 
-  // useEffect(() => {
-  //   if (!isUserLoggedIn.current) {
-  //     console.log(isUserLoggedIn.current);
-  //     navigate("/login");
-  //   }
-  //   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  //   setUser(userInfo);
+  useEffect(() => {
+    if (!isUserLoggedIn.current) {
+      console.log(isUserLoggedIn.current);
+      navigate("/login");
+    }
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    setUser(userInfo);
 
-  //   pageLoad();
-  //   // console.log("working");
-  // }, []);
+    pageLoad();
+    // console.log("working");
+  }, []);
 
   useEffect(() => {
     setDiscussion([...discussion, newDiscussion]);
@@ -131,7 +134,7 @@ const Discussion = () => {
               setCode(e.target.value);
             }}
           />
-          <a className="btn-cta-blue" onClick={handleClick}>
+          <a className="btn-cta-orange" onClick={handleClick}>
             Create Discussion
           </a>
         </div>

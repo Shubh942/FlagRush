@@ -35,6 +35,7 @@ const DiscussionAnswer = ({ item }) => {
       console.error(err);
     }
   };
+
   const handleUpVote = async () => {
     try {
       const config = {
