@@ -1,0 +1,4 @@
+.flag-flex {
+  display: flex;
+  flex-direction: column;
+}
