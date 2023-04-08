@@ -41,8 +41,6 @@ const Me = () => {
 
         config
       );
-      console.log("-----------user-----------");
-      console.log(data.user[0]);
       setViewUser(data.user[0]);
       for (let i = 0; i < data.user[0].friends.length; i++) {
         if (
@@ -99,7 +97,7 @@ const Me = () => {
     <div className="profile">
       <div className="profile-content">
         <div className="profile-pic">
-          <img src={viewUser ? viewUser.photo : ""} alt="user" />
+          <img src={viewUser ? viewUser.photo : userpic} alt="user" />
         </div>
         <div className="profile-content-details">
           {JSON.parse(localStorage.getItem("userInfo")).data.user._id !==
