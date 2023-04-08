@@ -5,6 +5,7 @@ import axios from "axios";
 import { BeatLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { ChatState } from "../../context/ChatProvider";
 
 const FlagCard = ({ object }) => {
@@ -12,6 +13,10 @@ const FlagCard = ({ object }) => {
   const [flag, setFlag] = useState("");
   const [loading, setLoading] = useState(false);
   const [isSolved, setIsSolved] = useState(false);
+  const [show, setShow] = useState(false);
+  const eyeChange = () => {
+    setShow(!show);
+  };
   const submitFlag = async () => {
     try {
       setLoading(true);
@@ -66,7 +71,15 @@ const FlagCard = ({ object }) => {
           {object ? <img src={object.host.photo} /> : ""}
           <p>Author:{object ? object.host.name : ""}</p>
         </div>
-        <div>Hint: {object && object.hint ? object.hint : "NO HINTS"}</div>
+        <div className="flagBox-hint">
+          Hint:{" "}
+          {show ? (
+            <AiOutlineEye onClick={eyeChange} />
+          ) : (
+            <AiOutlineEyeInvisible onClick={eyeChange} />
+          )}{" "}
+          {object && object.hint && show ? object.hint : ""}
+        </div>
       </div>
       <div className="flagBox-input">
         <TextField

@@ -45,3 +45,10 @@
   display: flex;
   gap: 6px;
 }
+
+.flagBox-hint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
