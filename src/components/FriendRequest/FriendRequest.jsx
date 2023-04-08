@@ -51,22 +51,20 @@ const FriendRequest = ({ item, setClick, click }) => {
     }
   };
   return (
-    <div className="question">
-      <div className="question-txt">
+    <div className="friendrequest">
+      <div className="friendrequest-txt">
         <p>Requested By:</p>
-        <div className="profile-pic">
-          <img src={item.photo ? item.photo : ""} alt="user-image" />
-        </div>
-        <h3>{item.name ? item.name : ""}</h3>
-        {/* <h5>{item.chatId ? item.chatId.discription : ""}</h5> */}
+        <img src={item.photo ? item.photo : ""} alt="user-image" />
       </div>
 
-      <button className="btn" onClick={handleAccept}>
-        Accept
-      </button>
-      <button className="btn" onClick={handleDecline}>
-        Decline
-      </button>
+      <div className="friendrequest-buttons">
+        <button className="btn" onClick={handleAccept}>
+          Accept
+        </button>
+        <button className="btn" onClick={handleDecline}>
+          Decline
+        </button>
+      </div>
     </div>
   );
 };

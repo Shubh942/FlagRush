@@ -10,6 +10,7 @@ import Discussion from "./pages/Discussion/Discussion";
 import AdminChat from "./pages/AdminChat/AdminChat";
 import DiscussionChat from "./pages/DiscussionChat/DiscussionChat";
 import Error from "./pages/Error/Error";
+import FutureScope from "./pages/Error/FutureScope";
 import Reports from "./pages/Reports/Reports";
 import Home from "./pages/Home/Home";
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="social" element={<Social />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="profile/:slug" element={<Me />} />
+        <Route path="future-scope" element={<FutureScope />} />
         <Route path="*" element={<Error />} />
       </Routes>
       {/* </BrowserRouter> */}

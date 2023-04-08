@@ -5,17 +5,20 @@
   border-radius: 10px;
 } */
 
-.question-txt {
-  /* display: flex;
+.friendrequest {
+  display: flex;
   flex-direction: column;
-  align-items: flex-start; */
-  padding: 0px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
   gap: 10px;
-  width: 276px;
-  /* border: 2px solid black; */
+  width: 250px;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 30px 0;
 }
 
-.question-txt h3 {
+.friendrequest h3 {
   font-weight: 600;
   font-size: 20px;
   line-height: 27px;
@@ -24,11 +27,12 @@
   /* border: 2px solid black; */
 }
 
-.question-tag {
-  /* display: flex;
-  flex-direction: row; */
-  flex-wrap: wrap;
-  gap: 10px;
+.friendrequest-txt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .question-tag p {
@@ -38,10 +42,10 @@
   background: rgba(255, 122, 0, 0.1);
   border-radius: 30px;
 }
-.profile-pic img {
-  width: 10px;
-  height: 10px;
-  border: 5px solid #fa9236;
+.friendrequest-txt img {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #fa9236;
   filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.15));
   border-radius: 100px;
 }
@@ -57,4 +61,9 @@
 .question-acceptance {
   font-size: 16px;
   font-weight: 600;
+}
+
+.friendrequest-buttons {
+  display: flex;
+  gap: 15px;
 }
