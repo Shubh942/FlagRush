@@ -231,7 +231,7 @@ const Me = () => {
         ) : isTrue ? (
           "Request sent"
         ) : (
-          <button className="btn-cta-orange" onClick={makeFriend}>
+          <button className="btn-cta-blue" onClick={makeFriend}>
             Make Connection
           </button>
         )

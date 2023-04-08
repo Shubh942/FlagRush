@@ -15,7 +15,7 @@ const Codechef = () => {
       try {
         const handle = codechefHandle.current;
         const fdata = await axios.get(
-          `https://codenova-webscrapping.onrender.com/api/v1/codechef/${handle}`
+          `http://localhost:5000/api/v1/codechef/${handle}`
         );
         setData(fdata.data);
         setLoading(false);

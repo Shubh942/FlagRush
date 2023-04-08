@@ -25,7 +25,7 @@ Link {
   justify-content: center;
   align-items: center;
   padding: 8px 10px;
-  background: #038aff;
+  background: #fa9236;
   border-radius: 5px;
   color: #fff;
   font-weight: 500;
@@ -36,6 +36,26 @@ Link {
 .btn-cta-orange:hover,
 .active:hover {
   background-color: #038aff;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-cta-blue,
+.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  background: #038aff;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn-cta-blue:hover,
+.active:hover {
+  background-color: #0269c3;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
 
@@ -80,13 +100,35 @@ Link {
 .btn-round {
   padding: 6px 12px;
   color: #fff;
-  background: #038aff;
+  background: #16648c;
   border-radius: 30px;
   transition: all 0.3s;
 }
 
 .btn-round:hover {
-  background: #16648c;
+  background: #038aff;
+}
+
+/* blue button */
+
+.btn-cta-blue,
+.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  background: #038aff;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn-cta-blue:hover,
+.active:hover {
+  background-color: #036ac4;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 button {

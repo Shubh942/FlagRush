@@ -134,7 +134,7 @@ const Discussion = () => {
               setCode(e.target.value);
             }}
           />
-          <a className="btn-cta-orange" onClick={handleClick}>
+          <a className="btn-cta-blue" onClick={handleClick}>
             Create Discussion
           </a>
         </div>

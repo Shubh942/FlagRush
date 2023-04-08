@@ -125,7 +125,7 @@ const Registration = () => {
         />
       </div>
       <div>
-        <button type="submit" className="btn-cta-orange" onClick={register}>
+        <button type="submit" className="btn-cta-blue" onClick={register}>
           {loading ? <BeatLoader color="#fff" /> : "Register"}
         </button>
       </div>

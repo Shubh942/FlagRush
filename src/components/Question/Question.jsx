@@ -14,7 +14,7 @@ const Question = () => {
       </div>
       <p className="question-level">Easy</p>
       <p className="question-acceptance">69.69%</p>
-      <a href="#" className="btn-cta-orange">
+      <a href="#" className="btn-cta-blue">
         Solve Problem
       </a>
     </div>

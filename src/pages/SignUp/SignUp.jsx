@@ -158,7 +158,7 @@ const SignUp = () => {
             onChange={(e) => postDetails(e.target.files[0])}
           />
         </div>
-        <a type="submit" className="btn-cta-orange" onClick={submitHandler}>
+        <a type="submit" className="btn-cta-blue" onClick={submitHandler}>
           {loading ? <BeatLoader color="#fff" /> : "Sign Up"}
         </a>
       </div>

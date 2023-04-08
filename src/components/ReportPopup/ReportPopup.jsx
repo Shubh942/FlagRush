@@ -53,7 +53,7 @@ const ReportPopup = ({ item }) => {
           />
         </div>
         <div className="reportpopup-buttons">
-          <div className="btn-cta-orange" onClick={handleClick}>
+          <div className="btn-cta-blue" onClick={handleClick}>
             Post Query
           </div>
           <div className="btn-cta-light">Close</div>
