@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { IoIosPaper, IoMdChatboxes } from "react-icons/io";
 import { BsChatRightDotsFill } from "react-icons/bs";
 import { RiGroupFill } from "react-icons/ri";
+import { FaChessKing } from "react-icons/fa";
 
 import "./Header.css";
 // import "./tempheader.css";
@@ -31,6 +32,10 @@ const Menu = () => {
       <NavLink to="social" className="menu-link">
         <RiGroupFill />
         Social
+      </NavLink>
+      <NavLink to="future-scope" className="menu-link">
+        <FaChessKing />
+        Contests
       </NavLink>
     </div>
   );
