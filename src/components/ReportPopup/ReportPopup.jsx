@@ -17,7 +17,7 @@ const ReportPopup = ({ item }) => {
         },
       };
       const { data } = await axios.post(
-        `https://codenova-api.onrender.com/api/v1/report/report-discussion`,
+        `http://localhost:5000/api/v1/report/report-discussion`,
         { content: query, chatId: item._id },
         config
       );

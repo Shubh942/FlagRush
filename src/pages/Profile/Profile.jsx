@@ -28,8 +28,6 @@ const Me = () => {
   const [click, setClick] = useState(false);
   // console.log(slug);
 
-
-
   const pageLoad = async () => {
     try {
       const config = {
@@ -43,13 +41,8 @@ const Me = () => {
 
         config
       );
-      // console.log("-------------------data----------------");
-      // console.log(data.user);
-      // console.log(
-      //   data.user[0].techStack ? data.user[0].techStack.split(" ") : ""
-      // );
-
-      // console.log(data.user[0]);
+      console.log("-----------user-----------");
+      console.log(data.user[0]);
       setViewUser(data.user[0]);
       for (let i = 0; i < data.user[0].friends.length; i++) {
         if (
@@ -83,6 +76,8 @@ const Me = () => {
           }`,
         },
       };
+
+      // console.log(viewUser);
       const { data } = await axios.post(
         `http://localhost:5000/api/v1/users/make-friend`,
         { friendId: viewUser._id },

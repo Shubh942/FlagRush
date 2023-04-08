@@ -38,13 +38,6 @@ const FriendCard = ({ item }) => {
           <img src={item.photo ? item.photo : ""} alt="user-image" />
         </div>
         <h3>{item.name ? item.name : ""}</h3>
-        <div>
-          {item.codeforcesRating ? (
-            <p>{`${item.codeforcesRating} rating`}</p>
-          ) : (
-            "Handle not Provided"
-          )}{" "}
-        </div>
         <button className="btn-cta-blue" onClick={handleChat}>
           Chat
         </button>

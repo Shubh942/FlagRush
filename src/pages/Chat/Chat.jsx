@@ -10,7 +10,7 @@ import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 
-const ENDPOINT = "https://codenova-api.onrender.com/";
+const ENDPOINT = "http://localhost:5000/";
 var socket, selectedChatCompare;
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -56,7 +56,7 @@ const Chat = () => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          "https://codenova-api.onrender.com/api/v1/message",
+          "http://localhost:5000/api/v1/message",
           {
             content: newMessage,
             chatId: selectedChat._id,

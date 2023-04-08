@@ -19,7 +19,7 @@ const ChatName = () => {
       };
 
       const { data } = await axios.get(
-        "https://codenova-api.onrender.com/api/v1/admin/all-chats",
+        "http://localhost:5000/api/v1/admin/all-chats",
         config
       );
       console.log(data);

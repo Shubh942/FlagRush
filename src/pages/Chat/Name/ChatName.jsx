@@ -5,7 +5,7 @@ import axios from "axios";
 
 import "./ChatName.css";
 
-const ENDPOINT = "https://codenova-api.onrender.com/";
+const ENDPOINT = "http://localhost:5000/";
 var socket, selectedChatCompare;
 const ChatName = () => {
   const [loggedUser, setLoggedUser] = useState();
@@ -25,7 +25,7 @@ const ChatName = () => {
       };
 
       const { data } = await axios.get(
-        "https://codenova-api.onrender.com/api/v1/chat",
+        "http://localhost:5000/api/v1/chat",
         config
       );
       // console.log(data);

@@ -64,8 +64,7 @@ const Social = () => {
           }}
         />
         <a className="btn-round">Search Profile</a>
-        <div className="social-searchbyhandle">
-        </div>
+        <div className="social-searchbyhandle"></div>
       </div>
       <div className="social-middle">
         <div className="user-card">
