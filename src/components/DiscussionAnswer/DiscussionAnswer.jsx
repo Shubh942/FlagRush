@@ -24,7 +24,7 @@ const DiscussionAnswer = ({ item }) => {
       };
 
       const { data } = await axios.post(
-        "localhost:5000/api/v1/admin/delete-message",
+        "https://codenova-api.onrender.com/api/v1/admin/delete-message",
         { messageId: item._id },
         config
       );
@@ -35,7 +35,6 @@ const DiscussionAnswer = ({ item }) => {
       console.error(err);
     }
   };
-
   const handleUpVote = async () => {
     try {
       const config = {
@@ -47,7 +46,7 @@ const DiscussionAnswer = ({ item }) => {
       };
 
       const { data } = await axios.post(
-        `localhost:5000/api/v1/message/vote/${item._id}`,
+        `https://codenova-api.onrender.com/api/v1/message/vote/${item._id}`,
         { vote: "up" },
         config
       );
@@ -70,7 +69,7 @@ const DiscussionAnswer = ({ item }) => {
       };
 
       const { data } = await axios.post(
-        `localhost:5000/api/v1/message/vote/${item._id}`,
+        `https://codenova-api.onrender.com/api/v1/message/vote/${item._id}`,
         { vote: "down" },
         config
       );

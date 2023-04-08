@@ -16,7 +16,7 @@
   background: #ffffff;
   border: 2px solid #e6e6e6;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-  border-radius: 2px;
+  border-radius: 6px;
 }
 .login-welcome {
   width: 110px;
@@ -38,7 +38,7 @@
   height: 40px;
   background: #ffffff;
   border: 1px solid #e6e6e6;
-  border-radius: 6px;
+  border-radius: 50px;
 }
 .login-password {
   display: flex;
@@ -98,16 +98,16 @@
   font-size: 14px;
   line-height: 19px;
   /* identical to box height */
-  
+
   display: flex;
   align-items: center;
 
-  color: #fff;
+  color: #000000;
 }
 .btn-cta-blue {
   padding: 8px 10px;
   background: #2f80ed;
-  border-radius: 2px;
+  border-radius: 5px;
   color: #fff;
   font-weight: 500;
   transition: all 0.3s;

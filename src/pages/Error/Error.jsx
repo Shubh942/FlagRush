@@ -13,7 +13,7 @@ const Error = () => {
   return (
     <div className="error">
       <h1>Error 404 page not found</h1>
-      <div className="btn-cta-blue" onClick={back}>
+      <div className="btn-cta-orange" onClick={back}>
         Go Back
       </div>
       <img src={error} alt="error 404" />

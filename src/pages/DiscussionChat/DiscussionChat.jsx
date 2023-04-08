@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-// import { MdArrowBackIos } from "react-icons/md ";
+import { MdArrowBackIos } from "react-icons/md ";
 import { BiUpvote, BiDownvote, BiComment } from "react-icons/bi";
 import { BsThreeDotsVertical, BsShare, BsBookmark } from "react-icons/bs";
 import { GoReport } from "react-icons/go";
@@ -54,7 +54,7 @@ const DiscussionChat = () => {
       };
 
       const { data } = await axios.post(
-        `https://codenova-api.onrender.com/api/v1/chat/vote/${discussionData._id}`,
+        `http://localhost:5000/api/v1/chat/vote/${discussionData._id}`,
         { vote: "up" },
         config
       );
@@ -77,7 +77,7 @@ const DiscussionChat = () => {
       };
 
       const { data } = await axios.post(
-        `https://codenova-api.onrender.com/api/v1/chat/vote/${discussionData._id}`,
+        `http://localhost:5000/api/v1/chat/vote/${discussionData._id}`,
         { vote: "down" },
         config
       );
@@ -102,7 +102,7 @@ const DiscussionChat = () => {
         },
       };
       const { data } = await axios.post(
-        `https://codenova-api.onrender.com/api/v1/chat/slug`,
+        `http://localhost:5000/api/v1/chat/slug`,
         { slug: slug },
         config
       );
@@ -113,7 +113,7 @@ const DiscussionChat = () => {
       setDown(data.chat[0].downvotes.length);
 
       const message = await axios.get(
-        `https://codenova-api.onrender.com/api/v1/message/${data.chat[0]._id}`,
+        `http://localhost:5000/api/v1/message/${data.chat[0]._id}`,
 
         config
       );
@@ -145,7 +145,7 @@ const DiscussionChat = () => {
           autoClose: 2000,
         });
         const { data } = await axios.post(
-          `https://codenova-api.onrender.com/api/v1/message/`,
+          `http://localhost:5000/api/v1/message/`,
           { content: answer, code: answercode, chatId: discussionData._id },
           config
         );

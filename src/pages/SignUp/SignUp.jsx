@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SignUp.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-// import logo from "";
+import logo from "../../assets/codenova.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -82,7 +82,7 @@ const SignUp = () => {
     if (pics.type === "image/jpeg" || pics.type === "/image/png") {
       const data = new FormData();
       data.append("file", pics);
-      data.append("upload_preset", "flagrush");
+      data.append("upload_preset", "codenova");
       data.append("cloud_name", "df4t1zu7e");
       fetch("https://api.cloudinary.com/v1_1/df4t1zu7e/image/upload", {
         method: "post",
@@ -106,7 +106,7 @@ const SignUp = () => {
   return (
     <div className="signup">
       <div className="signup-container">
-        {/* <img src={logo} /> */}
+        <img src={logo} />
         <h3 className="signup-welcome">Welcome</h3>
         <div className="signup-input">
           <input
@@ -158,7 +158,7 @@ const SignUp = () => {
             onChange={(e) => postDetails(e.target.files[0])}
           />
         </div>
-        <a type="submit" className="btn-cta-blue" onClick={submitHandler}>
+        <a type="submit" className="btn-cta-orange" onClick={submitHandler}>
           {loading ? <BeatLoader color="#fff" /> : "Sign Up"}
         </a>
       </div>

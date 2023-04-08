@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./DiscussionCard.css";
-import utkarsh from "../../assets/default.jpg";
+import utkarsh from "../../assets/utkarsh.jpg";
 import { Link } from "react-router-dom";
 import { BiUpvote, BiDownvote, BiComment } from "react-icons/bi";
 import {
@@ -13,17 +13,68 @@ import { GoReport } from "react-icons/go";
 import { RxCross1 } from "react-icons/rx";
 import { AiTwotoneDelete } from "react-icons/ai";
 import axios from "axios";
+import { ChatState } from "../../context/ChatProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
+import ReportPopup from "../ReportPopup/ReportPopup";
+ 
 const DiscussionCard = ({ item }) => {
+  const { user, setUser } = ChatState();
+  const [report, setReport] = useState(false);
   // console.log(item.slug);
   const [open, setOpen] = useState(false);
   const [book, setBook] = useState(false);
+  const [up, setUp] = useState(item.upvotes ? item.upvotes.length : 0);
+  const [down, setDown] = useState(item.downvotes ? item.downvotes.length : 0);
 
   const openPopup = () => {
     setOpen(!open);
+  };
+
+  const handleUpVote = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("userInfo")).token
+          }`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `http://localhost:5000/api/v1/chat/vote/${item._id}`,
+        { vote: "up" },
+        config
+      );
+      setUp(data.upvotes);
+      setDown(data.downvotes);
+      // console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDownVote = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("userInfo")).token
+          }`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `http://localhost:5000/api/v1/chat/vote/${item._id}`,
+        { vote: "down" },
+        config
+      );
+      setDown(data.downvotes);
+      setUp(data.upvotes);
+      // console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleDelete = async () => {
@@ -63,6 +114,7 @@ const DiscussionCard = ({ item }) => {
 
         config
       );
+      console.log("LLLlllllllllllllllll");
       // console.log(data.user);
       const isbookmarked = await data.user[0].bookmarkChats.includes(item._id);
 
@@ -104,6 +156,8 @@ const DiscussionCard = ({ item }) => {
   // });
   return (
     <div className="discussion-card">
+      {/* {console.log(item)} */}
+      {report ? <ReportPopup item={item._id ? item._id : ""} /> : ""}
       <div className="discussion-card-content">
         <div className="discussion-card-ques">
           <p>{item.name}</p>
@@ -118,7 +172,7 @@ const DiscussionCard = ({ item }) => {
           </div>
         </div>
 
-        <Link to={item ? item.slug : "/"} className="btn-cta-blue">
+        <Link to={item ? item.slug : "/"} className="btn-cta-orange">
           Join Discussion
         </Link>
       </div>
@@ -126,11 +180,11 @@ const DiscussionCard = ({ item }) => {
 
       <div className="discussion-card-datas">
         <div className="discussion-card-data">
-          <div className="discussion-card-upvote" >
-            <BiUpvote className="discussion-icon" /> 
+          <div className="discussion-card-upvote" onClick={handleUpVote}>
+            <BiUpvote className="discussion-icon" /> <p>{up}</p>
           </div>
-          <div className="discussion-card-downvote" >
-            <BiDownvote className="discussion-icon" />
+          <div className="discussion-card-downvote" onClick={handleDownVote}>
+            <BiDownvote className="discussion-icon" /> <p>{down}</p>
           </div>
           <div className="discussion-card-comment">
             <Link
@@ -140,16 +194,21 @@ const DiscussionCard = ({ item }) => {
               <BiComment className="discussion-icon" />
               {/* <p>4</p> */}
             </Link>
-            {/* {item
+            {item
               ? item.users.map((user) => (
                   <img src={user.photo} alt="" key={user._id} />
                 ))
-              : ""} */}
+              : ""}
             {/* <img src={utkarsh} alt="" />
             <img src={utkarsh} alt="" />
             <img src={utkarsh} alt="" /> */}
           </div>
         </div>
+        {user.data.user.role === "admin" ? (
+          <AiTwotoneDelete onClick={handleDelete} />
+        ) : (
+          ""
+        )}
         <div className="discussion-card-dropdown" onClick={openPopup}>
           {open ? <RxCross1 /> : <BsThreeDotsVertical onClick={isBookmark} />}
           {open && (
