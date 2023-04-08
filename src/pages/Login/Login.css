@@ -98,11 +98,11 @@
   font-size: 14px;
   line-height: 19px;
   /* identical to box height */
-
+  
   display: flex;
   align-items: center;
 
-  color: #000000;
+  color: #fff;
 }
 .btn-cta-blue {
   padding: 8px 10px;
