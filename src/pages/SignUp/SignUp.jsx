@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SignUp.css";
+import { Helmet } from "react-helmet";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../../assets/codenova.png";
@@ -105,6 +106,9 @@ const SignUp = () => {
   };
   return (
     <div className="signup">
+      <Helmet>
+        <title>FlagRush | Social</title>
+      </Helmet>
       <div className="signup-container">
         <h2>FlagRush</h2>
         <h3>Welcome</h3>

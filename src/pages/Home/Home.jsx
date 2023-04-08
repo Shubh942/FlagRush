@@ -8,6 +8,7 @@ import { BeatLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ChatState } from "../../context/ChatProvider";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -111,12 +112,15 @@ const Home = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>FlagRush | Home</title>
+      </Helmet>
       <h1>Community Page --</h1>
       <div className="discussion-question">
         <TextField
           id="filled-basic"
           label="Heading of CTF / Type of CTF"
-          variant="outlined"
+          variant="filled"
           className="discussion-question-input"
           value={heading}
           onChange={(e) => {
@@ -126,7 +130,7 @@ const Home = () => {
         <TextField
           id="filled-basic"
           label="Add description of ctf"
-          variant="outlined"
+          variant="filled"
           multiline
           value={discription}
           className="discussion-question-input"

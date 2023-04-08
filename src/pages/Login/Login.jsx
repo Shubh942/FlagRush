@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BeatLoader } from "react-spinners";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { ChatState } from "../../context/ChatProvider";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -68,13 +69,16 @@ const Login = () => {
   useEffect(() => {}, []);
   return (
     <div className="login-container">
+      <Helmet>
+        <title>FlagRush | Login</title>
+      </Helmet>
       <div className="login">
         <h2>FlagRush</h2>
         <h3 className="login-welcome">Welcome Back</h3>
         <div className="login-input">
           <input
             type="text"
-            placeholder="username"
+            placeholder="user email"
             name="username"
             className="login-username"
             value={username}

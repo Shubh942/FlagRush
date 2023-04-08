@@ -7,13 +7,7 @@ import FriendRequest from "../../components/FriendRequest/FriendRequest";
 import { ChatState } from "../../context/ChatProvider";
 import { FaUserFriends } from "react-icons/fa";
 import { AiTwotoneEdit } from "react-icons/ai";
-import {
-  SiGithub,
-  SiCodeforces,
-  SiCodechef,
-  SiLeetcode,
-  SiGeeksforgeeks,
-} from "react-icons/si";
+import { Helmet } from "react-helmet";
 
 import "./Profile.css";
 
@@ -95,6 +89,9 @@ const Me = () => {
 
   return (
     <div className="profile">
+      <Helmet>
+        <title>FlagRush | Profile</title>
+      </Helmet>
       <div className="profile-content">
         <div className="profile-pic">
           <img src={viewUser ? viewUser.photo : userpic} alt="user" />

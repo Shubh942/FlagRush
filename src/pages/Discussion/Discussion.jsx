@@ -100,6 +100,9 @@ const Discussion = () => {
 
   return (
     <div className="discussion-page">
+      <Helmet>
+        <title>FlagRush | Discussion</title>
+      </Helmet>
       <div className="discussion-Ask">
         <div className="discussion-question">
           <TextField

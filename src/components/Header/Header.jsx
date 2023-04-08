@@ -83,7 +83,7 @@ const Header = () => {
         )}
       </Link>
       <div onClick={handleLogout} style={{ cursor: "pointer" }}>
-        Logout
+        {isUserLoggedIn.current ? "Logout" : ""}
       </div>
       <ToastContainer
         position="bottom-right"
