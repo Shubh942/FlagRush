@@ -8,6 +8,7 @@ import { BeatLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ChatState } from "../../context/ChatProvider";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -110,7 +111,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="home">
+      <Helmet>
+        <title>FlagRush | Home</title>
+      </Helmet>
       <h1>Community Page --</h1>
       <div className="discussion-question">
         <TextField

@@ -5,6 +5,7 @@ import error from "../../assets/error.png";
 import "./Error.css";
 import axios from "axios";
 
+
 const Error = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
@@ -36,6 +37,9 @@ const Error = () => {
   }, [search]);
   return (
     <div className="error">
+      <Helmet>
+        <title>FlagRush | Error</title>
+      </Helmet>
       <h1>Error 404 page not found</h1>
       <div className="btn-cta-blue" onClick={back}>
         Go Back

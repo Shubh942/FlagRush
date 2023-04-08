@@ -10,6 +10,7 @@ import io from "socket.io-client";
 import { AiOutlineSend } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
+import { Helmet } from "react-helmet";
 
 const ENDPOINT = "http://localhost:5000/";
 var socket, selectedChatCompare;
@@ -90,6 +91,9 @@ const Chat = () => {
   // });
   return (
     <div className="chat-box">
+      <Helmet>
+        <title>FlagRush | Chat</title>
+      </Helmet>
       <div className="chatName">
         <ChatName />
       </div>

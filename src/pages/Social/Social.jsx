@@ -47,7 +47,7 @@ const Social = () => {
   return (
     <div>
       <Helmet>
-        <title>CodeNova | Social</title>
+        <title>FlagRush | Social</title>
       </Helmet>
 
       <div className="social-searchbox">
