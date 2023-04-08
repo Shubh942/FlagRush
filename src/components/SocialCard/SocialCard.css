@@ -17,7 +17,7 @@
   gap: 20px;
   width: 220px;
   height: 134px;
-  background: #121212;
+  background: #2c2c2c;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
   border-radius: 10px 10px 0px 0px;
 }
@@ -38,7 +38,7 @@
   gap: 10px;
   isolation: isolate;
   width: 220px;
-  background: #ffffff;
+  background: #1c1c1c;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
   border-radius: 0px 0px 10px 10px;
   position: relative;
@@ -51,7 +51,7 @@
   padding: 2px 8px;
   font-weight: 500;
   top: -21px;
-  background: #ffffff;
+  background: #414040;
   border: 1.5px solid #121212;
   border-radius: 30px;
   display: flex;
