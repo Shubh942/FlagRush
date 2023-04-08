@@ -6,19 +6,20 @@ import Home from "./pages/Home/Home";
 import Error from "./pages/Error/Error";
 import Header from "./components/Header/Header";
 import Discussion from "./pages/Discussion/Discussion";
+import DiscussionChat from "./pages/DiscussionChat/DiscussionChat";
 
 function App() {
   return (
     <div className="App">
-       <Header />
+      <Header />
       <Routes>
         <Route path="" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="discussion" element={<Discussion />} />
+        <Route path="discussion/:slug" element={<DiscussionChat />} />
         <Route path="*" element={<Error />} />
       </Routes>
-
     </div>
   );
 }

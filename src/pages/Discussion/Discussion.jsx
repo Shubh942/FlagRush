@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import DiscussionCard from "../../components/DiscussionCard/DiscussionCard";
 
 const Discussion = () => {
-
   const [newDiscussion, setNewDiscussion] = useState("");
   const [discussion, setDiscussion] = useState([]);
   const [discussionName, setDiscussionName] = useState("");
