@@ -80,17 +80,17 @@ const Discussion = () => {
 
   // window.addEventListener("beforeunload", pageLoad);
 
-  // useEffect(() => {
-  //   if (!isUserLoggedIn.current) {
-  //     console.log(isUserLoggedIn.current);
-  //     navigate("/login");
-  //   }
-  //   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  //   setUser(userInfo);
+  useEffect(() => {
+    if (!isUserLoggedIn.current) {
+      console.log(isUserLoggedIn.current);
+      navigate("/login");
+    }
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    setUser(userInfo);
 
-  //   pageLoad();
-  //   // console.log("working");
-  // }, []);
+    pageLoad();
+    // console.log("working");
+  }, []);
 
   useEffect(() => {
     setDiscussion([...discussion, newDiscussion]);

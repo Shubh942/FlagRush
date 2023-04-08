@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-// import logo from "";
+import logo from "../../assets/default.jpg";
 import { BsGoogle, BsGithub, BsLinkedin } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BeatLoader } from "react-spinners";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { ChatState } from "../../context/ChatProvider";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Login = () => {
   const [show, setshow] = useState(false);
   const [loginstatus, setloginstatus] = useState("");
   const [loading, setLoading] = useState(false);
+  const { user, setUser, isUserLoggedIn } = ChatState();
 
   const handleClick = () => setshow(!show);
   const login = async (e) => {
@@ -67,7 +69,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login">
-        {/* <img src={logo} /> */}
+        <img src={logo} />
         <h3 className="login-welcome">Welcome Back</h3>
         <div className="login-input">
           <input
@@ -100,7 +102,7 @@ const Login = () => {
             />
           </div>
         </div>
-        <a type="submit" className="btn-cta-blue" onClick={login}>
+        <a type="submit" className="btn-cta-orange" onClick={login}>
           {loading ? <BeatLoader color="#fff" /> : "Login"}
         </a>
         <div className="login-options">
