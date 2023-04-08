@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-import logo from "../../assets/default.jpg";
+import logo from "../../assets/codenova.png";
 import { BsGoogle, BsGithub, BsLinkedin } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

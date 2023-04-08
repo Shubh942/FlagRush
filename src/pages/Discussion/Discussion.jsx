@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ChatState } from "../../context/ChatProvider";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import "./Discussion.css";
@@ -9,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import DiscussionCard from "../../components/DiscussionCard/DiscussionCard";
 
 const Discussion = () => {
+  const { user, setUser, isUserLoggedIn } = ChatState();
 
   const [newDiscussion, setNewDiscussion] = useState("");
   const [discussion, setDiscussion] = useState([]);
@@ -30,7 +32,7 @@ const Discussion = () => {
           },
         };
         const { data } = await axios.post(
-          `localhost:5000/api/v1/chat/create-discussion`,
+          `http://localhost:5000/api/v1/chat/create-discussion`,
           {
             chatName: discussionName,
             discription: discription,
@@ -68,7 +70,7 @@ const Discussion = () => {
         },
       };
       const { data } = await axios.get(
-        `localhost:5000/api/v1/chat/discussion`,
+        `http://localhost:5000/api/v1/chat/discussion`,
         config
       );
       setDiscussion(data);
@@ -132,7 +134,7 @@ const Discussion = () => {
               setCode(e.target.value);
             }}
           />
-          <a className="btn-cta-blue" onClick={handleClick}>
+          <a className="btn-cta-orange" onClick={handleClick}>
             Create Discussion
           </a>
         </div>

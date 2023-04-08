@@ -24,7 +24,7 @@
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.07);
-  border-radius: 2px;
+  border-radius: 6px;
 }
 
 .discussion-question-input {
@@ -32,7 +32,7 @@
   width: 555px;
   background: #ffffff;
   border: 10px solid #e6e6e6;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
 .discussion {
