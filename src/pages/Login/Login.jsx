@@ -74,7 +74,7 @@ const Login = () => {
         <div className="login-input">
           <input
             type="text"
-            placeholder="username"
+            placeholder="user email"
             name="username"
             className="login-username"
             value={username}
