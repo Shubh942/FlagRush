@@ -18,7 +18,7 @@ const Menu = () => {
     <div className="menu">
       <NavLink to="/" className="menu-link">
         <IoIosPaper />
-        Questions
+        CTFs
       </NavLink>
       <NavLink to="discussion" className="menu-link">
         <IoMdChatboxes />

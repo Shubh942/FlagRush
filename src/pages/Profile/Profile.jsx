@@ -19,44 +19,16 @@ import "./Profile.css";
 
 const Me = () => {
   const { slug } = useParams();
-  const codeforcesHandle = useRef(null);
-  const codechefHandle = useRef(null);
-  const leetcodeHandle = useRef(null);
-  const githubHandle = useRef(null);
-  const gfgHandle = useRef(null);
   const { user, isUserLoggedIn, openProfile } = ChatState();
   // const { isUserLoggedIn } = GlobalProvider();
-  const [viewUser, setViewUser] = useState(null);
+  const [viewUser, setViewUser] = useState();
   const [isTrue, setIsTrue] = useState(false);
   const [request, setRequest] = useState(false);
   const [alreadyFriend, setAlreadyFriend] = useState(false);
   const [click, setClick] = useState(false);
   // console.log(slug);
 
-  const Platform = () => (
-    <div className="platform">
-      <NavLink to={`/profile/${slug}/github`} className="platform-link">
-        <SiGithub />
-        Github
-      </NavLink>
-      <NavLink to={`/profile/${slug}/codeforces`} className="platform-link">
-        <SiCodeforces />
-        Codeforces
-      </NavLink>
-      <NavLink to={`/profile/${slug}/codechef`} className="platform-link">
-        <SiCodechef />
-        Codechef
-      </NavLink>
-      <NavLink to={`/profile/${slug}/leetcode`} className="platform-link">
-        <SiLeetcode />
-        Leetcode
-      </NavLink>
-      <NavLink to={`/profile/${slug}/geeksforgeeks`} className="platform-link">
-        <SiGeeksforgeeks />
-        GFG
-      </NavLink>
-    </div>
-  );
+
 
   const pageLoad = async () => {
     try {
@@ -67,7 +39,7 @@ const Me = () => {
         },
       };
       const { data } = await axios.get(
-        `http://localhost:5001/api/v1/users/${slug}`,
+        `http://localhost:5000/api/v1/users/${slug}`,
 
         config
       );
@@ -76,28 +48,9 @@ const Me = () => {
       // console.log(
       //   data.user[0].techStack ? data.user[0].techStack.split(" ") : ""
       // );
-      data.user[0].techStack = data.user[0].techStack
-        ? data.user[0].techStack.split(" ")
-        : [];
 
       // console.log(data.user[0]);
       setViewUser(data.user[0]);
-      if (data.user[0].codeforcesHandle) {
-        codeforcesHandle.current = data.user[0].codeforcesHandle;
-      }
-      if (data.user[0].codechefHandle) {
-        codechefHandle.current = data.user[0].codechefHandle;
-      }
-      if (data.user[0].leetcodeHandle) {
-        leetcodeHandle.current = data.user[0].leetcodeHandle;
-      }
-      if (data.user[0].githubHandle) {
-        githubHandle.current = data.user[0].githubHandle;
-      }
-      if (data.user[0].gfgHandle) {
-        gfgHandle.current = data.user[0].gfgHandle;
-      }
-      // console.log(codeforcesHandle);
       for (let i = 0; i < data.user[0].friends.length; i++) {
         if (
           data.user[0].friends[i]._id ===
@@ -131,7 +84,7 @@ const Me = () => {
         },
       };
       const { data } = await axios.post(
-        `https://codenova-api.onrender.com/api/v1/users/make-friend`,
+        `http://localhost:5000/api/v1/users/make-friend`,
         { friendId: viewUser._id },
 
         config
@@ -171,25 +124,6 @@ const Me = () => {
             <FaUserFriends />
             <h3>Friend of {viewUser ? viewUser.friends.length : ""} user</h3>
           </div>
-          <div className="profile-techstack">
-            <h3>Tech Stack</h3>
-            <div className="profile-techstack-detail">
-              {viewUser
-                ? viewUser.techStack.length > 0
-                  ? viewUser.techStack.map((item) => (
-                      <div className="techstack" key={item}>
-                        {item}
-                      </div>
-                    ))
-                  : "Empty"
-                : ""}
-              {/* <div className="techstack">CSS</div>
-              <div className="techstack">JavaScript</div>
-              <div className="techstack">React</div>
-              <div className="techstack">Node.js</div>
-              <div className="techstack">Express</div> */}
-            </div>
-          </div>
 
           <div className="profile-admin">
             {JSON.parse(localStorage.getItem("userInfo")).data.user.role ===
@@ -210,17 +144,6 @@ const Me = () => {
           </div>
         </div>
       </div>
-      <div className="profile-platform">
-        <Platform />
-      </div>
-      <Outlet
-        context={[
-          codeforcesHandle,
-          codechefHandle,
-          leetcodeHandle,
-          githubHandle,
-        ]}
-      />
 
       {JSON.parse(localStorage.getItem("userInfo")).data.user._id !==
       (viewUser ? viewUser._id : "") ? (

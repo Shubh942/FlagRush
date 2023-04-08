@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { ChatState } from "../../context/ChatProvider";
 import { Helmet } from "react-helmet";
 import axios from "axios";
-import codeforces from "../../assets/codeforces.png";
-import leetcode from "../../assets/leetcode.png";
-import logo from "../../assets/codenova.png";
 
 import "./Social.css";
 import SocialCard from "../../components/SocialCard/SocialCard";
