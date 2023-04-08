@@ -38,19 +38,20 @@
   gap: 10px;
   isolation: isolate;
   width: 220px;
-  background: #ffffff;
+  background: #0000;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
   border-radius: 0px 0px 10px 10px;
   position: relative;
 }
 
-.socialcard-user {
+.socialcard-user { 
   position: absolute;
   max-width: 190px;
   height: 34px;
   padding: 2px 8px;
   font-weight: 500;
   top: -21px;
+  color: black;
   background: #ffffff;
   border: 1.5px solid #121212;
   border-radius: 30px;
