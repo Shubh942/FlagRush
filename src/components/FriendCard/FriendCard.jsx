@@ -1,8 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import codeforces from "../../assets/codeforces.png";
-import leetcode from "../../assets/leetcode.png";
 import "./FriendCard.css";
 
 const FriendCard = ({ item }) => {
