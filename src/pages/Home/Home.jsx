@@ -116,7 +116,7 @@ const Home = () => {
         <TextField
           id="filled-basic"
           label="Heading of CTF / Type of CTF"
-          variant="outlined"
+          variant="filled"
           className="discussion-question-input"
           value={heading}
           onChange={(e) => {
@@ -126,7 +126,7 @@ const Home = () => {
         <TextField
           id="filled-basic"
           label="Add description of ctf"
-          variant="outlined"
+          variant="filled"
           multiline
           value={discription}
           className="discussion-question-input"
