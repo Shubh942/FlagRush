@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import user from "../../assets/default.jpg";
 import { Link, NavLink, redirect, useNavigate } from "react-router-dom";
 import userpic from "../../assets/default.jpg";
+import { ChatState } from "../../context/ChatProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IoIosPaper, IoMdChatboxes } from "react-icons/io";
@@ -17,7 +18,7 @@ const Menu = () => {
     <div className="menu">
       <NavLink to="/" className="menu-link">
         <IoIosPaper />
-        CTFs
+        Questions
       </NavLink>
       <NavLink to="discussion" className="menu-link">
         <IoMdChatboxes />
@@ -36,6 +37,7 @@ const Menu = () => {
 };
 
 const Header = () => {
+  const { user, setOpenProfile, openProfile, isUserLoggedIn } = ChatState();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -50,10 +52,10 @@ const Header = () => {
   return (
     <div className="header">
       <Link to="/" className="logo">
-        {"FlagRush"}
+        {"<CodeNova />"}
       </Link>
       <Menu />
-      {/* <Link
+      <Link
         onClick={() => {
           setOpenProfile(!openProfile);
         }}
@@ -73,8 +75,8 @@ const Header = () => {
           />
         ) : (
           ""
-        )} */}
-      {/* </Link> */}
+        )}
+      </Link>
       <div onClick={handleLogout} style={{ cursor: "pointer" }}>
         Logout
       </div>
