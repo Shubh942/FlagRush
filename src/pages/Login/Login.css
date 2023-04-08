@@ -46,6 +46,7 @@
   position: relative;
 }
 .btn-see {
+  color: black;
   position: absolute;
   top: 10px;
   right: 20px;
@@ -93,6 +94,10 @@
   margin-top: 4vh;
   gap: 7px;
 }
+.login-forgot-link{
+  color: #2f80ed;
+  font-weight: bold;
+}
 .login-signup-text {
   /* font-family: "Nunito"; */
   font-family: consolas, sans-serif;
@@ -104,7 +109,6 @@
 
   display: flex;
   align-items: center;
-
   color: #fff;
 }
 .btn-cta-blue {
