@@ -42,9 +42,8 @@
   max-width: 100%;
   /* word-wrap: break-word; */
   overflow-wrap: break-word;
-  border: 2px solid red;
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 15px;
   width: 560px;
 }

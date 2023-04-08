@@ -56,7 +56,7 @@ const AccessChat = ({ messages, setMessages }) => {
             <span
               style={{
                 backgroundColor: `${
-                  m.sender._id === user.data.user._id ? "#BEE3F8" : "#B9F5D0"
+                  m.sender._id === user.data.user._id ? "#081736" : "#050A1D"
                 }`,
                 borderRadius: "20px",
                 padding: "5px 15px",
@@ -68,7 +68,7 @@ const AccessChat = ({ messages, setMessages }) => {
                   selectedChat.users[0]._id
                 ),
                 marginTop: isSameUser(messages, m, i, selectedChat.users[0]._id)
-                  ? 3
+                  ? 5
                   : 10,
               }}
             >
@@ -79,7 +79,7 @@ const AccessChat = ({ messages, setMessages }) => {
           </div>
         ))
       ) : (
-        <p>Loading..</p>
+        <p>Loading...</p>
       )}
     </div>
   );

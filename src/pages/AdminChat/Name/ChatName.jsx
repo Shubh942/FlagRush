@@ -48,7 +48,7 @@ const ChatName = () => {
             }}
             style={{
               cursor: "pointer",
-              background: `${selectedChat === chat ? "#38B2AC" : "#E8E8E8"}`,
+              background: `${selectedChat === chat ? "#232828" : "#463F3F"}`,
               color: `${selectedChat === chat ? "black" : "black"}`,
             }}
           >

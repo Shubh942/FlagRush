@@ -7,6 +7,7 @@ import AccessChat from "./AccessChat/AccessChat";
 import MessageBox from "./MessageBox/MessageBox";
 import axios from "axios";
 import io from "socket.io-client";
+import { AiOutlineSend } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 
@@ -101,34 +102,27 @@ const Chat = () => {
             selectedChatCompare={selectedChatCompare}
           />
         </div>
-        <input
-          className="messageBox"
-          type="text"
-          value={newMessage}
-          style={{
-            color: "black",
-          }}
-          onChange={(e) => setNewMessage(e.target.value)}
-        />
-        {/* <TextField
-          id="filled-basic"
-          label=""
-          variant="outlined"
-          className="messageBox"
-          value={newMessage}
-          onChange={(e) => {
-            setNewMessage(e.target.value);
-          }}
-        /> */}
-        <button
-          className="btn"
-          style={{
-            cursor: "pointer",
-          }}
-          onClick={handleclick}
-        >
-          Login
-        </button>
+        <div className="chat-send-msg">
+          <input
+            className="messageBox"
+            type="text"
+            value={newMessage}
+            style={{
+              color: "#fff",
+            }}
+            onChange={(e) => setNewMessage(e.target.value)}
+          />
+
+          <button
+            className="chat-btn"
+            style={{
+              cursor: "pointer",
+            }}
+            onClick={handleclick}
+          >
+            <AiOutlineSend style={{ fontSize: "20px" }} />
+          </button>
+        </div>
 
         {/* </input> */}
       </div>

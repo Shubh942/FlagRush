@@ -76,7 +76,6 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
         display: "flex",
         alignItems: "flex-start",
         flexDirection: "column",
-        border: "2px solid black",
         width: "600px",
       }}
       className="chatBox"
@@ -93,12 +92,11 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
             <div
               style={{
                 backgroundColor: `${
-                  m.sender._id === user.data.user._id ? "#BEE3F8" : "#B9F5D0"
+                  m.sender._id === user.data.user._id ? "#1F1212" : "#0F121B"
                 }`,
                 borderRadius: "20px",
-                padding: "5px 15px",
+                padding: "10px 20px",
                 width: "300px",
-                border: "2px solid blue",
                 display: "flex",
                 height: "auto",
                 flexWrap: "wrap",

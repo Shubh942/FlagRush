@@ -1,24 +1,23 @@
 .chat-box {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 0px;
   gap: 13px;
   position: absolute;
-  width: 823px;
+  /* width: 823px; */
+  width: 838px;
   height: 466px;
-  /* left: 309px;
-  top: 217px; */
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 .chatName {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-
-  width: 217px;
-
+  /* width: 217px; */
+  width: 230px;
   min-height: 466px;
   overflow-y: scroll;
 
@@ -36,7 +35,6 @@
 
   width: 700px;
   height: 466px;
-  border: 2px solid red;
 }
 .showChat {
   display: flex;
@@ -51,7 +49,7 @@
   background: #ffffff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
 }
 
 .messageBox {
@@ -70,11 +68,19 @@
   height: 54px;
 
   background: #ffffff;
-  border: 1px solid #e6e6e6;
+  /* border: 1px solid #e6e6e6; */
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.07);
   border-radius: 50px;
 }
 
-.btn {
+.chat-btn {
   cursor: pointer;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.chat-send-msg {
+  display: flex;
+  gap: 20px;
 }

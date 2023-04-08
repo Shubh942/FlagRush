@@ -69,7 +69,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login">
-        <img src={logo} />
+        <h2>FlagRush</h2>
         <h3 className="login-welcome">Welcome Back</h3>
         <div className="login-input">
           <input
