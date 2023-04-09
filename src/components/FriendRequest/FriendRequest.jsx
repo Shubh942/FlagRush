@@ -17,7 +17,7 @@ const FriendRequest = ({ item, setClick, click }) => {
         },
       };
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/users/accept-request`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/users/accept-request`,
         { friendId: item._id, accept: true },
 
         config
@@ -39,7 +39,7 @@ const FriendRequest = ({ item, setClick, click }) => {
         },
       };
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/users/accept-request`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/users/accept-request`,
         { friendId: item._id, accept: false },
 
         config

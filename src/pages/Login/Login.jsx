@@ -39,7 +39,7 @@ const Login = () => {
         };
         setLoading(true);
         const { data } = await axios.post(
-          "http://localhost:5000/api/v1/users/login",
+          "https://flagrush-backend-w1n5.onrender.com/api/v1/users/login",
           { email: username, password: password },
           config
         );
@@ -62,7 +62,7 @@ const Login = () => {
         // alert(err);
         // console.log(err.response.data.message);
         setLoading(false);
-        toast.error(err.response.data.message, {
+        toast.error(err, {
           autoClose: 1000,
         });
       }

@@ -25,7 +25,7 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
         },
       };
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/message/${selectedChat._id}`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/message/${selectedChat._id}`,
         config
       );
       socket.emit("join chat", selectedChat._id);

@@ -27,7 +27,7 @@ const FlagCard = ({ object }) => {
         },
       };
       const data = await axios.post(
-        `http://localhost:5000/api/v1/ctf/submitFlag`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/ctf/submitFlag`,
         { flag: flag, ctfId: object._id },
         config
       );
