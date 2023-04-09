@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ChatState } from "../../context/ChatProvider";
 import { Helmet } from "react-helmet";
+import Leaderboard from "../../components/Leaderboard/Leaderboard";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -74,7 +75,7 @@ const Home = () => {
         const { data } = await axios.post(
           `http://localhost:5000/api/v1/ctf/createCtf`,
           {
-            discription,
+            description: discription,
             heading,
             hint,
             flag,
@@ -112,78 +113,83 @@ const Home = () => {
 
   return (
     <div className="home">
-      <Helmet>
-        <title>FlagRush | Home</title>
-      </Helmet>
-      <h1>Community Page --</h1>
-      <div className="discussion-question">
-        <TextField
-          id="filled-basic"
-          label="Heading of CTF / Type of CTF"
-          variant="filled"
-          className="discussion-question-input"
-          value={heading}
-          onChange={(e) => {
-            setHeading(e.target.value);
-          }}
-        />
-        <TextField
-          id="filled-basic"
-          label="Add description of ctf"
-          variant="filled"
-          multiline
-          value={discription}
-          className="discussion-question-input"
-          onChange={(e) => {
-            setDiscription(e.target.value);
-          }}
-        />
-        <TextField
-          id="filled-multiline-static"
-          label="Link of the site"
-          multiline
-          variant="filled"
-          value={link}
-          className="discussion-question-input"
-          onChange={(e) => {
-            setLink(e.target.value);
-          }}
-        />
-        <TextField
-          id="filled-multiline-static"
-          label="Hint for CTF"
-          multiline
-          variant="filled"
-          value={hint}
-          className="discussion-question-input"
-          onChange={(e) => {
-            setHint(e.target.value);
-          }}
-        />
-        <TextField
-          id="filled-multiline-static"
-          label="Flag you inserted in CTF"
-          multiline
-          variant="filled"
-          value={flag}
-          className="discussion-question-input"
-          onChange={(e) => {
-            setFlag(e.target.value);
-          }}
-        />
-        <a className="btn-cta-blue" onClick={handleClick}>
-          {!loading ? "Create CTF" : <BeatLoader color="#fff" />}
-        </a>
-      </div>
-      <h3>All Flags are published here, you can try capturing them</h3>
-      <div className="capture-the-flag">
-        <div className="ctfs">
-          {capture?.map((object) => (
-            <div className="flag-flex" key={object._id}>
-              <FlagCard object={object} />
-            </div>
-          ))}
+      <div className="another">
+        <Helmet>
+          <title>FlagRush | Home</title>
+        </Helmet>
+        <h1>Community Page --</h1>
+        <div className="discussion-question">
+          <TextField
+            id="filled-basic"
+            label="Heading of CTF / Type of CTF"
+            variant="filled"
+            className="discussion-question-input"
+            value={heading}
+            onChange={(e) => {
+              setHeading(e.target.value);
+            }}
+          />
+          <TextField
+            id="filled-basic"
+            label="Add description of ctf"
+            variant="filled"
+            multiline
+            value={discription}
+            className="discussion-question-input"
+            onChange={(e) => {
+              setDiscription(e.target.value);
+            }}
+          />
+          <TextField
+            id="filled-multiline-static"
+            label="Link of the site"
+            multiline
+            variant="filled"
+            value={link}
+            className="discussion-question-input"
+            onChange={(e) => {
+              setLink(e.target.value);
+            }}
+          />
+          <TextField
+            id="filled-multiline-static"
+            label="Hint for CTF"
+            multiline
+            variant="filled"
+            value={hint}
+            className="discussion-question-input"
+            onChange={(e) => {
+              setHint(e.target.value);
+            }}
+          />
+          <TextField
+            id="filled-multiline-static"
+            label="Flag you inserted in CTF"
+            multiline
+            variant="filled"
+            value={flag}
+            className="discussion-question-input"
+            onChange={(e) => {
+              setFlag(e.target.value);
+            }}
+          />
+          <a className="btn-cta-blue" onClick={handleClick}>
+            {!loading ? "Create CTF" : <BeatLoader color="#fff" />}
+          </a>
         </div>
+        <h3>All Flags are published here, you can try capturing them</h3>
+        <div className="capture-the-flag">
+          <div className="ctfs">
+            {capture?.map((object) => (
+              <div className="flag-flex" key={object._id}>
+                <FlagCard object={object} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="leader">
+        <Leaderboard />
       </div>
       <ToastContainer
         position="bottom-right"

@@ -1,0 +1,23 @@
+.leader-box {
+  height: 50vh;
+  width: 50vh;
+  border: 2px solid white;
+  overflow-y: scroll;
+}
+
+.leader-div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.leaderCard {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid red;
+}
+
+.leaderCard img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
