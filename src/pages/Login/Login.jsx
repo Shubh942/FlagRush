@@ -54,12 +54,14 @@ const Login = () => {
           });
           setLoading(false);
         } else {
+          setLoading(false);
           throw new Error("Invalid");
           setLoading(false);
         }
       } catch (err) {
         // alert(err);
         // console.log(err.response.data.message);
+        setLoading(false);
         toast.error(err.response.data.message, {
           autoClose: 1000,
         });
