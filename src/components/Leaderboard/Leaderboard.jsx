@@ -23,15 +23,17 @@ const Leaderboard = () => {
   }, []);
   return (
     <div className="leader-box">
-      Leaderboard
+      <h2>Leaderboard</h2>
       <div className="leader-div">
         {ranking.length > 0
           ? ranking.map((user) => (
               <div className="leaderCard">
-                <img src={user.photo} alt="" />
-                <Link to={`/profile/${user.name}`}>
-                  <a>{user.name}</a>
-                </Link>
+                <div className="leaderCard-profile">
+                  <img src={user.photo} alt="" />
+                  <Link to={`/profile/${user.name}`} className="leader-name">
+                    <a>{user.name}</a>
+                  </Link>
+                </div>
                 <a>{user.totalCtfs}</a>
               </div>
             ))
