@@ -14,7 +14,9 @@
   font-size: 28px;
   font-weight: 700;
 }
-
+.name {
+  color: white;
+}
 .menu {
   display: flex;
   flex-direction: row;

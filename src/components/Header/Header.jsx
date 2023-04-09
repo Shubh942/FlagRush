@@ -71,7 +71,9 @@ const Header = () => {
         }`}
         className="user"
       >
-        <p>{user ? user.data.user.name : <Link to="/login">login</Link>}</p>
+        <div className="name">
+          {user ? user.data.user.name : <Link to="/login">login</Link>}
+        </div>
         {user ? (
           <img
             src={user ? user.data.user.photo : ""}
