@@ -1,14 +1,22 @@
 .discussion-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 18px 20px;
-  gap: 14px;
-  width: 590px;
-  background: #262525;
-  border: 1px solid #4b4b4b;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.07);
-  border-radius: 4px;
+  gap: 18px;
+  width: 100%;
+  max-width: 600px;
+  background: #18181b;
+  color: #f3f4f6;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.13);
+  margin-bottom: 24px;
+  padding: 22px 24px 18px 24px;
+  transition: box-shadow 0.2s;
+  overflow: visible;
+}
+
+.discussion-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18);
 }
 
 .discussion-card-content {
@@ -16,25 +24,26 @@
   align-items: center;
   justify-content: space-between;
   gap: 36px;
-  width: 550px;
+  width: 100%;
 }
 
 .discussion-card-ques {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 357px;
+  max-width: 370px;
 }
 
 .discussion-card-text {
   font-size: 14px;
-  color: rgba(230, 230, 230, 0.9);
+  color: rgba(230, 230, 230, 0.7);
 }
 
 .discussion-card-question {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 25px;
+  font-weight: 600;
+  font-size: 1.18rem;
+  line-height: 1.4;
+  color: #e5e7eb;
 }
 
 .discussion-card-ques div {
@@ -44,27 +53,54 @@
 }
 
 .discussion-card-line {
-  width: 550px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 0;
 }
 
 .discussion-card-ques div h4 {
   font-weight: 500;
   font-size: 14px;
+  color: #a5b4fc;
+  margin: 0;
 }
 
 .discussion-card-ques img {
   height: 28px;
   width: 28px;
   border-radius: 50%;
-  border: 0.5px solid #038aff;
+  border: 1.5px solid #2563eb;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
+}
+
+.btn-cta-blue {
+  background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 22px;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  transition: background 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+}
+
+.btn-cta-blue:hover {
+  background: linear-gradient(90deg, #1d4ed8 0%, #38bdf8 100%);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.13);
 }
 
 .discussion-card-datas {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 550px;
+  width: 100%;
   align-items: center;
   gap: 10px;
 }
@@ -73,42 +109,39 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0px;
   gap: 15px;
 }
 
-.discussion-card-upvote {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 6px;
-  width: 69px;
-  background: #ffffe0;
-  border-radius: 50px;
-  cursor: pointer;
-  color: #121212;
-  transition: all 0.2s ease-in;
-}
-
-.discussion-card-upvote:hover {
-  background: #f5f573;
-}
-
+.discussion-card-upvote,
 .discussion-card-downvote {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 3px 6px;
-  width: 69px;
-  background: #efefed;
-  border-radius: 50px;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 24px;
+  font-weight: 500;
+  font-size: 1rem;
+  background: #23272f;
+  color: #60a5fa;
   cursor: pointer;
-  color: #121212;
-  transition: all 0.2s ease-in;
+  transition: background 0.18s, color 0.18s;
+  border: 1px solid transparent;
+}
+
+.discussion-card-upvote:hover {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.discussion-card-downvote {
+  color: #f87171;
 }
 
 .discussion-card-downvote:hover {
-  background: #c7c7c6;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
 }
 
 .discussion-card-comment {
@@ -124,6 +157,13 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
+  color: #60a5fa;
+  font-size: 1.1rem;
+  transition: color 0.18s;
+}
+
+.discussion-card-comment-link:hover {
+  color: #2563eb;
 }
 
 .discussion-card-comment img {
@@ -131,22 +171,33 @@
   width: 24px;
   border-radius: 50%;
   margin-right: -10px;
-  border: 0.5px solid #038aff;
+  border: 1px solid #2563eb;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
 }
 
 .discussion-icon {
-  height: 18px;
-  width: 18px;
-  color: #121212;
-}
-
-BiUpvote {
-  height: 50px;
+  font-size: 1.2rem;
+  margin-right: 2px;
 }
 
 .discussion-card-dropdown {
   position: relative;
+  margin-left: 12px;
+  z-index: 10;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.discussion-card-dropdown svg {
+  font-size: 1.4rem;
+  color: #a1a1aa;
+  transition: color 0.18s;
+}
+
+.discussion-card-dropdown svg:hover {
+  color: #2563eb;
 }
 
 .discussion-dropdown {
@@ -154,21 +205,94 @@ BiUpvote {
   flex-direction: column;
   align-items: flex-start;
   position: absolute;
-  top: 0px;
-  right: 20px;
-  background: #383838;
+  top: 36px;
+  right: 0;
+  min-width: 160px;
+  background: #23272f;
   border: 1.5px solid #494949;
-  border-radius: 4px;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.18);
+  z-index: 100;
+  padding: 6px 0;
+  animation: fadeInDropdown 0.18s;
+}
+
+@keyframes fadeInDropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .discussion-dropdown div {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 10px;
+  padding: 10px 18px;
   width: 100%;
+  color: #e5e7eb;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  border: none;
+  background: none;
 }
 
 .discussion-dropdown div:hover {
-  background-color: rgb(57, 57, 57);
+  background-color: #1e222a;
+  color: #60a5fa;
+}
+
+/* Responsive styles */
+@media (max-width: 700px) {
+  .discussion-card {
+    max-width: 98vw;
+    padding: 16px 6vw 14px 6vw;
+  }
+  .discussion-card-content,
+  .discussion-card-datas {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    width: 100%;
+  }
+  .btn-cta-blue {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .discussion-card {
+    padding: 12px 2vw 10px 2vw;
+    border-radius: 8px;
+    gap: 12px;
+  }
+  .discussion-card-ques img {
+    height: 22px;
+    width: 22px;
+  }
+  .discussion-card-question {
+    font-size: 1rem;
+  }
+  .discussion-card-ques > p {
+    font-size: 0.97rem;
+  }
+  .discussion-card-comment img {
+    height: 18px;
+    width: 18px;
+  }
+  .discussion-card-upvote,
+  .discussion-card-downvote {
+    font-size: 0.97rem;
+    padding: 5px 10px;
+  }
+  .discussion-dropdown {
+    min-width: 120px;
+    font-size: 0.97rem;
+  }
 }
