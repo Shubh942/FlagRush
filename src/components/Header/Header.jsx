@@ -121,7 +121,14 @@ const Header = () => {
                     <button
                       className="dropdown-option"
                       onClick={() => {
-                        navigate(`/profile/${user.data.user.slug}`);
+                        navigate(
+                          `profile/${
+                            JSON.parse(localStorage.getItem('userInfo'))
+                              ? JSON.parse(localStorage.getItem('userInfo'))
+                                  .data.user.name
+                              : ''
+                          }`
+                        );
                         setOpenProfile(true);
                         setProfileDropdownOpen(false);
                       }}

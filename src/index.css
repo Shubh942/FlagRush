@@ -41,6 +41,7 @@ body {
   --bg-glass-light: rgba(30, 41, 59, 0.8);
 
   /* Borders */
+  --border: #1e293b;
   --border-light: rgba(148, 163, 184, 0.1);
   --border-medium: rgba(148, 163, 184, 0.2);
   --border-dark: rgba(148, 163, 184, 0.3);
