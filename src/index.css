@@ -65,6 +65,12 @@ Link {
   text-decoration: none;
 }
 
+::selection {
+  background: var(--accent-pink);
+  color: #fff;
+}
+
+/* Button Styles */
 .btn-cta-orange,
 .active {
   display: flex;
@@ -156,7 +162,6 @@ Link {
 }
 
 /* blue button */
-
 .btn-cta-blue,
 .active {
   display: flex;
@@ -191,6 +196,7 @@ button {
   border: 1.5px solid #038aff;
 }
 
+/* Custom Scrollbar Styles */
 html {
   --scrollbarBG: #cfd8dc;
   --thumbBG: #272d3d;
