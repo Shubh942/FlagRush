@@ -112,114 +112,115 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home-container">
-      <Helmet>
-        <title>FlagRush | Home</title>
-      </Helmet>
+    <div className="home-page">
+      <div className="home-container">
+        <Helmet>
+          <title>FlagRush | Home</title>
+        </Helmet>
 
-      <main className="home-main">
-        {/* CTF Creation Form */}
-        <section className="ctf-form">
-          <h2>Create New CTF Challenge</h2>
-          <div className="form-grid">
-            <div className="form-field">
-              <TextField
-                label="Challenge Title"
-                variant="filled"
-                value={heading}
-                onChange={(e) => setHeading(e.target.value)}
-                fullWidth
-              />
+        <main className="home-main">
+          {/* CTF Creation Form */}
+          <section className="ctf-form">
+            <h2>Create New CTF Challenge</h2>
+            <div className="form-grid">
+              <div className="form-field">
+                <TextField
+                  label="Challenge Title"
+                  variant="filled"
+                  value={heading}
+                  onChange={(e) => setHeading(e.target.value)}
+                  fullWidth
+                />
+              </div>
+
+              <div className="form-field">
+                <TextField
+                  label="Challenge Link"
+                  variant="filled"
+                  value={link}
+                  onChange={(e) => setLink(e.target.value)}
+                  fullWidth
+                />
+              </div>
+
+              <div className="form-field" style={{ gridColumn: '1 / -1' }}>
+                <TextField
+                  label="Description"
+                  variant="filled"
+                  multiline
+                  rows={4}
+                  value={discription}
+                  onChange={(e) => setDiscription(e.target.value)}
+                  fullWidth
+                />
+              </div>
+
+              <div className="form-field">
+                <TextField
+                  label="Hint"
+                  variant="filled"
+                  multiline
+                  rows={2}
+                  value={hint}
+                  onChange={(e) => setHint(e.target.value)}
+                  fullWidth
+                />
+              </div>
+
+              <div className="form-field">
+                <TextField
+                  label="Flag"
+                  variant="filled"
+                  value={flag}
+                  onChange={(e) => setFlag(e.target.value)}
+                  fullWidth
+                />
+              </div>
+
+              <button
+                className="btn-cta ctf-submit-btn"
+                onClick={handleClick}
+                disabled={loading}
+              >
+                {loading ? (
+                  <BeatLoader color="#fff" size={10} />
+                ) : (
+                  'Create Challenge'
+                )}
+              </button>
+            </div>
+          </section>
+
+          {/* CTF Challenges List */}
+          <section className="ctf-list">
+            <div className="ctf-list-header">
+              <h2>Available CTF Challenges</h2>
             </div>
 
-            <div className="form-field">
-              <TextField
-                label="Challenge Link"
-                variant="filled"
-                value={link}
-                onChange={(e) => setLink(e.target.value)}
-                fullWidth
-              />
-            </div>
+            {capture.length > 0 ? (
+              <div className="ctf-grid">
+                {capture.map((object) => (
+                  <FlagCard key={object._id} object={object} />
+                ))}
+              </div>
+            ) : (
+              <div className="loading-spinner">
+                <BeatLoader
+                  color={getComputedStyle(
+                    document.documentElement
+                  ).getPropertyValue('--primary')}
+                />
+              </div>
+            )}
+          </section>
+        </main>
 
-            <div className="form-field" style={{ gridColumn: '1 / -1' }}>
-              <TextField
-                label="Description"
-                variant="filled"
-                multiline
-                rows={4}
-                value={discription}
-                onChange={(e) => setDiscription(e.target.value)}
-                fullWidth
-              />
-            </div>
+        {/* Leaderboard Sidebar */}
+        <aside className="sidebar">
+          <Leaderboard />
+        </aside>
 
-            <div className="form-field">
-              <TextField
-                label="Hint"
-                variant="filled"
-                multiline
-                rows={2}
-                value={hint}
-                onChange={(e) => setHint(e.target.value)}
-                fullWidth
-              />
-            </div>
-
-            <div className="form-field">
-              <TextField
-                label="Flag"
-                variant="filled"
-                value={flag}
-                onChange={(e) => setFlag(e.target.value)}
-                fullWidth
-              />
-            </div>
-
-            <button
-              className="btn-cta ctf-submit-btn"
-              onClick={handleClick}
-              disabled={loading}
-            >
-              {loading ? (
-                <BeatLoader color="#fff" size={10} />
-              ) : (
-                'Create Challenge'
-              )}
-            </button>
-          </div>
-        </section>
-
-        {/* CTF Challenges List */}
-        <section className="ctf-list">
-          <div className="ctf-list-header">
-            <h2>Available CTF Challenges</h2>
-          </div>
-
-          {capture.length > 0 ? (
-            <div className="ctf-grid">
-              {capture.map((object) => (
-                <FlagCard key={object._id} object={object} />
-              ))}
-            </div>
-          ) : (
-            <div className="loading-spinner">
-              <BeatLoader
-                color={getComputedStyle(
-                  document.documentElement
-                ).getPropertyValue('--primary')}
-              />
-            </div>
-          )}
-        </section>
-      </main>
-
-      {/* Leaderboard Sidebar */}
-      <aside className="sidebar">
-        <Leaderboard />
-      </aside>
-
-      {/* <ToastContainer
+        {/* <ToastContainer
         position="bottom-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -231,6 +232,7 @@ const Home = () => {
         pauseOnHover
         theme="dark"
       /> */}
+      </div>
     </div>
   );
 };

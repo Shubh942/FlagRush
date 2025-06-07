@@ -1,140 +1,190 @@
+/* SocialCard.css */
 .socialcard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 220px;
-  background: #18181b;
-  color: #f3f4f6;
-  border: none;
-  border-radius: 14px;
-  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.13);
-  margin-bottom: 24px;
+  width: 240px;
+  background: var(--bg-glass);
+  color: var(--text-primary);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 1.5rem;
   padding: 0;
-  transition: box-shadow 0.2s;
+  transition: var(--transition-bounce);
+  border: 1px solid var(--border-light);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  position: relative;
 }
 
 .socialcard:hover {
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-glow);
+  border-color: var(--primary-light);
+}
+
+.socialcard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
 }
 
 .socialcard-image {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 22px 0 10px 0;
+  padding: 1.5rem 0 0.5rem 0;
   width: 100%;
-  background: #23272f;
-  border-radius: 14px 14px 0 0;
+  position: relative;
 }
 
 .socialcard-image img {
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #2563eb;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
-  background: #fff;
+  border: 3px solid var(--primary);
+  box-shadow: var(--shadow-md);
+  background: var(--text-primary);
+  transition: var(--transition-smooth);
+  z-index: 1;
+}
+
+.socialcard:hover .socialcard-image img {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-glow);
 }
 
 .socialcard-details {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 18px 0 14px 0;
-  gap: 10px;
+  padding: 1rem 1.5rem;
+  gap: 0.5rem;
   width: 100%;
-  background: #18181b;
-  border-radius: 0 0 14px 14px;
-  position: relative;
+  text-align: center;
 }
 
 .socialcard-user {
-  max-width: 180px;
-  min-height: 28px;
-  padding: 4px 14px;
   font-weight: 600;
-  font-size: 1.08rem;
-  background: #23272f;
-  color: #e5e7eb;
-  border: 1.5px solid #2563eb;
-  border-radius: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 6px;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin: 0.5rem 0;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.socialcard-user::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: var(--primary);
 }
 
 .socialcard-user-rating {
-  width: 100%;
-  padding: 0 10px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  font-size: 14px;
-  color: #a1a1aa;
-}
-
-.socialcard-user-rating img {
-  height: 28px;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 }
 
 .btn-round {
-  padding: 7px 18px;
-  color: #fff;
-  background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
-  border-radius: 30px;
+  padding: 0.6rem 1.5rem;
+  color: var(--text-primary);
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
+  border-radius: 2rem;
   border: none;
   font-weight: 600;
-  font-size: 1rem;
-  transition: background 0.18s, box-shadow 0.18s;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
+  font-size: 0.95rem;
+  transition: var(--transition-bounce);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
-  outline: none;
-  margin-top: 6px;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-round:hover {
-  background: linear-gradient(90deg, #1d4ed8 0%, #38bdf8 100%);
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.13);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-round::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.btn-round:hover::before {
+  left: 100%;
 }
 
 /* Responsive styles */
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .socialcard {
-    width: 98vw;
-    max-width: 340px;
+    width: 200px;
   }
+
   .socialcard-image img {
-    width: 54px;
-    height: 54px;
+    width: 70px;
+    height: 70px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .socialcard {
-    border-radius: 8px;
-    width: 98vw;
-    max-width: 98vw;
+    width: 160px;
+    border-radius: 12px;
   }
+
   .socialcard-image {
-    border-radius: 8px 8px 0 0;
-    padding: 14px 0 6px 0;
+    padding: 1rem 0 0.5rem 0;
   }
+
+  .socialcard-image img {
+    width: 60px;
+    height: 60px;
+  }
+
   .socialcard-details {
-    border-radius: 0 0 8px 8px;
-    padding: 10px 0 8px 0;
+    padding: 0.8rem;
   }
+
   .socialcard-user {
-    font-size: 0.97rem;
-    padding: 3px 10px;
+    font-size: 1rem;
   }
+
   .btn-round {
-    font-size: 0.97rem;
-    padding: 6px 10px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
 }

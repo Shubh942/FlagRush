@@ -99,70 +99,71 @@ const Discussion = () => {
   }, [newDiscussion]);
 
   return (
-    <div className="discussion-container">
-      <Helmet>
-        <title>FlagRush | Discussion</title>
-      </Helmet>
+    <div className="discussion-page">
+      <div className="discussion-container">
+        <Helmet>
+          <title>FlagRush | Discussion</title>
+        </Helmet>
 
-      <div className="discussion-header">
-        <h1>Community Discussions</h1>
-        <p>Ask questions and share knowledge with the community</p>
-      </div>
+        <div className="discussion-header">
+          <h1>Community Discussions</h1>
+          <p>Ask questions and share knowledge with the community</p>
+        </div>
 
-      {/* Discussion Form */}
-      <div className="discussion-form">
-        <h2 className="form-title">Start a New Discussion</h2>
-        <div className="discussion-form-grid">
-          <TextField
-            label="Discussion Title"
-            variant="filled"
-            value={discussionName}
-            onChange={(e) => setDiscussionName(e.target.value)}
-            fullWidth
-          />
+        {/* Discussion Form */}
+        <div className="discussion-form">
+          <h2 className="form-title">Start a New Discussion</h2>
+          <div className="discussion-form-grid">
+            <TextField
+              label="Discussion Title"
+              variant="filled"
+              value={discussionName}
+              onChange={(e) => setDiscussionName(e.target.value)}
+              fullWidth
+            />
 
-          <TextField
-            label="Detailed Description"
-            variant="filled"
-            multiline
-            rows={4}
-            value={discription}
-            onChange={(e) => setDiscription(e.target.value)}
-            fullWidth
-          />
+            <TextField
+              label="Detailed Description"
+              variant="filled"
+              multiline
+              rows={4}
+              value={discription}
+              onChange={(e) => setDiscription(e.target.value)}
+              fullWidth
+            />
 
-          <TextField
-            label="Relevant Code (optional)"
-            variant="filled"
-            multiline
-            rows={4}
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            fullWidth
-          />
+            <TextField
+              label="Relevant Code (optional)"
+              variant="filled"
+              multiline
+              rows={4}
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              fullWidth
+            />
 
-          <div className="form-submit">
-            <button className="btn-primary" onClick={handleClick}>
-              Post Discussion
-            </button>
+            <div className="form-submit">
+              <button className="btn-primary" onClick={handleClick}>
+                Post Discussion
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Discussions List */}
-      <div className="discussions-list">
-        {discussion && discussion.length > 0 ? (
-          discussion.map((item) => (
-            <DiscussionCard item={item} key={item._id || Math.random()} />
-          ))
-        ) : (
-          <div className="empty-state">
-            <p>No discussions yet. Be the first to start one!</p>
-          </div>
-        )}
-      </div>
+        {/* Discussions List */}
+        <div className="discussions-list">
+          {discussion && discussion.length > 0 ? (
+            discussion.map((item) => (
+              <DiscussionCard item={item} key={item._id || Math.random()} />
+            ))
+          ) : (
+            <div className="empty-state">
+              <p>No discussions yet. Be the first to start one!</p>
+            </div>
+          )}
+        </div>
 
-      {/* <ToastContainer
+        {/* <ToastContainer
         position="bottom-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -174,6 +175,7 @@ const Discussion = () => {
         pauseOnHover
         theme="dark"
       /> */}
+      </div>
     </div>
   );
 };

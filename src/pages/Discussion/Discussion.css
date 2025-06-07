@@ -1,4 +1,9 @@
 /* Discussion.css */
+
+.discussion-page {
+  background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+}
+
 .discussion-container {
   max-width: 1200px;
   margin: 0 auto;
