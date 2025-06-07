@@ -13,11 +13,11 @@ const FlagCard = ({ object }) => {
   const [flag, setFlag] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSolved, setIsSolved] = useState(false);
-  const [show, setShow] = useState(false);
-  const eyeChange = () => {
-    setShow(!show);
-  };
+  const [showHint, setShowHint] = useState(false);
+
   const submitFlag = async () => {
+    if (!flag.trim()) return;
+
     try {
       setLoading(true);
       const config = {
@@ -26,91 +26,99 @@ const FlagCard = ({ object }) => {
           Authorization: `Bearer ${isUserLoggedIn.current.token}`,
         },
       };
-      const data = await axios.post(
+
+      const { data } = await axios.post(
         `http://localhost:5000/api/v1/ctf/submitFlag`,
-        { flag: flag, ctfId: object._id },
+        { flag: flag.trim(), ctfId: object._id },
         config
       );
-      console.log(data);
+
       setLoading(false);
       if (data.data.status === 'success') {
         setFlag('');
         setIsSolved(true);
-        toast.success(data.data.message, {
-          autoClose: 2500,
-        });
+        toast.success(data.data.message, { autoClose: 2500 });
       } else {
-        toast.error(data.data.message, {
-          autoClose: 1000,
-        });
+        toast.error(data.data.message, { autoClose: 1000 });
       }
     } catch (error) {
+      setLoading(false);
       toast.error('Entered Flag is not correct, Please try again', {
         autoClose: 1000,
       });
-      setLoading(false);
-      console.error(error);
+      console.error('Flag submission error:', error);
     }
   };
-  // console.log(isUserLoggedIn.current.data.user._id);
-  // console.log(object.users);
+
+  const isChallengeSolved = object?.users?.includes(
+    isUserLoggedIn.current.data.user._id
+  );
+
   return (
-    <div className="flagBox">
-      {object && object.users.includes(isUserLoggedIn.current.data.user._id) ? (
-        <h3>You Solved this</h3>
-      ) : (
-        ''
+    <div className="flag-card">
+      <div className="flag-header">
+        <h2 className="flag-title">{object?.heading || 'Challenge'}</h2>
+        {isChallengeSolved && <div className="solved-badge">Solved ✓</div>}
+      </div>
+
+      <div className="flag-content">
+        <p className="flag-description">
+          <strong>Description:</strong>{' '}
+          {object?.description || 'No description provided'}
+        </p>
+
+        <div className="flag-link">
+          <span>🔗</span>
+          <a href={object?.link} target="_blank" rel="noopener noreferrer">
+            {object?.link || 'No link provided'}
+          </a>
+        </div>
+
+        <div className="flag-author">
+          <img
+            src={object?.host?.photo || '/default-avatar.jpg'}
+            alt="Author"
+            className="author-avatar"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '/default-avatar.jpg';
+            }}
+          />
+          <span className="author-name">
+            Author: {object?.host?.name || 'Unknown'}
+          </span>
+        </div>
+
+        {object?.hint && (
+          <div className="flag-hint">
+            <strong>Hint:</strong>
+            <div className="hint-toggle" onClick={() => setShowHint(!showHint)}>
+              {showHint ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            </div>
+            {showHint && <div className="hint-content">{object.hint}</div>}
+          </div>
+        )}
+      </div>
+
+      {!isChallengeSolved && (
+        <div className="flag-input-container">
+          <TextField
+            label="Enter the flag"
+            variant="filled"
+            value={flag}
+            onChange={(e) => setFlag(e.target.value)}
+            className="flag-input"
+            disabled={loading}
+          />
+          <button
+            className="submit-btn"
+            onClick={submitFlag}
+            disabled={loading || !flag.trim()}
+          >
+            {loading ? <BeatLoader color="#fff" size={10} /> : <>Submit Flag</>}
+          </button>
+        </div>
       )}
-      <h2>{object ? object.heading : ''}</h2>
-      <div className="flagBox-contents">
-        <div>Discription: {object ? object.description : ''}</div>
-        <div className="flag-card-link">
-          Link: <p> {object ? object.link : ''} </p>
-        </div>
-        <div className="flagBox-author">
-          {object ? <img src={object.host.photo} /> : ''}
-          <p>Author:{object ? object.host.name : ''}</p>
-        </div>
-        <div className="flagBox-hint">
-          Hint:{' '}
-          {show ? (
-            <AiOutlineEye onClick={eyeChange} />
-          ) : (
-            <AiOutlineEyeInvisible onClick={eyeChange} />
-          )}{' '}
-          {object && object.hint && show ? object.hint : ''}
-        </div>
-      </div>
-      <div className="flagBox-input">
-        <TextField
-          id="filled-multiline-static"
-          label="Flag you inserted in CTF"
-          multiline
-          variant="filled"
-          value={flag}
-          className="discussion-question-input"
-          onChange={(e) => {
-            setFlag(e.target.value);
-          }}
-          style={{ width: '420px' }}
-        />
-        <button className="btn-cta-blue" onClick={submitFlag}>
-          {!loading ? 'Submit Flag Id' : <BeatLoader color="#fff" />}
-        </button>
-      </div>
-      {/* 
-      <ToastContainer
-        position="bottom-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      /> */}
     </div>
   );
 };
