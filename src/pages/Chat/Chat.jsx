@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ChatName from './Name/ChatName';
 import { ChatState } from '../../context/ChatProvider';
-// import { ChatState } from "../../context/ChatProvider";
 import './Chat.css';
 import AccessChat from './AccessChat/AccessChat';
-import MessageBox from './MessageBox/MessageBox';
-import axios from 'axios';
-import io from 'socket.io-client';
-import { AiOutlineSend } from 'react-icons/ai';
+import { AiOutlineSend, AiOutlineArrowLeft } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
 import { Helmet } from 'react-helmet';
+import io from 'socket.io-client';
+import axios from 'axios';
 
 const ENDPOINT = 'http://localhost:5000/';
 var socket, selectedChatCompare;
@@ -18,6 +15,9 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [socketConnected, setSocketConnected] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true); // for mobile
+  const [showChat, setShowChat] = useState(false); // for mobile
+
   const {
     selectedChat,
     setSelectedChat,
@@ -44,6 +44,19 @@ const Chat = () => {
       socket.disconnect();
     };
   }, []);
+
+  // Show/hide sidebar/chat on mobile
+  useEffect(() => {
+    if (window.innerWidth <= 992) {
+      if (selectedChat) {
+        setShowSidebar(false);
+        setShowChat(true);
+      } else {
+        setShowSidebar(true);
+        setShowChat(false);
+      }
+    }
+  }, [selectedChat]);
 
   const handleSendMessage = async () => {
     if (!newMessage.trim() || !selectedChat) return;
@@ -80,44 +93,79 @@ const Chat = () => {
     }
   };
 
+  // Back button for mobile
+  const handleBack = () => {
+    setSelectedChat(null);
+    setShowSidebar(true);
+    setShowChat(false);
+  };
+
+  // Responsive rendering
   return (
-    <div className="chat-container">
-      <Helmet>
-        <title>FlagRush | Chat</title>
-      </Helmet>
+    <div className="chat-page">
+      <div className="chat-container">
+        <Helmet>
+          <title>FlagRush | Chat</title>
+        </Helmet>
 
-      <div className="chat-sidebar">
-        <ChatName />
-      </div>
-
-      <div className="chat-main">
-        <div className="chat-messages">
-          <AccessChat
-            messages={messages}
-            setMessages={setMessages}
-            socket={socket}
-            selectedChatCompare={selectedChatCompare}
+        {/* Sidebar */}
+        <div
+          className={`chat-sidebar${showSidebar ? '' : ' hide-on-mobile'}`}
+          style={{ display: showSidebar ? 'flex' : 'none' }}
+        >
+          <ChatName
+            onChatSelect={() => {
+              if (window.innerWidth <= 992) {
+                setShowSidebar(false);
+                setShowChat(true);
+              }
+            }}
           />
         </div>
-        <div className="chat-input-container">
-          <input
-            className="chat-input"
-            type="text"
-            placeholder="Type your message..."
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
-          <button
-            className="send-button"
-            onClick={handleSendMessage}
-            disabled={!newMessage.trim()}
-          >
-            <AiOutlineSend style={{ fontSize: '20px' }} />
-          </button>
+
+        {/* Main chat */}
+        <div
+          className={`chat-main${showChat ? '' : ' hide-on-mobile'}`}
+          style={{
+            display: showChat || window.innerWidth > 992 ? 'flex' : 'none',
+          }}
+        >
+          {/* Back button for mobile */}
+          {window.innerWidth <= 992 && (
+            <button className="chat-back-btn" onClick={handleBack}>
+              <AiOutlineArrowLeft size={22} />
+              Back
+            </button>
+          )}
+          <div className="chat-messages">
+            <AccessChat
+              messages={messages}
+              setMessages={setMessages}
+              socket={socket}
+              selectedChatCompare={selectedChatCompare}
+            />
+          </div>
+          <div className="chat-input-container">
+            <input
+              className="chat-input"
+              type="text"
+              placeholder="Type your message..."
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+            <button
+              className="send-button"
+              onClick={handleSendMessage}
+              disabled={!newMessage.trim()}
+            >
+              <AiOutlineSend style={{ fontSize: '20px' }} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default Chat;

@@ -7,7 +7,7 @@ import './ChatName.css';
 
 const ENDPOINT = 'http://localhost:5000/';
 var socket, selectedChatCompare;
-const ChatName = () => {
+const ChatName = ({ onChatSelect }) => {
   const [loggedUser, setLoggedUser] = useState();
   const [socketConnected, setSocketConnected] = useState(false);
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
@@ -55,7 +55,10 @@ const ChatName = () => {
                 selectedChat?._id === chat._id ? 'active' : ''
               }`}
               key={chat._id}
-              onClick={() => setSelectedChat(chat)}
+              onClick={() => {
+                setSelectedChat(chat);
+                if (onChatSelect) onChatSelect();
+              }}
             >
               <div className="avatar-container">
                 {partner?.photo && (
