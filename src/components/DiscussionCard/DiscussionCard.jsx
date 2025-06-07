@@ -157,7 +157,14 @@ const DiscussionCard = ({ item }) => {
   return (
     <div className="discussion-card">
       {/* {console.log(item)} */}
-      {report ? <ReportPopup item={item._id ? item._id : ''} /> : ''}
+      {report ? (
+        <ReportPopup
+          item={item._id ? item._id : ''}
+          onClose={() => setReport(false)}
+        />
+      ) : (
+        ''
+      )}
       <div className="discussion-card-content">
         <div className="discussion-card-ques">
           <p>{item.name}</p>

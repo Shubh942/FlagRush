@@ -3,8 +3,7 @@ import "./ReportPopup.css";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 
-const ReportPopup = ({ item }) => {
-  // console.log(item);
+const ReportPopup = ({ item, onClose }) => {
   const [query, setQuery] = useState("");
   const handleClick = async () => {
     try {
@@ -23,6 +22,7 @@ const ReportPopup = ({ item }) => {
       );
       console.log(data);
       setQuery("");
+      if (onClose) onClose();
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +56,9 @@ const ReportPopup = ({ item }) => {
           <div className="btn-cta-blue" onClick={handleClick}>
             Post Query
           </div>
-          <div className="btn-cta-light">Close</div>
+          <div className="btn-cta-light" onClick={onClose}>
+            Close
+          </div>
         </div>
       </div>
     </div>
