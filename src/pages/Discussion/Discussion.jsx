@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { ChatState } from "../../context/ChatProvider";
-import { Helmet } from "react-helmet";
-import axios from "axios";
-import "./Discussion.css";
-import { Link, useNavigate } from "react-router-dom";
-import TextField from "@mui/material/TextField";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import DiscussionCard from "../../components/DiscussionCard/DiscussionCard";
+import React, { useEffect, useState } from 'react';
+import { ChatState } from '../../context/ChatProvider';
+import { Helmet } from 'react-helmet';
+import axios from 'axios';
+import './Discussion.css';
+import { Link, useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import DiscussionCard from '../../components/DiscussionCard/DiscussionCard';
 
 const Discussion = () => {
   const { user, setUser, isUserLoggedIn } = ChatState();
 
-  const [newDiscussion, setNewDiscussion] = useState("");
+  const [newDiscussion, setNewDiscussion] = useState('');
   const [discussion, setDiscussion] = useState([]);
-  const [discussionName, setDiscussionName] = useState("");
-  const [discription, setDiscription] = useState("");
-  const [code, setCode] = useState("");
+  const [discussionName, setDiscussionName] = useState('');
+  const [discription, setDiscription] = useState('');
+  const [code, setCode] = useState('');
   const navigate = useNavigate();
   const handleClick = async () => {
     if (!discussionName) {
-      toast.error("Enter discussion Name", {
+      toast.error('Enter discussion Name', {
         autoClose: 1000,
       });
     } else {
       try {
         const config = {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,
           },
         };
@@ -40,15 +40,15 @@ const Discussion = () => {
           },
           config
         );
-        toast.success("New discussion added", {
+        toast.success('New discussion added', {
           autoClose: 1000,
         });
         setNewDiscussion(data);
 
         // console.log(data);
-        setCode("");
-        setDiscription("");
-        setDiscussionName("");
+        setCode('');
+        setDiscription('');
+        setDiscussionName('');
       } catch (error) {
         console.log(error);
         toast.error(error.response.data.message, {
@@ -63,9 +63,9 @@ const Discussion = () => {
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
@@ -85,9 +85,9 @@ const Discussion = () => {
   useEffect(() => {
     if (!isUserLoggedIn.current) {
       console.log(isUserLoggedIn.current);
-      navigate("/login");
+      navigate('/login');
     }
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     setUser(userInfo);
 
     pageLoad();
@@ -99,62 +99,72 @@ const Discussion = () => {
   }, [newDiscussion]);
 
   return (
-    <div className="discussion-page">
+    <div className="discussion-container">
       <Helmet>
         <title>FlagRush | Discussion</title>
       </Helmet>
-      <div className="discussion-Ask">
-        <div className="discussion-question">
+
+      <div className="discussion-header">
+        <h1>Community Discussions</h1>
+        <p>Ask questions and share knowledge with the community</p>
+      </div>
+
+      {/* Discussion Form */}
+      <div className="discussion-form">
+        <h2 className="form-title">Start a New Discussion</h2>
+        <div className="discussion-form-grid">
           <TextField
-            id="filled-basic"
-            label="Create New Discussion / Ask new question"
-            variant="outlined"
-            className="discussion-question-input"
-            value={discussionName}
-            onChange={(e) => {
-              setDiscussionName(e.target.value);
-            }}
-          />
-          <TextField
-            id="filled-basic"
-            label="Add description of question"
-            variant="outlined"
-            multiline
-            value={discription}
-            className="discussion-question-input"
-            onChange={(e) => {
-              setDiscription(e.target.value);
-            }}
-          />
-          <TextField
-            id="filled-multiline-static"
-            label="Code"
-            multiline
+            label="Discussion Title"
             variant="filled"
-            value={code}
-            className="discussion-question-input"
-            onChange={(e) => {
-              setCode(e.target.value);
-            }}
+            value={discussionName}
+            onChange={(e) => setDiscussionName(e.target.value)}
+            fullWidth
           />
-          <a className="btn-cta-blue" onClick={handleClick}>
-            Create Discussion
-          </a>
+
+          <TextField
+            label="Detailed Description"
+            variant="filled"
+            multiline
+            rows={4}
+            value={discription}
+            onChange={(e) => setDiscription(e.target.value)}
+            fullWidth
+          />
+
+          <TextField
+            label="Relevant Code (optional)"
+            variant="filled"
+            multiline
+            rows={4}
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            fullWidth
+          />
+
+          <div className="form-submit">
+            <button className="btn-primary" onClick={handleClick}>
+              Post Discussion
+            </button>
+          </div>
         </div>
       </div>
-      <div className="discussion">
-        {discussion ? (
+
+      {/* Discussions List */}
+      <div className="discussions-list">
+        {discussion && discussion.length > 0 ? (
           discussion.map((item) => (
-            <DiscussionCard item={item} key={item._id ? item._id : ""} />
+            <DiscussionCard item={item} key={item._id || Math.random()} />
           ))
         ) : (
-          <p>Loading...</p>
+          <div className="empty-state">
+            <p>No discussions yet. Be the first to start one!</p>
+          </div>
         )}
-        {/* <DiscussionCard/> */}
       </div>
-      <ToastContainer
+
+      {/* <ToastContainer
         position="bottom-right"
-        autoClose={1000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -162,8 +172,8 @@ const Discussion = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
-      />
+        theme="dark"
+      /> */}
     </div>
   );
 };

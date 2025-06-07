@@ -226,7 +226,7 @@ const SignUp = () => {
           </Link>
         </div>
       </motion.div>
-
+      {/* 
       <ToastContainer
         position="bottom-right"
         autoClose={1000}
@@ -238,7 +238,7 @@ const SignUp = () => {
         draggable
         pauseOnHover
         theme="dark"
-      />
+      /> */}
     </div>
   );
 };

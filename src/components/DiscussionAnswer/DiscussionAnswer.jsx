@@ -1,11 +1,11 @@
-import { React, useState } from "react";
-import utkarsh from "../../assets/utkarsh.jpg";
-import { BiUpvote, BiDownvote, BiCopy } from "react-icons/bi";
-import "./DiscussionAnswer.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { AiTwotoneDelete } from "react-icons/ai";
-import axios from "axios";
+import { React, useState } from 'react';
+import utkarsh from '../../assets/utkarsh.jpg';
+import { BiUpvote, BiDownvote, BiCopy } from 'react-icons/bi';
+import './DiscussionAnswer.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AiTwotoneDelete } from 'react-icons/ai';
+import axios from 'axios';
 
 const DiscussionAnswer = ({ item }) => {
   const [up, setUp] = useState(item.upvotes.length ? item.upvotes.length : 0);
@@ -18,13 +18,13 @@ const DiscussionAnswer = ({ item }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/admin/delete-message",
+        'http://localhost:5000/api/v1/admin/delete-message',
         { messageId: item._id },
         config
       );
@@ -40,14 +40,14 @@ const DiscussionAnswer = ({ item }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.post(
         `http://localhost:5000/api/v1/message/vote/${item._id}`,
-        { vote: "up" },
+        { vote: 'up' },
         config
       );
       setUp(data.upvotes);
@@ -63,14 +63,14 @@ const DiscussionAnswer = ({ item }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.post(
         `http://localhost:5000/api/v1/message/vote/${item._id}`,
-        { vote: "down" },
+        { vote: 'down' },
         config
       );
       setDown(data.downvotes);
@@ -88,7 +88,7 @@ const DiscussionAnswer = ({ item }) => {
           Just add this CSS content into your CSS file. It will automatically
           center the content. Align horizontally to center in CSS:
         </p> */}
-        <p>{item.content ? item.content : ""}</p>
+        <p>{item.content ? item.content : ''}</p>
       </div>
 
       {item.code && (
@@ -97,12 +97,12 @@ const DiscussionAnswer = ({ item }) => {
           onClick={(e) => {
             e.preventDefault();
             navigator.clipboard.writeText(e.target.textContent);
-            toast.success("Text copied!", {
+            toast.success('Text copied!', {
               autoClose: 1000,
             });
           }}
         >
-          <code>{`${item.code ? item.code : ""}`}</code>
+          <code>{`${item.code ? item.code : ''}`}</code>
           <BiCopy className="copy-icon" />
         </pre>
       )}
@@ -111,15 +111,15 @@ const DiscussionAnswer = ({ item }) => {
         <div>
           <img src={utkarsh} alt="utkarsh" />
           {/* <p>Utkarsh Raj</p> */}
-          <p>{item.sender ? item.sender.name : ""}</p>
+          <p>{item.sender ? item.sender.name : ''}</p>
         </div>
         <div className="discussion-answer-details-date">
           <p>posted on May 11, 2020 at 21:57</p>
-          {JSON.parse(localStorage.getItem("userInfo")).data.user.role ===
-          "admin" ? (
+          {JSON.parse(localStorage.getItem('userInfo')).data.user.role ===
+          'admin' ? (
             <AiTwotoneDelete onClick={handleClick} />
           ) : (
-            ""
+            ''
           )}
         </div>
       </div>
@@ -132,7 +132,7 @@ const DiscussionAnswer = ({ item }) => {
           <BiDownvote className="discussion-icon" /> <p>{down}</p>
         </div>
       </div>
-      <ToastContainer
+      {/* <ToastContainer
         position="bottom-right"
         autoClose={1000}
         hideProgressBar={false}
@@ -143,7 +143,7 @@ const DiscussionAnswer = ({ item }) => {
         draggable
         pauseOnHover
         theme="light"
-      />
+      /> */}
     </div>
   );
 };

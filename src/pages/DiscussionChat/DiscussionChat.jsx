@@ -1,20 +1,20 @@
-import { React, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import { MdArrowBackIos } from "react-icons/md ";
-import { BiUpvote, BiDownvote, BiComment } from "react-icons/bi";
-import { BsThreeDotsVertical, BsShare, BsBookmark } from "react-icons/bs";
-import { GoReport } from "react-icons/go";
-import { RxCross1 } from "react-icons/rx";
-import "./DiscussionChat.css";
-import DiscussionAnswer from "../../components/DiscussionAnswer/DiscussionAnswer";
-import ReportPopup from "../../components/ReportPopup/ReportPopup";
-import TextField from "@mui/material/TextField";
-import utkarsh from "../../assets/utkarsh.jpg";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { Helmet } from "react-helmet";
+import { React, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import { MdArrowBackIos } from 'react-icons/md ';
+import { BiUpvote, BiDownvote, BiComment } from 'react-icons/bi';
+import { BsThreeDotsVertical, BsShare, BsBookmark } from 'react-icons/bs';
+import { GoReport } from 'react-icons/go';
+import { RxCross1 } from 'react-icons/rx';
+import './DiscussionChat.css';
+import DiscussionAnswer from '../../components/DiscussionAnswer/DiscussionAnswer';
+import ReportPopup from '../../components/ReportPopup/ReportPopup';
+import TextField from '@mui/material/TextField';
+import utkarsh from '../../assets/utkarsh.jpg';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const DiscussionChat = () => {
   const { slug } = useParams();
@@ -22,8 +22,8 @@ const DiscussionChat = () => {
   const [discussionData, setDiscussionData] = useState({});
   const [messages, setMessages] = useState([]);
 
-  const [answer, setAnswer] = useState("");
-  const [answercode, setAnswercode] = useState("");
+  const [answer, setAnswer] = useState('');
+  const [answercode, setAnswercode] = useState('');
   // update this
   const [up, setUp] = useState(0);
   const [down, setDown] = useState(0);
@@ -41,7 +41,7 @@ const DiscussionChat = () => {
   };
 
   const faltu = () => {
-    console.log("");
+    console.log('');
   };
 
   const handleUpVote = async () => {
@@ -49,14 +49,14 @@ const DiscussionChat = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.post(
         `http://localhost:5000/api/v1/chat/vote/${discussionData._id}`,
-        { vote: "up" },
+        { vote: 'up' },
         config
       );
       setUp(data.upvotes);
@@ -72,14 +72,14 @@ const DiscussionChat = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.post(
         `http://localhost:5000/api/v1/chat/vote/${discussionData._id}`,
-        { vote: "down" },
+        { vote: 'down' },
         config
       );
       setDown(data.downvotes);
@@ -96,9 +96,9 @@ const DiscussionChat = () => {
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
@@ -128,21 +128,21 @@ const DiscussionChat = () => {
   };
 
   const handleClick = async () => {
-    if (answer === "") {
-      toast.error("Enter Your Answer", {
+    if (answer === '') {
+      toast.error('Enter Your Answer', {
         autoClose: 2000,
       });
     } else {
       try {
         const config = {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("userInfo")).token
+              JSON.parse(localStorage.getItem('userInfo')).token
             }`,
           },
         };
-        toast.success("Answer submitted successfully", {
+        toast.success('Answer submitted successfully', {
           autoClose: 2000,
         });
         const { data } = await axios.post(
@@ -153,16 +153,16 @@ const DiscussionChat = () => {
         // console.log(data);
         setMessages([...messages, data]);
         // console.log(messages);
-        setAnswer("");
-        setAnswercode("");
-        toast.success("Answer submitted successfully", {
+        setAnswer('');
+        setAnswercode('');
+        toast.success('Answer submitted successfully', {
           autoClose: 2000,
         });
         // console.log(data.chat[0]);
         // setDiscussionData(data.chat[0]);
       } catch (error) {
         console.log(error);
-        toast.error("Enter Your Answer", {
+        toast.error('Enter Your Answer', {
           autoClose: 2000,
         });
       }
@@ -174,76 +174,79 @@ const DiscussionChat = () => {
   }, []);
 
   return (
-    <div className="discussion-chat">
+    <div className="discussion-chat-container">
       <Helmet>
         <title>FlagRush | Discussion Chat</title>
       </Helmet>
-      <div className="back-button" onClick={back}>
-        <MdArrowBackIos />
+
+      <div className="discussion-header">
+        <button className="back-button" onClick={back}>
+          <MdArrowBackIos />
+        </button>
+        <h1>Discussion</h1>
       </div>
 
-      {report ? <ReportPopup item={discussionData} /> : ""}
+      {report && (
+        <ReportPopup item={discussionData} onClose={() => setReport(false)} />
+      )}
 
-      <div className="discussion-chat-question">
-        <div className="discussion-chat-question-content">
-          <h2>{discussionData.chatName ? discussionData.chatName : ""}</h2>
-          {discussionData.discription && (
-            <p>
-              {discussionData.discription ? discussionData.discription : ""}
-            </p>
-          )}
-          {discussionData.code && (
-            <pre className="discussion-chat-question-code">
-              <code>{`${discussionData.code ? discussionData.code : ""}`}</code>
+      {/* Main Discussion Content */}
+      <div className="discussion-content">
+        <h2 className="discussion-title">
+          {discussionData.chatName || 'Loading...'}
+        </h2>
+
+        {discussionData.discription && (
+          <p className="discussion-description">{discussionData.discription}</p>
+        )}
+
+        {discussionData.code && (
+          <div className="discussion-code-block">
+            <pre>
+              <code>{discussionData.code}</code>
             </pre>
-          )}
-        </div>
-        <div className="discussion-chat-question-line"></div>
+          </div>
+        )}
 
-        <div className="discussion-card-datas">
-          <div className="discussion-card-data">
-            <div className="discussion-card-upvote" onClick={handleUpVote}>
-              <BiUpvote className="discussion-icon" /> <p>{up}</p>
-            </div>
-            <div className="discussion-card-downvote" onClick={handleDownVote}>
-              <BiDownvote className="discussion-icon" /> <p>{down}</p>
-            </div>
-            <div className="discussion-card-comment">
-              <Link
-                // to={item ? item.slug : "/"}
-                to="/"
-                className="discussion-card-comment-link"
-              >
-                <BiComment className="discussion-icon" />
-                <p>4</p>
-              </Link>
-              <img src={utkarsh} alt="" />
-              <img src={utkarsh} alt="" />
-              <img src={utkarsh} alt="" />
-              <img src={utkarsh} alt="" />
+        {/* Discussion Actions */}
+        <div className="discussion-actions">
+          <div className="vote-section">
+            <button
+              className={`vote-button upvote ${up ? 'active' : ''}`}
+              onClick={handleUpVote}
+            >
+              <BiUpvote /> <span>{up}</span>
+            </button>
+            <button
+              className={`vote-button downvote ${down ? 'active' : ''}`}
+              onClick={handleDownVote}
+            >
+              <BiDownvote /> <span>{down}</span>
+            </button>
+            <div className="comment-info">
+              <BiComment />
+              <span>{messages.length}</span>
+              <div className="user-avatars">
+                <img src={utkarsh} alt="User" />
+                <img src={utkarsh} alt="User" />
+                <img src={utkarsh} alt="User" />
+              </div>
             </div>
           </div>
-          {/* {user.data.user.role === "admin" ? (
-              <AiTwotoneDelete onClick={handleDelete} />
-            ) : (
-              ""
-            )} */}
-          <div className="discussion-card-dropdown" onClick={openPopup}>
-            {open ? <RxCross1 /> : <BsThreeDotsVertical />}
+
+          <div className="dropdown-menu">
+            <button className="dropdown-toggle" onClick={openPopup}>
+              {open ? <RxCross1 /> : <BsThreeDotsVertical />}
+            </button>
             {open && (
-              <div className="discussion-dropdown">
-                <div>
+              <div className="dropdown-content">
+                <div className="dropdown-item" onClick={faltu}>
                   <BsShare /> Share
                 </div>
-                <div>
+                <div className="dropdown-item" onClick={faltu}>
                   <BsBookmark /> Bookmark
                 </div>
-                <div
-                  onClick={() => {
-                    // console.log("clicked");
-                    setReport(!report);
-                  }}
-                >
+                <div className="dropdown-item" onClick={() => setReport(true)}>
                   <GoReport /> Report
                 </div>
               </div>
@@ -251,46 +254,56 @@ const DiscussionChat = () => {
           </div>
         </div>
       </div>
-      <div className="discussion-answer-self">
-        <h3>Your Answer</h3>
-        <div>
-          <TextField
-            id="filled-basic"
-            label="Write your answer"
-            variant="outlined"
-            multiline
-            value={answer}
-            onChange={(e) => {
-              setAnswer(e.target.value);
-            }}
-            className="discussion-question-input"
-          />
-          <TextField
-            id="filled-multiline-static"
-            label="Add code here"
-            multiline
-            variant="filled"
-            value={answercode}
-            onChange={(e) => {
-              setAnswercode(e.target.value);
-            }}
-            className="discussion-question-input"
-          />
-        </div>
-        <div onClick={handleClick} className="btn-cta-blue">
-          Post Answer
-        </div>
-      </div>
-      <div className="discussion-chat-comments">
-        {messages.length > 0
-          ? messages.map((item) => (
-              <DiscussionAnswer item={item} key={item._id} />
-            ))
-          : "Loading..."}
 
-        {/* <DiscussionAnswer />
-        <DiscussionAnswer /> */}
+      {/* Answer Form */}
+      <div className="answer-form">
+        <h3>Your Answer</h3>
+        <TextField
+          label="Write your answer"
+          variant="outlined"
+          multiline
+          rows={4}
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+        />
+        <TextField
+          label="Add code here (optional)"
+          variant="outlined"
+          multiline
+          rows={4}
+          value={answercode}
+          onChange={(e) => setAnswercode(e.target.value)}
+        />
+        <div className="form-actions">
+          <button className="submit-button" onClick={handleClick}>
+            Post Answer
+          </button>
+        </div>
       </div>
+
+      {/* Answers List */}
+      <div className="answers-list">
+        {messages.length > 0 ? (
+          messages.map((item) => (
+            <DiscussionAnswer item={item} key={item._id} />
+          ))
+        ) : (
+          <p>No answers yet. Be the first to respond!</p>
+        )}
+      </div>
+      {/* 
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      /> */}
     </div>
   );
 };

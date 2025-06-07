@@ -1,31 +1,238 @@
-.flag-flex {
+/* Home.css */
+.home-container {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.home-main {
   display: flex;
   flex-direction: column;
-}
-.capture-the-flag {
-  display: flex;
-  /* justify-content: space-between; */
-}
-.create-ctfs {
-  position: fixed;
-  padding-left: 50vw;
+  gap: 2rem;
 }
 
-.home {
-  width: 585px;
-  margin: 0 auto;
+.ctf-form {
+  background: var(--bg-glass);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+}
+
+.ctf-form h2 {
+  margin: 0 0 1.5rem 0;
+  color: var(--primary-light);
+  font-size: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.ctf-submit-btn {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
+
+.ctf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ctf-list-header {
   display: flex;
   justify-content: space-between;
-  gap: 30px;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.home h1,
-.home h3 {
-  margin: 50px 0 20px 0;
+.ctf-list-header h2 {
+  margin: 0;
+  color: var(--primary-light);
+  font-size: 1.5rem;
 }
 
-.leader {
-  position: fixed;
-  right: 30px;
-  top: 120px;
+.ctf-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .ctf-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.sidebar {
+  position: sticky;
+  top: 40px;
+  align-self: flex-start;
+  height: fit-content;
+  min-width: 320px;
+  max-width: 400px;
+  width: 100%;
+  z-index: 2;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin-left: auto;
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+    min-width: 0;
+    max-width: 100vw;
+  }
+}
+
+@media (max-width: 992px) {
+  .home-container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    order: 2;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    padding-top: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .ctf-form {
+    padding: 1.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    max-width: 98vw;
+    padding-top: 1rem;
+  }
+}
+
+.MuiTextField-root {
+  width: 100%;
+}
+
+.MuiFilledInput-root {
+  background-color: var(--bg-glass-light) !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid var(--border-light) !important;
+}
+
+.MuiFilledInput-root:before,
+.MuiFilledInput-root:after {
+  display: none !important;
+}
+
+.MuiFilledInput-root:hover {
+  background-color: var(--bg-glass) !important;
+}
+
+.MuiFilledInput-root.Mui-focused {
+  background-color: var(--bg-glass) !important;
+  border-color: var(--primary) !important;
+}
+
+.MuiInputLabel-filled {
+  color: var(--text-muted) !important;
+}
+
+.MuiInputLabel-filled.Mui-focused {
+  color: var(--primary) !important;
+}
+
+/* Button styles */
+.btn-cta {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-cta:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-cta:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .home-container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    order: 2;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    padding-top: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .ctf-form {
+    padding: 1.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    max-width: 98vw;
+    padding-top: 1rem;
+  }
 }

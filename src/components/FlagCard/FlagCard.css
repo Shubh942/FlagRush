@@ -116,7 +116,7 @@
   background: #23272f !important;
   border-radius: 8px !important;
   color: #e5e7eb !important;
-  font-size: 1rem;
+  box-shadow: none !important;
 }
 
 .flagBox-input .MuiInputLabel-root {
@@ -129,7 +129,22 @@
 }
 
 .flagBox-input .MuiFilledInput-root:before {
-  border-bottom: 1.5px solid #494949 !important;
+  border-bottom: 2px solid #2563eb !important;
+  /* Remove white border */
+  background: none !important;
+}
+
+.flagBox-input .MuiFilledInput-root:hover:before {
+  border-bottom: 2px solid #60a5fa !important;
+}
+
+.flagBox-input .MuiFilledInput-root.Mui-focused:after {
+  border-bottom: 2px solid #60a5fa !important;
+}
+
+.flagBox-input .MuiFilledInput-underline:before,
+.flagBox-input .MuiFilledInput-underline:after {
+  border-bottom: none !important;
 }
 
 .flagBox-input button,
@@ -156,6 +171,13 @@
   box-shadow: 0 4px 16px rgba(37, 99, 235, 0.13);
 }
 
+.flagBox-input .discussion-question-input {
+  width: 100% !important;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 @media (max-width: 700px) {
   .flagBox {
     max-width: 98vw;
@@ -168,6 +190,13 @@
   }
   .flagBox-input .MuiFilledInput-root {
     width: 100% !important;
+  }
+  .flagBox-input .discussion-question-input {
+    width: 100% !important;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 0.97rem;
+    padding: 8px 10px !important;
   }
 }
 
@@ -189,5 +218,12 @@
   .flagBox-input .btn-cta-blue {
     font-size: 0.97rem;
     padding: 7px 10px;
+  }
+  .flagBox-input .discussion-question-input {
+    width: 100% !important;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 0.97rem;
+    padding: 8px 10px !important;
   }
 }

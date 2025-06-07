@@ -1,8 +1,8 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import comingSoon from "../../assets/coming-soon.avif";
-import "./Error.css";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import comingSoon from '../../assets/coming-soon.avif';
+import './Error.css';
+import { Helmet } from 'react-helmet';
 
 const Error = () => {
   const navigate = useNavigate();
@@ -12,15 +12,21 @@ const Error = () => {
   };
 
   return (
-    <div className="error">
+    <div className="error-page">
       <Helmet>
-        <title>FlagRush | Contest</title>
+        <title>FlagRush | Coming Soon</title>
       </Helmet>
-      <h1>the Feature will be implemented soon !!</h1>
-      <div className="btn-cta-blue" onClick={back}>
-        Go Back
+      <div className="error-content">
+        <h1 className="error-heading">Feature Coming Soon!</h1>
+        <p className="error-message">
+          We're working hard to bring you this exciting new feature. Stay tuned
+          for updates!
+        </p>
+        <img src={comingSoon} alt="Coming soon" className="error-image" />
+        <button className="error-btn" onClick={back}>
+          Go Back
+        </button>
       </div>
-      <img src={comingSoon} alt="coming soon" />
     </div>
   );
 };

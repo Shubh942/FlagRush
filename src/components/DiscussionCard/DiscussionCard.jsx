@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import "./DiscussionCard.css";
-import utkarsh from "../../assets/utkarsh.jpg";
-import { Link } from "react-router-dom";
-import { BiUpvote, BiDownvote, BiComment } from "react-icons/bi";
+import React, { useEffect, useState } from 'react';
+import './DiscussionCard.css';
+import utkarsh from '../../assets/utkarsh.jpg';
+import { Link } from 'react-router-dom';
+import { BiUpvote, BiDownvote, BiComment } from 'react-icons/bi';
 import {
   BsThreeDotsVertical,
   BsShare,
   BsBookmark,
   BsFillBookmarkCheckFill,
-} from "react-icons/bs";
-import { GoReport } from "react-icons/go";
-import { RxCross1 } from "react-icons/rx";
-import { AiTwotoneDelete } from "react-icons/ai";
-import axios from "axios";
-import { ChatState } from "../../context/ChatProvider";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ReportPopup from "../ReportPopup/ReportPopup";
+} from 'react-icons/bs';
+import { GoReport } from 'react-icons/go';
+import { RxCross1 } from 'react-icons/rx';
+import { AiTwotoneDelete } from 'react-icons/ai';
+import axios from 'axios';
+import { ChatState } from '../../context/ChatProvider';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ReportPopup from '../ReportPopup/ReportPopup';
 
 const DiscussionCard = ({ item }) => {
   const { user, setUser } = ChatState();
@@ -36,14 +36,14 @@ const DiscussionCard = ({ item }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.post(
         `http://localhost:5000/api/v1/chat/vote/${item._id}`,
-        { vote: "up" },
+        { vote: 'up' },
         config
       );
       setUp(data.upvotes);
@@ -59,14 +59,14 @@ const DiscussionCard = ({ item }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.post(
         `http://localhost:5000/api/v1/chat/vote/${item._id}`,
-        { vote: "down" },
+        { vote: 'down' },
         config
       );
       setDown(data.downvotes);
@@ -82,13 +82,13 @@ const DiscussionCard = ({ item }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/admin/delete-discussion",
+        'http://localhost:5000/api/v1/admin/delete-discussion',
         { chatId: item._id },
         config
       );
@@ -103,9 +103,9 @@ const DiscussionCard = ({ item }) => {
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
@@ -114,7 +114,7 @@ const DiscussionCard = ({ item }) => {
 
         config
       );
-      console.log("LLLlllllllllllllllll");
+      console.log('LLLlllllllllllllllll');
       // console.log(data.user);
       const isbookmarked = await data.user[0].bookmarkChats.includes(item._id);
 
@@ -129,19 +129,19 @@ const DiscussionCard = ({ item }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/users/add-bookmark",
+        'http://localhost:5000/api/v1/users/add-bookmark',
         { chatId: item._id },
         config
       );
 
       // include removed bookmarked popup
-      toast.success("Question Bookmarked!", {
+      toast.success('Question Bookmarked!', {
         autoClose: 1000,
       });
 
@@ -157,7 +157,7 @@ const DiscussionCard = ({ item }) => {
   return (
     <div className="discussion-card">
       {/* {console.log(item)} */}
-      {report ? <ReportPopup item={item._id ? item._id : ""} /> : ""}
+      {report ? <ReportPopup item={item._id ? item._id : ''} /> : ''}
       <div className="discussion-card-content">
         <div className="discussion-card-ques">
           <p>{item.name}</p>
@@ -165,14 +165,14 @@ const DiscussionCard = ({ item }) => {
           <div>
             <p className="discussion-card-text">created by</p>
             <img
-              src={item.groupCreater ? item.groupCreater.photo : ""}
+              src={item.groupCreater ? item.groupCreater.photo : ''}
               alt="creator"
             />
-            <h4>{item.groupCreater ? item.groupCreater.name : ""}</h4>
+            <h4>{item.groupCreater ? item.groupCreater.name : ''}</h4>
           </div>
         </div>
 
-        <Link to={item ? item.slug : "/"} className="btn-cta-blue">
+        <Link to={item ? item.slug : '/'} className="btn-cta-blue">
           Join Discussion
         </Link>
       </div>
@@ -188,7 +188,7 @@ const DiscussionCard = ({ item }) => {
           </div>
           <div className="discussion-card-comment">
             <Link
-              to={item ? item.slug : "/"}
+              to={item ? item.slug : '/'}
               className="discussion-card-comment-link"
             >
               <BiComment className="discussion-icon" />
@@ -198,16 +198,16 @@ const DiscussionCard = ({ item }) => {
               ? item.users.map((user) => (
                   <img src={user.photo} alt="" key={user._id} />
                 ))
-              : ""}
+              : ''}
             {/* <img src={utkarsh} alt="" />
             <img src={utkarsh} alt="" />
             <img src={utkarsh} alt="" /> */}
           </div>
         </div>
-        {user.data.user.role === "admin" ? (
+        {user.data.user.role === 'admin' ? (
           <AiTwotoneDelete onClick={handleDelete} />
         ) : (
-          ""
+          ''
         )}
         <div className="discussion-card-dropdown" onClick={openPopup}>
           {open ? <RxCross1 /> : <BsThreeDotsVertical onClick={isBookmark} />}
@@ -231,7 +231,7 @@ const DiscussionCard = ({ item }) => {
           )}
         </div>
       </div>
-      <ToastContainer
+      {/* <ToastContainer
         position="bottom-right"
         autoClose={1000}
         hideProgressBar={false}
@@ -242,7 +242,7 @@ const DiscussionCard = ({ item }) => {
         draggable
         pauseOnHover
         theme="light"
-      />
+      /> */}
     </div>
   );
 };

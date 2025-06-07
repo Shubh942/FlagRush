@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import "./FlagCard.css";
-import TextField from "@mui/material/TextField";
-import axios from "axios";
-import { BeatLoader } from "react-spinners";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import { ChatState } from "../../context/ChatProvider";
+import React, { useState } from 'react';
+import './FlagCard.css';
+import TextField from '@mui/material/TextField';
+import axios from 'axios';
+import { BeatLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import { ChatState } from '../../context/ChatProvider';
 
 const FlagCard = ({ object }) => {
   const { isUserLoggedIn } = ChatState();
-  const [flag, setFlag] = useState("");
+  const [flag, setFlag] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSolved, setIsSolved] = useState(false);
   const [show, setShow] = useState(false);
@@ -22,7 +22,7 @@ const FlagCard = ({ object }) => {
       setLoading(true);
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${isUserLoggedIn.current.token}`,
         },
       };
@@ -33,8 +33,8 @@ const FlagCard = ({ object }) => {
       );
       console.log(data);
       setLoading(false);
-      if (data.data.status === "success") {
-        setFlag("");
+      if (data.data.status === 'success') {
+        setFlag('');
         setIsSolved(true);
         toast.success(data.data.message, {
           autoClose: 2500,
@@ -45,7 +45,7 @@ const FlagCard = ({ object }) => {
         });
       }
     } catch (error) {
-      toast.error("Entered Flag is not correct, Please try again", {
+      toast.error('Entered Flag is not correct, Please try again', {
         autoClose: 1000,
       });
       setLoading(false);
@@ -59,26 +59,26 @@ const FlagCard = ({ object }) => {
       {object && object.users.includes(isUserLoggedIn.current.data.user._id) ? (
         <h3>You Solved this</h3>
       ) : (
-        ""
+        ''
       )}
-      <h2>{object ? object.heading : ""}</h2>
+      <h2>{object ? object.heading : ''}</h2>
       <div className="flagBox-contents">
-        <div>Discription: {object ? object.description : ""}</div>
+        <div>Discription: {object ? object.description : ''}</div>
         <div className="flag-card-link">
-          Link: <p> {object ? object.link : ""} </p>
+          Link: <p> {object ? object.link : ''} </p>
         </div>
         <div className="flagBox-author">
-          {object ? <img src={object.host.photo} /> : ""}
-          <p>Author:{object ? object.host.name : ""}</p>
+          {object ? <img src={object.host.photo} /> : ''}
+          <p>Author:{object ? object.host.name : ''}</p>
         </div>
         <div className="flagBox-hint">
-          Hint:{" "}
+          Hint:{' '}
           {show ? (
             <AiOutlineEye onClick={eyeChange} />
           ) : (
             <AiOutlineEyeInvisible onClick={eyeChange} />
-          )}{" "}
-          {object && object.hint && show ? object.hint : ""}
+          )}{' '}
+          {object && object.hint && show ? object.hint : ''}
         </div>
       </div>
       <div className="flagBox-input">
@@ -92,13 +92,13 @@ const FlagCard = ({ object }) => {
           onChange={(e) => {
             setFlag(e.target.value);
           }}
-          style={{ width: "420px" }}
+          style={{ width: '420px' }}
         />
         <button className="btn-cta-blue" onClick={submitFlag}>
-          {!loading ? "Submit Flag Id" : <BeatLoader color="#fff" />}
+          {!loading ? 'Submit Flag Id' : <BeatLoader color="#fff" />}
         </button>
       </div>
-
+      {/* 
       <ToastContainer
         position="bottom-right"
         autoClose={1000}
@@ -110,7 +110,7 @@ const FlagCard = ({ object }) => {
         draggable
         pauseOnHover
         theme="light"
-      />
+      /> */}
     </div>
   );
 };

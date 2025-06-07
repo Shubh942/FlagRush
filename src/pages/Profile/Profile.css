@@ -1,152 +1,119 @@
-/* Profile.css */
 .profile {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
   color: var(--text-primary);
-  background: linear-gradient(
-    to bottom,
-    var(--bg-darker) 0%,
-    var(--bg-dark) 100%
-  );
+  background: var(--bg-dark);
   min-height: 100vh;
 }
 
 .profile-content {
   display: flex;
   flex-direction: row;
+  gap: 2.5rem;
   align-items: center;
-  gap: 3rem;
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2.5rem;
   background: var(--bg-glass);
+  padding: 2rem;
   border-radius: 1.5rem;
+  backdrop-filter: blur(12px);
   box-shadow: var(--shadow-xl);
-  position: relative;
-  backdrop-filter: blur(10px);
   border: 1px solid var(--border-light);
-}
-
-.profile-pic {
-  position: relative;
+  transition: var(--transition-smooth);
+  margin: 2rem auto;
 }
 
 .profile-pic img {
-  width: 200px;
-  height: 200px;
-  border: 4px solid transparent;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
-  transition: var(--transition-smooth);
-  box-shadow: var(--shadow-glow);
+  border: 4px solid transparent;
   background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
     linear-gradient(
         135deg,
-        var(--primary) 0%,
-        var(--accent-pink) 50%,
-        var(--secondary) 100%
+        var(--primary-light),
+        var(--accent-pink),
+        var(--secondary)
       )
       border-box;
+  box-shadow: var(--shadow-glow);
+  transition: var(--transition-smooth);
 }
 
 .profile-pic img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
 }
 
 .profile-content-details {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 1.2rem;
-  position: relative;
   flex: 1;
+  position: relative;
 }
 
 .profile-content-details h1 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  margin: 0;
-  color: var(--text-primary);
   background: linear-gradient(
     to right,
-    var(--primary-light) 0%,
-    var(--text-primary) 100%
+    var(--primary-light),
+    var(--text-primary)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 0.5px;
 }
 
 .profile-edit {
   position: absolute;
   top: 0;
   right: 0;
+  background: var(--primary);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  font-size: 1.3rem;
-  color: var(--text-primary);
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 100%
-  );
-  border: none;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-glow);
   cursor: pointer;
   transition: var(--transition-bounce);
-  z-index: 2;
 }
 
 .profile-edit:hover {
-  transform: scale(1.1) rotate(15deg);
-  box-shadow: var(--shadow-glow);
+  transform: scale(1.15) rotate(15deg);
 }
 
 .profile-content-friend {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  color: var(--text-secondary);
-  font-size: 1.1rem;
+  gap: 0.6rem;
   padding: 0.6rem 1rem;
-  background: var(--bg-glass-light);
   border-radius: 2rem;
+  font-size: 1rem;
+  background: var(--bg-glass-light);
   border: 1px solid var(--border-light);
-}
-
-.profile-content-friend svg {
-  color: var(--accent);
+  color: var(--text-secondary);
 }
 
 .profile-admin {
   display: flex;
-  gap: 1.2rem;
-  margin-top: 1.5rem;
+  gap: 1rem;
+  margin-top: 1.2rem;
 }
 
 .profile-admin a {
-  padding: 0.7rem 1.5rem;
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 100%
-  );
-  color: var(--text-primary);
+  padding: 0.6rem 1.2rem;
   border-radius: 0.8rem;
-  text-decoration: none;
+  background: var(--primary);
+  color: var(--text-primary);
   font-weight: 600;
+  text-decoration: none;
   transition: var(--transition-bounce);
+  border: 1px solid var(--primary-dark);
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--primary-light);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .profile-admin a:hover {
@@ -155,135 +122,105 @@
 }
 
 .btn-cta-blue {
-  padding: 0.9rem 2rem;
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 100%
-  );
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  padding: 0.9rem 2.2rem;
+  border-radius: 1rem;
   color: var(--text-primary);
-  border: none;
-  border-radius: 0.8rem;
   font-weight: 600;
+  border: none;
   cursor: pointer;
-  transition: var(--transition-bounce);
-  margin: 1.5rem 0;
-  box-shadow: var(--shadow-md);
   font-size: 1rem;
-  letter-spacing: 0.5px;
+  transition: var(--transition-bounce);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-cta-blue:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-glow);
+}
+
+.profile-status {
+  text-align: center;
+  padding: 0.8rem 1.5rem;
+  background: var(--bg-glass-light);
+  color: var(--text-primary);
+  border-radius: 1rem;
+  font-weight: 500;
+  margin: 1.5rem auto;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
 }
 
 .friends-container,
 .friendrequest-container {
   background: var(--bg-glass);
   padding: 2rem;
-  border-radius: 1.5rem;
-  margin: 3rem auto;
-  max-width: 1100px;
+  border-radius: 1.2rem;
+  margin-top: 2.5rem;
+  border: 1px solid var(--border-medium);
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-light);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
 }
 
 .friends-container h2,
 .friendrequest-container h2 {
   font-size: 1.8rem;
-  margin-bottom: 2rem;
-  color: var(--text-primary);
+  margin-bottom: 1.5rem;
   text-align: center;
+  color: var(--text-primary);
   position: relative;
-  padding-bottom: 0.5rem;
 }
 
 .friends-container h2::after,
 .friendrequest-container h2::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
   height: 3px;
-  background: linear-gradient(
-    to right,
-    var(--primary) 0%,
-    var(--accent-pink) 100%
-  );
+  width: 90px;
+  background: linear-gradient(to right, var(--primary), var(--accent-pink));
   border-radius: 3px;
 }
 
 .friends,
 .friendrequest-content {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
 }
 
-/* Status messages */
-.profile-status {
-  padding: 0.8rem 1.5rem;
-  background: var(--bg-glass-light);
-  border-radius: 0.8rem;
-  color: var(--text-primary);
-  margin: 1.5rem 0;
-  text-align: center;
-  font-weight: 500;
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Responsive adjustments */
+/* Mobile responsiveness */
 @media (max-width: 900px) {
   .profile-content {
     flex-direction: column;
-    text-align: center;
-    align-items: center;
     gap: 2rem;
-  }
-
-  .profile-content-details {
-    align-items: center;
     text-align: center;
   }
 
   .profile-edit {
-    top: -1rem;
-    right: -1rem;
-  }
-
-  .profile-pic img {
-    width: 180px;
-    height: 180px;
+    top: -0.5rem;
+    right: -0.5rem;
   }
 
   .friends,
   .friendrequest-content {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   }
 }
 
 @media (max-width: 600px) {
   .profile {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .profile-content {
     padding: 1.5rem;
   }
 
-  .profile-pic img {
-    width: 150px;
-    height: 150px;
-  }
-
   .profile-content-details h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .friends,
@@ -293,10 +230,6 @@
 
   .profile-admin {
     flex-direction: column;
-    width: 100%;
-  }
-
-  .profile-admin a {
-    justify-content: center;
+    align-items: center;
   }
 }
