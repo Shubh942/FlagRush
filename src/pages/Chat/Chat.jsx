@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import ChatName from "./Name/ChatName";
-import { ChatState } from "../../context/ChatProvider";
+import React, { useState, useEffect } from 'react';
+import ChatName from './Name/ChatName';
+import { ChatState } from '../../context/ChatProvider';
 // import { ChatState } from "../../context/ChatProvider";
-import "./Chat.css";
-import AccessChat from "./AccessChat/AccessChat";
-import MessageBox from "./MessageBox/MessageBox";
-import axios from "axios";
-import io from "socket.io-client";
-import { AiOutlineSend } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
-import TextField from "@mui/material/TextField";
-import { Helmet } from "react-helmet";
+import './Chat.css';
+import AccessChat from './AccessChat/AccessChat';
+import MessageBox from './MessageBox/MessageBox';
+import axios from 'axios';
+import io from 'socket.io-client';
+import { AiOutlineSend } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import { Helmet } from 'react-helmet';
 
-const ENDPOINT = "http://localhost:5000/";
+const ENDPOINT = 'http://localhost:5000/';
 var socket, selectedChatCompare;
 const Chat = () => {
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState('');
   const [socketConnected, setSocketConnected] = useState(false);
   const {
     selectedChat,
@@ -27,78 +27,71 @@ const Chat = () => {
     isUserLoggedIn,
   } = ChatState();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!isUserLoggedIn.current) {
-      navigate("/login");
+      navigate('/login');
     }
+
     socket = io(ENDPOINT);
-    console.log(socket);
-    // console.log(JSON.parse(localStorage.getItem("userInfo")).data.user);
     socket.emit(
-      "setup",
-      JSON.parse(localStorage.getItem("userInfo"))
-        ? JSON.parse(localStorage.getItem("userInfo")).data.user
-        : ""
+      'setup',
+      JSON.parse(localStorage.getItem('userInfo'))?.data.user || ''
     );
-    socket.on("connected", () => setSocketConnected(true));
-    // socket.on("typing", () => setIsTyping(true));
-    // socket.on("stop typing", () => setIsTyping(false));
+    socket.on('connected', () => setSocketConnected(true));
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
-  const handleclick = async () => {
-    // console.log(selectedChat);
+  const handleSendMessage = async () => {
+    if (!newMessage.trim() || !selectedChat) return;
 
     try {
-      if (newMessage) {
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        };
-        setNewMessage("");
-        const { data } = await axios.post(
-          "http://localhost:5000/api/v1/message",
-          {
-            content: newMessage,
-            chatId: selectedChat._id,
-          },
-          config
-        );
-        // console.log(data);
-        socket.emit("new message", data);
-        setMessages([...messages, data]);
-      }
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        'http://localhost:5000/api/v1/message',
+        {
+          content: newMessage.trim(),
+          chatId: selectedChat._id,
+        },
+        config
+      );
+
+      setNewMessage('');
+      socket.emit('new message', data);
+      setMessages((prev) => [...prev, data]);
     } catch (error) {
-      console.log(error);
+      console.error('Error sending message:', error);
     }
   };
 
-  // useEffect(() => {
-  //   socket.on("message recieved", (newMessageReceived) => {
-  //     // console.log("oooooooooooooooooooooooooooooooooooooooooooooooo");
-  //     if (
-  //       !selectedChatCompare ||
-  //       selectedChatCompare._id !== newMessageReceived.chat._id
-  //     ) {
-  //       //notification
-  //     } else {
-  //       console.log("=-----------new------------=");
-  //       console.log(newMessageReceived);
-  //       setMessages([...messages, newMessageReceived]);
-  //     }
-  //   });
-  // });
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
   return (
-    <div className="chat-box">
+    <div className="chat-container">
       <Helmet>
         <title>FlagRush | Chat</title>
       </Helmet>
-      <div className="chatName">
+
+      <div className="chat-sidebar">
         <ChatName />
       </div>
-      <div className="chats">
-        <div className="showChat">
+
+      <div className="chat-main">
+        <div className="chat-messages">
           <AccessChat
             messages={messages}
             setMessages={setMessages}
@@ -106,32 +99,25 @@ const Chat = () => {
             selectedChatCompare={selectedChatCompare}
           />
         </div>
-        <div className="chat-send-msg">
+        <div className="chat-input-container">
           <input
-            className="messageBox"
+            className="chat-input"
             type="text"
+            placeholder="Type your message..."
             value={newMessage}
-            style={{
-              color: "#fff",
-            }}
             onChange={(e) => setNewMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
           />
-
           <button
-            className="chat-btn"
-            style={{
-              cursor: "pointer",
-            }}
-            onClick={handleclick}
+            className="send-button"
+            onClick={handleSendMessage}
+            disabled={!newMessage.trim()}
           >
-            <AiOutlineSend style={{ fontSize: "20px" }} />
+            <AiOutlineSend style={{ fontSize: '20px' }} />
           </button>
         </div>
-
-        {/* </input> */}
       </div>
     </div>
   );
 };
-
 export default Chat;

@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { ChatState } from "../../../context/ChatProvider";
-import "./AcessChat.css";
-
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { ChatState } from '../../../context/ChatProvider';
 import {
-  isSameSender,
   isLastMessage,
+  isSameSender,
   isSameSenderMargin,
   isSameUser,
-} from "../../../context/ChatLogics";
+} from '../../../context/ChatLogics';
+import './AcessChat.css';
+
 const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
-  //   const [messages, setMessages] = useState();
-  const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
+  const { selectedChat, user } = ChatState();
   const [bool, setBool] = useState(false);
+
   const fetchMessages = async () => {
-    if (!selectedChat) {
-      return;
-    }
+    if (!selectedChat) return;
+
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${user.token}`,
         },
       };
@@ -28,14 +27,10 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
         `http://localhost:5000/api/v1/message/${selectedChat._id}`,
         config
       );
-      socket.emit("join chat", selectedChat._id);
+      socket.emit('join chat', selectedChat._id);
       setMessages(data);
-      // console.log(user);
-      //   console.log(data[0].content);
-      //   console.log(data[1].content);
-      //   setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -44,81 +39,69 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
-  // useEffect(() => {
-  //   fetchMessages();
-  // }, [bool]);
-
   useEffect(() => {
-    socket
-      ? socket.on("message recieved", (newMessageReceived) => {
-          // console.log("oooooooooooooooooooooooooooooooooooooooooooooooo");
-          if (
-            !selectedChatCompare ||
-            selectedChatCompare._id !== newMessageReceived.chat._id
-          ) {
-            //notification
-          } else {
-            // console.log("------------received--------------");
-            // console.log(newMessageReceived);
-            setBool(!bool);
-            // Microsoft Edge
-            setMessages((messages) => [...messages, newMessageReceived]);
+    if (!socket) return;
 
-            //Chrome
-            // setMessages([...messages, newMessageReceived]);
-          }
-        })
-      : "";
-  });
+    const handleNewMessage = (newMessageReceived) => {
+      if (
+        !selectedChatCompare ||
+        selectedChatCompare._id !== newMessageReceived.chat._id
+      ) {
+        // Show notification
+      } else {
+        setBool(!bool);
+        setMessages((prev) => [...prev, newMessageReceived]);
+      }
+    };
+
+    socket.on('message recieved', handleNewMessage);
+    return () => socket.off('message recieved', handleNewMessage);
+  }, [socket, selectedChatCompare, bool]);
+
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        flexDirection: "column",
-        width: "600px",
-      }}
-      className="chatBox"
-    >
+    <div className="accesschat-container">
       {messages ? (
         messages.map((m, i) => (
-          <div className="right" style={{ display: "flex" }} key={m._id}>
+          <div
+            className={`accesschat-message ${
+              m.sender._id === user.data.user._id
+                ? 'sent-message'
+                : 'received-message'
+            }`}
+            key={m._id}
+          >
             {(isSameSender(messages, m, i, user.data.user._id) ||
               isLastMessage(messages, i, user.data.user._id)) && (
-              <div className="profile-pic-2">
-                <img src={m.sender.photo} alt="sender-image" />
-              </div>
+              <img
+                src={m.sender.photo}
+                alt="sender"
+                className="message-sender-avatar"
+                style={{
+                  marginRight: isSameSenderMargin(
+                    messages,
+                    m,
+                    i,
+                    user.data.user._id
+                  ),
+                  marginTop: isSameUser(messages, m, i, user.data.user._id)
+                    ? '3px'
+                    : '10px',
+                }}
+              />
             )}
-            <div
-              style={{
-                backgroundColor: `${
-                  m.sender._id === user.data.user._id ? "#1F1212" : "#0F121B"
-                }`,
-                borderRadius: "20px",
-                padding: "10px 20px",
-                width: "300px",
-                display: "flex",
-                height: "auto",
-                flexWrap: "wrap",
-                marginLeft: isSameSenderMargin(
-                  messages,
-                  m,
-                  i,
-                  user.data.user._id
-                ),
-                marginTop: isSameUser(messages, m, i, user.data.user._id)
-                  ? 3
-                  : 10,
-              }}
-            >
-              <div className="chat-message-content">
-                <p>{m.content}</p>
-              </div>
+            <div className="message-content">
+              <p>{m.content}</p>
+              <span className="message-time">
+                {new Date(m.createdAt).toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              </span>
             </div>
           </div>
         ))
       ) : (
-        <p>Loading..</p>
+        <div className="loading-indicator">Loading messages...</div>
       )}
     </div>
   );

@@ -1,91 +1,93 @@
-import React, { useEffect, useState } from "react";
-import { ChatState } from "../../../context/ChatProvider";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { ChatState } from '../../../context/ChatProvider';
+import axios from 'axios';
 // import ChatNameAvatar from "./ChatNameAvatar/ChatNameAvatar";
 
-import "./ChatName.css";
+import './ChatName.css';
 
-const ENDPOINT = "http://localhost:5000/";
+const ENDPOINT = 'http://localhost:5000/';
 var socket, selectedChatCompare;
 const ChatName = () => {
   const [loggedUser, setLoggedUser] = useState();
   const [socketConnected, setSocketConnected] = useState(false);
-
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 
   const fetchChats = async () => {
-    // console.log(user);
     try {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/v1/chat",
+        'http://localhost:5000/api/v1/chat',
         config
       );
-      // console.log(data);
       setChats(data);
     } catch (error) {
-      console.log(error);
-      // alert(error);
+      console.error(error);
     }
   };
 
   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+    setLoggedUser(JSON.parse(localStorage.getItem('userInfo')));
     fetchChats();
   }, []);
+
+  const getChatPartner = (chat) => {
+    if (!chat.users || chat.users.length === 0) return null;
+    return chat.users[0]._id === user.data.user._id
+      ? chat.users[1]
+      : chat.users[0];
+  };
+
   return (
-    <div>
-      {/* {chats && chats.map((chat) => <div className="myChats">{chat.name}</div>)} */}
+    <div className="chat-list-container">
       {chats.length > 0 ? (
-        chats.map((chat) => (
-          <div
-            className="myChats"
-            key={chat._id}
-            onClick={() => {
-              setSelectedChat(chat);
-              // console.log(chat._id);
-            }}
-            style={{
-              cursor: "pointer",
-              background: `${selectedChat === chat ? "#38B2AC" : "#E8E8E8"}`,
-              color: `${selectedChat === chat ? "black" : "black"}`,
-            }}
-          >
-            <p className="text">
-              <div className="profile-pic-2">
-                {chat.users[0] ? (
-                  chat.users[0].name === user.data.user.name ? (
+        chats.map((chat) => {
+          const partner = getChatPartner(chat);
+          return (
+            <div
+              className={`chat-item ${
+                selectedChat?._id === chat._id ? 'active' : ''
+              }`}
+              key={chat._id}
+              onClick={() => setSelectedChat(chat)}
+            >
+              <div className="avatar-container">
+                {partner?.photo && (
+                  <>
                     <img
-                      src={chat.users[1].photo ? chat.users[1].photo : ""}
-                      alt="sender-image"
+                      src={partner.photo}
+                      alt={partner.name}
+                      className="chat-avatar"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/default-avatar.jpg';
+                      }}
                     />
-                  ) : (
-                    <img
-                      src={chat.users[0].photo ? chat.users[0].photo : ""}
-                      alt="sender-image"
-                    />
-                  )
-                ) : (
-                  ""
+                    {/* <div className="online-status"></div> */}
+                  </>
                 )}
               </div>
-              {chat.users[0]
-                ? chat.users[0].name === user.data.user.name
-                  ? chat.users[1].name
-                  : chat.users[0].name
-                : ""}
-            </p>
-          </div>
-        ))
+              <div>
+                <div className="chat-name">
+                  {partner?.name || 'Unknown User'}
+                </div>
+                {/* <div className="last-message">
+                  {chat.latestMessage?.content || 'No messages yet'}
+                </div> */}
+              </div>
+            </div>
+          );
+        })
       ) : (
-        <p>Loading...</p>
+        <div className="empty-state">
+          <p>No chats yet. Start a new conversation!</p>
+        </div>
       )}
     </div>
   );

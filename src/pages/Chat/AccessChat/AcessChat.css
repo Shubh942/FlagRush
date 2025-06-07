@@ -1,49 +1,148 @@
-/* .left {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 10px 20px;
-  gap: 10px;
-
-  position: absolute;
-  width: 186px;
-  height: 40px;
-  left: 22px;
-  top: 194px;
-
-  background: #f2f2f7;
-  border-radius: 40px;
-} */
-/* .right {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 10px 20px;
-  gap: 10px;
-
-  position: absolute;
-  width: 218px;
-  height: 40px;
-  left: 225px;
-  top: 310px;
-
-  background: #007aff;
-  border-radius: 40px;
-} */
-
-.profile-pic-2 img {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #fa9236;
-  filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.05));
-  border-radius: 100px;
-}
-.chat-message-content {
-  max-width: 100%;
-  /* word-wrap: break-word; */
-  overflow-wrap: break-word;
+/* AccessChat.css */
+.accesschat-container {
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  width: 560px;
+  padding: 1rem;
+  overflow-y: auto;
+  background: var(--bg-dark);
+}
+
+.accesschat-message {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+  transition: var(--transition-smooth);
+}
+
+.accesschat-message:hover {
+  transform: translateX(5px);
+}
+
+.message-sender-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.message-content {
+  max-width: 70%;
+  padding: 0.75rem 1.25rem;
+  border-radius: 1.25rem;
+  position: relative;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.sent-message {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--text-primary);
+  border-top-right-radius: 0.25rem;
+  margin-left: auto;
+  box-shadow: var(--shadow-md);
+}
+
+.received-message {
+  background: var(--bg-glass-light);
+  color: var(--text-primary);
+  border-top-left-radius: 0.25rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.message-time {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+  display: block;
+  text-align: right;
+}
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  color: var(--text-muted);
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  padding: 0.75rem 1.25rem;
+  background: var(--bg-glass-light);
+  border-radius: 1.25rem;
+  border-top-left-radius: 0.25rem;
+  margin-bottom: 1rem;
+  align-self: flex-start;
+  border: 1px solid var(--border-light);
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--primary-light);
+  border-radius: 50%;
+  margin: 0 2px;
+  animation: typingAnimation 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingAnimation {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Scrollbar styling */
+.accesschat-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.accesschat-container::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+  border-radius: 3px;
+}
+
+.accesschat-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .accesschat-container {
+    padding: 0.5rem;
+  }
+
+  .message-content {
+    max-width: 80%;
+    padding: 0.6rem 1rem;
+  }
+
+  .message-sender-avatar {
+    width: 32px;
+    height: 32px;
+  }
 }
