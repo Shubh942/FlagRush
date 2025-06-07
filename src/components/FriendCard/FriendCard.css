@@ -1,95 +1,107 @@
-/* .question {
-  width: 650px; 
-  background: #ffffff;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-} */
-
-.friends-card {
+/* FriendCard.css */
+.friend-card {
+  background: var(--bg-glass);
+  border-radius: 1.5rem;
+  padding: 1.8rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border-light);
+  backdrop-filter: blur(10px);
+  transition: var(--transition-bounce);
+  width: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  width: 220px;
-  background: #18181b;
-  color: #f3f4f6;
-  border: none;
-  border-radius: 14px;
-  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.13);
-  margin-bottom: 24px;
-  padding: 22px 18px 18px 18px;
-  transition: box-shadow 0.2s;
+  text-align: center;
 }
 
-.friends-card:hover {
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18);
+.friend-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-glow);
 }
 
-.friends-pic img {
-  width: 72px;
-  height: 72px;
+.friend-avatar {
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #2563eb;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
-  background: #fff;
+  border: 3px solid transparent;
+  background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+    linear-gradient(135deg, var(--primary), var(--accent), var(--secondary))
+      border-box;
+  margin-bottom: 1.2rem;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-smooth);
 }
 
-.friends-card h3 {
+.friend-avatar:hover {
+  transform: scale(1.05);
+}
+
+.friend-name {
+  font-size: 1.3rem;
   font-weight: 600;
-  font-size: 1.08rem;
-  color: #e5e7eb;
-  margin: 0;
-  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
   word-break: break-word;
 }
 
-.btn-cta-blue {
-  background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
-  color: #fff;
+.chat-btn {
+  padding: 0.7rem 1.8rem;
+  border-radius: 0.8rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--text-primary);
   font-weight: 600;
-  padding: 8px 22px;
-  border-radius: 8px;
   border: none;
-  text-decoration: none;
-  transition: background 0.18s, box-shadow 0.18s;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
-  font-size: 1rem;
   cursor: pointer;
-  outline: none;
-  display: inline-block;
-}
-.btn-cta-blue:hover {
-  background: linear-gradient(90deg, #1d4ed8 0%, #38bdf8 100%);
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.13);
+  transition: var(--transition-bounce);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Responsive styles */
-@media (max-width: 700px) {
-  .friends-card {
-    width: 98vw;
-    max-width: 340px;
-    padding: 16px 6vw 14px 6vw;
+.chat-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow);
+}
+
+.chat-btn:active {
+  transform: translateY(1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .friend-card {
+    width: 200px;
+    padding: 1.5rem;
+  }
+
+  .friend-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .friend-name {
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .friends-card {
-    padding: 12px 2vw 10px 2vw;
-    border-radius: 8px;
-    gap: 10px;
-    width: 98vw;
-    max-width: 98vw;
+  .friend-card {
+    width: 160px;
+    padding: 1.2rem;
+    border-radius: 1rem;
   }
-  .friends-pic img {
-    width: 54px;
-    height: 54px;
+
+  .friend-avatar {
+    width: 70px;
+    height: 70px;
   }
-  .friends-card h3 {
-    font-size: 0.97rem;
-  }
-  .btn-cta-blue {
-    font-size: 0.97rem;
-    padding: 7px 10px;
+
+  .chat-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
 }

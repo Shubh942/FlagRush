@@ -1,47 +1,50 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./FriendCard.css";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './FriendCard.css';
 
 const FriendCard = ({ item }) => {
-  // console.log(item);
   const navigate = useNavigate();
+
   const handleChat = async () => {
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem('userInfo')).token
           }`,
         },
       };
+
       const { data } = await axios.post(
         `http://localhost:5000/api/v1/chat`,
         { userId: item._id },
         config
       );
 
-      console.log(data);
-      navigate("/chat");
+      navigate('/chat');
     } catch (error) {
-      console.error(error);
+      console.error('Error starting chat:', error);
     }
   };
-  //   const [color, setColor] = useState(item.isResolved ? item.isResolved : false);
 
   return (
-    <div className="friends-card">
-      {/* <p>Requested By:</p> */}
-      <div className="friends-pic">
-        <img src={item.photo ? item.photo : ""} alt="user-image" />
-      </div>
-      <h3>{item.name ? item.name : ""}</h3>
-      <button className="btn-cta-blue" onClick={handleChat}>
-        Chat
+    <div className="friend-card">
+      <img
+        src={item.photo || '/default-avatar.jpg'}
+        alt="friend"
+        className="friend-avatar"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = '/default-avatar.jpg';
+        }}
+      />
+      <h3 className="friend-name">{item.name || 'Unknown User'}</h3>
+      <button className="chat-btn" onClick={handleChat}>
+        <span>💬</span> Chat
       </button>
     </div>
   );
 };
-
 export default FriendCard;

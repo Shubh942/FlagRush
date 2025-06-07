@@ -1,9 +1,13 @@
+.profile-page {
+  background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+  min-height: 100vh;
+}
+
 .profile {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
   color: var(--text-primary);
-  background: var(--bg-dark);
   min-height: 100vh;
 }
 
@@ -186,9 +190,11 @@
 
 .friends,
 .friendrequest-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* Mobile responsiveness */

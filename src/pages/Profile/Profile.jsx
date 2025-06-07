@@ -84,135 +84,137 @@ const Me = () => {
   const isCurrentUser = currentUserId === (viewUser?._id || '');
 
   return (
-    <motion.div
-      className="profile"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    >
-      <Helmet>
-        <title>FlagRush | Profile</title>
-      </Helmet>
+    <div className="profile-page">
+      <motion.div
+        className="profile"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Helmet>
+          <title>FlagRush | Profile</title>
+        </Helmet>
 
-      <div className="profile-content">
-        <div className="profile-pic">
-          <img
-            src={viewUser?.photo || userpic}
-            alt="user"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = userpic;
-            }}
-          />
-        </div>
-
-        <div className="profile-content-details">
-          {isCurrentUser && (
-            <div className="profile-edit">
-              <Link to="/registration">
-                <AiTwotoneEdit />
-              </Link>
-            </div>
-          )}
-
-          <h1>{viewUser?.name || ''}</h1>
-
-          <div className="profile-content-friend">
-            <FaUserFriends />
-            <h3>Friend of {viewUser?.friends.length || 0} users</h3>
+        <div className="profile-content">
+          <div className="profile-pic">
+            <img
+              src={viewUser?.photo || userpic}
+              alt="user"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = userpic;
+              }}
+            />
           </div>
 
-          {JSON.parse(localStorage.getItem('userInfo')).data.user.role ===
-            'admin' && (
-            <div className="profile-admin">
-              <Link to="/admin-chats">View Chats</Link>
-              <Link to="/view-reports">View Reports</Link>
-            </div>
-          )}
-        </div>
-      </div>
+          <div className="profile-content-details">
+            {isCurrentUser && (
+              <div className="profile-edit">
+                <Link to="/registration">
+                  <AiTwotoneEdit />
+                </Link>
+              </div>
+            )}
 
-      {!isCurrentUser && (
-        <div className="profile-actions">
-          {alreadyFriend ? (
-            <div className="profile-status">You are friends</div>
-          ) : request ? (
-            <div className="profile-status">Request pending</div>
-          ) : isTrue ? (
-            <div className="profile-status">Request sent</div>
-          ) : (
-            <motion.button
-              className="btn-cta-blue"
-              onClick={makeFriend}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <h1>{viewUser?.name || ''}</h1>
+
+            <div className="profile-content-friend">
+              <FaUserFriends />
+              <h3>Friend of {viewUser?.friends.length || 0} users</h3>
+            </div>
+
+            {JSON.parse(localStorage.getItem('userInfo')).data.user.role ===
+              'admin' && (
+              <div className="profile-admin">
+                <Link to="/admin-chats">View Chats</Link>
+                <Link to="/view-reports">View Reports</Link>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {!isCurrentUser && (
+          <div className="profile-actions">
+            {alreadyFriend ? (
+              <div className="profile-status">You are friends</div>
+            ) : request ? (
+              <div className="profile-status">Request pending</div>
+            ) : isTrue ? (
+              <div className="profile-status">Request sent</div>
+            ) : (
+              <motion.button
+                className="btn-cta-blue"
+                onClick={makeFriend}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Make Connection
+              </motion.button>
+            )}
+          </div>
+        )}
+
+        {isCurrentUser && (
+          <>
+            <motion.div
+              className="friends-container"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
             >
-              Make Connection
-            </motion.button>
-          )}
-        </div>
-      )}
+              <h2>Friends</h2>
+              <div className="friends">
+                <AnimatePresence>
+                  {viewUser?.friends.map((item) => (
+                    <motion.div
+                      key={item._id}
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.3 }}
+                      className="friend-motion"
+                    >
+                      <FriendCard item={item} />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            </motion.div>
 
-      {isCurrentUser && (
-        <>
-          <motion.div
-            className="friends-container"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <h2>Friends</h2>
-            <div className="friends">
-              <AnimatePresence>
-                {viewUser?.friends.map((item) => (
-                  <motion.div
-                    key={item._id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                    className="friend-motion"
-                  >
-                    <FriendCard item={item} />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="friendrequest-container"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            <h2>Pending Requests</h2>
-            <div className="friendrequest-content">
-              <AnimatePresence>
-                {viewUser?.friendsRequest.map((item) => (
-                  <motion.div
-                    key={item._id}
-                    layout
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="friend-motion"
-                  >
-                    <FriendRequest
-                      item={item}
-                      setClick={setClick}
-                      click={click}
-                    />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </motion.div>
+            <motion.div
+              className="friendrequest-container"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <h2>Pending Requests</h2>
+              <div className="friendrequest-content">
+                <AnimatePresence>
+                  {viewUser?.friendsRequest.map((item) => (
+                    <motion.div
+                      key={item._id}
+                      layout
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="friend-motion"
+                    >
+                      <FriendRequest
+                        item={item}
+                        setClick={setClick}
+                        click={click}
+                      />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </motion.div>
+    </div>
   );
 };
 
