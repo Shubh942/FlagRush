@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { ChatState } from '../../context/ChatProvider';
-import { Helmet } from 'react-helmet';
-import axios from 'axios';
-import { FiSearch } from 'react-icons/fi';
-import { motion } from 'framer-motion';
-import './Social.css';
-import SocialCard from '../../components/SocialCard/SocialCard';
-import { useNavigate } from 'react-router-dom';
-import { BeatLoader } from 'react-spinners';
+import React, { useEffect, useState } from "react";
+import { ChatState } from "../../context/ChatProvider";
+import { Helmet } from "react-helmet";
+import axios from "axios";
+import { FiSearch } from "react-icons/fi";
+import { motion } from "framer-motion";
+import "./Social.css";
+import SocialCard from "../../components/SocialCard/SocialCard";
+import { useNavigate } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
 const Social = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user, isUserLoggedIn } = ChatState();
@@ -22,13 +22,13 @@ const Social = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/users?search=${search}`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/users?search=${search}`,
         config
       );
       setSearchResult(data.users);
@@ -45,7 +45,7 @@ const Social = () => {
 
   useEffect(() => {
     if (!isUserLoggedIn.current) {
-      navigate('/login');
+      navigate("/login");
     }
   }, []);
 

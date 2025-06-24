@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import ChatName from './Name/ChatName';
-import { ChatState } from '../../context/ChatProvider';
-import './Chat.css';
-import AccessChat from './AccessChat/AccessChat';
-import { AiOutlineSend, AiOutlineArrowLeft } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import io from 'socket.io-client';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import ChatName from "./Name/ChatName";
+import { ChatState } from "../../context/ChatProvider";
+import "./Chat.css";
+import AccessChat from "./AccessChat/AccessChat";
+import { AiOutlineSend, AiOutlineArrowLeft } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import io from "socket.io-client";
+import axios from "axios";
 
-const ENDPOINT = 'http://localhost:5000/';
+const ENDPOINT = "https://flagrush-backend-w1n5.onrender.com/";
 var socket, selectedChatCompare;
 const Chat = () => {
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true); // for mobile
   const [showChat, setShowChat] = useState(false); // for mobile
@@ -30,15 +30,15 @@ const Chat = () => {
 
   useEffect(() => {
     if (!isUserLoggedIn.current) {
-      navigate('/login');
+      navigate("/login");
     }
 
     socket = io(ENDPOINT);
     socket.emit(
-      'setup',
-      JSON.parse(localStorage.getItem('userInfo'))?.data.user || ''
+      "setup",
+      JSON.parse(localStorage.getItem("userInfo"))?.data.user || ""
     );
-    socket.on('connected', () => setSocketConnected(true));
+    socket.on("connected", () => setSocketConnected(true));
 
     return () => {
       socket.disconnect();
@@ -64,13 +64,13 @@ const Chat = () => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       };
 
       const { data } = await axios.post(
-        'http://localhost:5000/api/v1/message',
+        "https://flagrush-backend-w1n5.onrender.com/api/v1/message",
         {
           content: newMessage.trim(),
           chatId: selectedChat._id,
@@ -78,16 +78,16 @@ const Chat = () => {
         config
       );
 
-      setNewMessage('');
-      socket.emit('new message', data);
+      setNewMessage("");
+      socket.emit("new message", data);
       setMessages((prev) => [...prev, data]);
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error("Error sending message:", error);
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
@@ -110,8 +110,8 @@ const Chat = () => {
 
         {/* Sidebar */}
         <div
-          className={`chat-sidebar${showSidebar ? '' : ' hide-on-mobile'}`}
-          style={{ display: showSidebar ? 'flex' : 'none' }}
+          className={`chat-sidebar${showSidebar ? "" : " hide-on-mobile"}`}
+          style={{ display: showSidebar ? "flex" : "none" }}
         >
           <ChatName
             onChatSelect={() => {
@@ -125,9 +125,9 @@ const Chat = () => {
 
         {/* Main chat */}
         <div
-          className={`chat-main${showChat ? '' : ' hide-on-mobile'}`}
+          className={`chat-main${showChat ? "" : " hide-on-mobile"}`}
           style={{
-            display: showChat || window.innerWidth > 992 ? 'flex' : 'none',
+            display: showChat || window.innerWidth > 992 ? "flex" : "none",
           }}
         >
           {/* Back button for mobile */}
@@ -159,7 +159,7 @@ const Chat = () => {
               onClick={handleSendMessage}
               disabled={!newMessage.trim()}
             >
-              <AiOutlineSend style={{ fontSize: '20px' }} />
+              <AiOutlineSend style={{ fontSize: "20px" }} />
             </button>
           </div>
         </div>

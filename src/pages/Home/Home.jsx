@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import FlagCard from '../../components/FlagCard/FlagCard';
-import './Home.css';
-import TextField from '@mui/material/TextField';
-import axios from 'axios';
-import { BeatLoader } from 'react-spinners';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { ChatState } from '../../context/ChatProvider';
-import { Helmet } from 'react-helmet';
-import Leaderboard from '../../components/Leaderboard/Leaderboard';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import FlagCard from "../../components/FlagCard/FlagCard";
+import "./Home.css";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { BeatLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ChatState } from "../../context/ChatProvider";
+import { Helmet } from "react-helmet";
+import Leaderboard from "../../components/Leaderboard/Leaderboard";
 
 const Home = () => {
   const navigate = useNavigate();
   const { isUserLoggedIn } = ChatState();
   const [capture, setCapture] = useState([]);
-  const [heading, setHeading] = useState('');
+  const [heading, setHeading] = useState("");
   const [loading, setLoading] = useState(false);
-  const [discription, setDiscription] = useState('');
-  const [hint, setHint] = useState('');
-  const [flag, setFlag] = useState('');
-  const [link, setLink] = useState('');
+  const [discription, setDiscription] = useState("");
+  const [hint, setHint] = useState("");
+  const [flag, setFlag] = useState("");
+  const [link, setLink] = useState("");
 
   const pageLoad = async () => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${isUserLoggedIn.current.token}`,
         },
       };
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/ctf`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/ctf`,
 
         config
       );
@@ -44,22 +44,22 @@ const Home = () => {
 
   const objects = [
     {
-      heading: 'hsdfs',
-      description: 'sdfsdf',
-      link: 'sdfsdf',
-      hint: 'dsfsdfsd',
+      heading: "hsdfs",
+      description: "sdfsdf",
+      link: "sdfsdf",
+      hint: "dsfsdfsd",
     },
     {
-      heading: 'hi',
-      description: 'sdfsdfsdfsdfsdf',
-      link: 'aaaa',
-      hint: '345sdx',
+      heading: "hi",
+      description: "sdfsdfsdfsdfsdf",
+      link: "aaaa",
+      hint: "345sdx",
     },
   ];
 
   const handleClick = async () => {
     if (!discription || !heading || !hint || !flag || !link) {
-      toast.error('Enter all the fields', {
+      toast.error("Enter all the fields", {
         autoClose: 1000,
       });
     } else {
@@ -67,13 +67,13 @@ const Home = () => {
       try {
         const config = {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${isUserLoggedIn.current.token}`,
           },
         };
         console.log(isUserLoggedIn.current.token);
         const { data } = await axios.post(
-          `http://localhost:5000/api/v1/ctf/createCtf`,
+          `https://flagrush-backend-w1n5.onrender.com/api/v1/ctf/createCtf`,
           {
             description: discription,
             heading,
@@ -83,18 +83,18 @@ const Home = () => {
           },
           config
         );
-        toast.success('New CTF added', {
+        toast.success("New CTF added", {
           autoClose: 1000,
         });
         // setNewDiscussion(data);
         setLoading(false);
         console.log(data);
         setCapture([...capture, data.data]);
-        setDiscription('');
-        setHeading('');
-        setHint('');
-        setFlag('');
-        setLink('');
+        setDiscription("");
+        setHeading("");
+        setHint("");
+        setFlag("");
+        setLink("");
       } catch (error) {
         console.log(error);
         setLoading(false);
@@ -106,7 +106,7 @@ const Home = () => {
   };
   useEffect(() => {
     if (!isUserLoggedIn.current) {
-      navigate('/login');
+      navigate("/login");
     }
     pageLoad();
   }, []);
@@ -143,7 +143,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="form-field" style={{ gridColumn: '1 / -1' }}>
+              <div className="form-field" style={{ gridColumn: "1 / -1" }}>
                 <TextField
                   label="Description"
                   variant="filled"
@@ -185,7 +185,7 @@ const Home = () => {
                 {loading ? (
                   <BeatLoader color="#fff" size={10} />
                 ) : (
-                  'Create Challenge'
+                  "Create Challenge"
                 )}
               </button>
             </div>
@@ -208,7 +208,7 @@ const Home = () => {
                 <BeatLoader
                   color={getComputedStyle(
                     document.documentElement
-                  ).getPropertyValue('--primary')}
+                  ).getPropertyValue("--primary")}
                 />
               </div>
             )}

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { ChatState } from '../../../context/ChatProvider';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { ChatState } from "../../../context/ChatProvider";
 import {
   isLastMessage,
   isSameSender,
   isSameSenderMargin,
   isSameUser,
-} from '../../../context/ChatLogics';
-import './AcessChat.css';
+} from "../../../context/ChatLogics";
+import "./AcessChat.css";
 
 const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
   const { selectedChat, user } = ChatState();
@@ -19,15 +19,15 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       };
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/message/${selectedChat._id}`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/message/${selectedChat._id}`,
         config
       );
-      socket.emit('join chat', selectedChat._id);
+      socket.emit("join chat", selectedChat._id);
       setMessages(data);
     } catch (error) {
       console.error(error);
@@ -54,8 +54,8 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
       }
     };
 
-    socket.on('message recieved', handleNewMessage);
-    return () => socket.off('message recieved', handleNewMessage);
+    socket.on("message recieved", handleNewMessage);
+    return () => socket.off("message recieved", handleNewMessage);
   }, [socket, selectedChatCompare, bool]);
 
   return (
@@ -65,8 +65,8 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
           <div
             className={`accesschat-message ${
               m.sender._id === user.data.user._id
-                ? 'sent-message'
-                : 'received-message'
+                ? "sent-message"
+                : "received-message"
             }`}
             key={m._id}
           >
@@ -84,8 +84,8 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
                     user.data.user._id
                   ),
                   marginTop: isSameUser(messages, m, i, user.data.user._id)
-                    ? '3px'
-                    : '10px',
+                    ? "3px"
+                    : "10px",
                 }}
               />
             )}
@@ -93,8 +93,8 @@ const AccessChat = ({ messages, setMessages, socket, selectedChatCompare }) => {
               <p>{m.content}</p>
               <span className="message-time">
                 {new Date(m.createdAt).toLocaleTimeString([], {
-                  hour: '2-digit',
-                  minute: '2-digit',
+                  hour: "2-digit",
+                  minute: "2-digit",
                 })}
               </span>
             </div>

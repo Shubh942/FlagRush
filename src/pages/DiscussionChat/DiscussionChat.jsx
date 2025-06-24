@@ -1,20 +1,20 @@
-import { React, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
-import { MdArrowBackIos } from 'react-icons/md ';
-import { BiUpvote, BiDownvote, BiComment } from 'react-icons/bi';
-import { BsThreeDotsVertical, BsShare, BsBookmark } from 'react-icons/bs';
-import { GoReport } from 'react-icons/go';
-import { RxCross1 } from 'react-icons/rx';
-import './DiscussionChat.css';
-import DiscussionAnswer from '../../components/DiscussionAnswer/DiscussionAnswer';
-import ReportPopup from '../../components/ReportPopup/ReportPopup';
-import TextField from '@mui/material/TextField';
-import utkarsh from '../../assets/utkarsh.jpg';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-import { Helmet } from 'react-helmet';
+import { React, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { MdArrowBackIos } from "react-icons/md ";
+import { BiUpvote, BiDownvote, BiComment } from "react-icons/bi";
+import { BsThreeDotsVertical, BsShare, BsBookmark } from "react-icons/bs";
+import { GoReport } from "react-icons/go";
+import { RxCross1 } from "react-icons/rx";
+import "./DiscussionChat.css";
+import DiscussionAnswer from "../../components/DiscussionAnswer/DiscussionAnswer";
+import ReportPopup from "../../components/ReportPopup/ReportPopup";
+import TextField from "@mui/material/TextField";
+import utkarsh from "../../assets/utkarsh.jpg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const DiscussionChat = () => {
   const { slug } = useParams();
@@ -22,8 +22,8 @@ const DiscussionChat = () => {
   const [discussionData, setDiscussionData] = useState({});
   const [messages, setMessages] = useState([]);
 
-  const [answer, setAnswer] = useState('');
-  const [answercode, setAnswercode] = useState('');
+  const [answer, setAnswer] = useState("");
+  const [answercode, setAnswercode] = useState("");
   // update this
   const [up, setUp] = useState(0);
   const [down, setDown] = useState(0);
@@ -41,7 +41,7 @@ const DiscussionChat = () => {
   };
 
   const faltu = () => {
-    console.log('');
+    console.log("");
   };
 
   const handleUpVote = async () => {
@@ -49,14 +49,14 @@ const DiscussionChat = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/chat/vote/${discussionData._id}`,
-        { vote: 'up' },
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/chat/vote/${discussionData._id}`,
+        { vote: "up" },
         config
       );
       setUp(data.upvotes);
@@ -72,14 +72,14 @@ const DiscussionChat = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/chat/vote/${discussionData._id}`,
-        { vote: 'down' },
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/chat/vote/${discussionData._id}`,
+        { vote: "down" },
         config
       );
       setDown(data.downvotes);
@@ -96,14 +96,14 @@ const DiscussionChat = () => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/chat/slug`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/chat/slug`,
         { slug: slug },
         config
       );
@@ -114,7 +114,7 @@ const DiscussionChat = () => {
       setDown(data.chat[0].downvotes.length);
 
       const message = await axios.get(
-        `http://localhost:5000/api/v1/message/${data.chat[0]._id}`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/message/${data.chat[0]._id}`,
 
         config
       );
@@ -128,41 +128,41 @@ const DiscussionChat = () => {
   };
 
   const handleClick = async () => {
-    if (answer === '') {
-      toast.error('Enter Your Answer', {
+    if (answer === "") {
+      toast.error("Enter Your Answer", {
         autoClose: 2000,
       });
     } else {
       try {
         const config = {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem('userInfo')).token
+              JSON.parse(localStorage.getItem("userInfo")).token
             }`,
           },
         };
-        toast.success('Answer submitted successfully', {
+        toast.success("Answer submitted successfully", {
           autoClose: 2000,
         });
         const { data } = await axios.post(
-          `http://localhost:5000/api/v1/message/`,
+          `https://flagrush-backend-w1n5.onrender.com/api/v1/message/`,
           { content: answer, code: answercode, chatId: discussionData._id },
           config
         );
         // console.log(data);
         setMessages([...messages, data]);
         // console.log(messages);
-        setAnswer('');
-        setAnswercode('');
-        toast.success('Answer submitted successfully', {
+        setAnswer("");
+        setAnswercode("");
+        toast.success("Answer submitted successfully", {
           autoClose: 2000,
         });
         // console.log(data.chat[0]);
         // setDiscussionData(data.chat[0]);
       } catch (error) {
         console.log(error);
-        toast.error('Enter Your Answer', {
+        toast.error("Enter Your Answer", {
           autoClose: 2000,
         });
       }
@@ -193,7 +193,7 @@ const DiscussionChat = () => {
       {/* Main Discussion Content */}
       <div className="discussion-content">
         <h2 className="discussion-title">
-          {discussionData.chatName || 'Loading...'}
+          {discussionData.chatName || "Loading..."}
         </h2>
 
         {discussionData.discription && (
@@ -212,13 +212,13 @@ const DiscussionChat = () => {
         <div className="discussion-actions">
           <div className="vote-section">
             <button
-              className={`vote-button upvote ${up ? 'active' : ''}`}
+              className={`vote-button upvote ${up ? "active" : ""}`}
               onClick={handleUpVote}
             >
               <BiUpvote /> <span>{up}</span>
             </button>
             <button
-              className={`vote-button downvote ${down ? 'active' : ''}`}
+              className={`vote-button downvote ${down ? "active" : ""}`}
               onClick={handleDownVote}
             >
               <BiDownvote /> <span>{down}</span>

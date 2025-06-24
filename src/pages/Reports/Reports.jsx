@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { motion, AnimatePresence } from 'framer-motion';
-import ReportCard from '../../components/ReportCard/ReportCard';
-import './Reports.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
+import ReportCard from "../../components/ReportCard/ReportCard";
+import "./Reports.css";
 
 const Reports = () => {
   const [reports, setReports] = useState([]);
@@ -13,13 +13,13 @@ const Reports = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/admin/all-reports`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/admin/all-reports`,
         config
       );
 

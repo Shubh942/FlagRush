@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import { Helmet } from "react-helmet";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineCloudUpload,
-} from 'react-icons/ai';
-import { BeatLoader } from 'react-spinners';
-import { motion } from 'framer-motion';
-import './SignUp.css';
+} from "react-icons/ai";
+import { BeatLoader } from "react-spinners";
+import { motion } from "framer-motion";
+import "./SignUp.css";
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [pic, setPic] = useState();
   const [isHovered, setIsHovered] = useState(false);
   const [filePreview, setFilePreview] = useState(null);
@@ -29,33 +29,33 @@ const SignUp = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword || !password || !name) {
-      toast.error('Passwords do not match!', { autoClose: 1000 });
+      toast.error("Passwords do not match!", { autoClose: 1000 });
       return;
     } else {
       try {
-        const config = { headers: { 'content-type': 'application/json' } };
+        const config = { headers: { "content-type": "application/json" } };
         setLoading(true);
         const { data } = await axios.post(
-          'http://localhost:5000/api/v1/users/signup',
+          "https://flagrush-backend-w1n5.onrender.com/api/v1/users/signup",
           { name, email, password, confirmPassword, photo: pic },
           config
         );
-        toast.success('Check mail for verification', { autoClose: 1000 });
+        toast.success("Check mail for verification", { autoClose: 1000 });
         setLoading(false);
         if (!data.token) {
-          toast.error('Invalid credentials', { autoClose: 1000 });
+          toast.error("Invalid credentials", { autoClose: 1000 });
           setLoading(false);
         } else {
-          setName('');
-          setEmail('');
-          setPassword('');
-          setConfirmPassword('');
+          setName("");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
           setPic(null);
           setFilePreview(null);
           setLoading(false);
         }
       } catch (err) {
-        toast.error(err.response?.data?.message || 'An error occurred', {
+        toast.error(err.response?.data?.message || "An error occurred", {
           autoClose: 1000,
         });
         setLoading(false);
@@ -66,12 +66,12 @@ const SignUp = () => {
   const postDetails = (pics) => {
     setLoading(true);
     if (!pics) {
-      toast.error('Please select an image', { autoClose: 1000 });
+      toast.error("Please select an image", { autoClose: 1000 });
       setLoading(false);
       return;
     }
 
-    if (pics.type === 'image/jpeg' || pics.type === 'image/png') {
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
       const reader = new FileReader();
       reader.readAsDataURL(pics);
       reader.onloadend = () => {
@@ -79,12 +79,12 @@ const SignUp = () => {
       };
 
       const data = new FormData();
-      data.append('file', pics);
-      data.append('upload_preset', 'codenova');
-      data.append('cloud_name', 'df4t1zu7e');
+      data.append("file", pics);
+      data.append("upload_preset", "codenova");
+      data.append("cloud_name", "df4t1zu7e");
 
-      fetch('https://api.cloudinary.com/v1_1/df4t1zu7e/image/upload', {
-        method: 'post',
+      fetch("https://api.cloudinary.com/v1_1/df4t1zu7e/image/upload", {
+        method: "post",
         body: data,
       })
         .then((res) => res.json())
@@ -94,11 +94,11 @@ const SignUp = () => {
         })
         .catch((err) => {
           console.log(err);
-          toast.error('Failed to upload image', { autoClose: 1000 });
+          toast.error("Failed to upload image", { autoClose: 1000 });
           setLoading(false);
         });
     } else {
-      toast.error('Please select a JPEG or PNG image', { autoClose: 1000 });
+      toast.error("Please select a JPEG or PNG image", { autoClose: 1000 });
       setLoading(false);
     }
   };
@@ -149,7 +149,7 @@ const SignUp = () => {
 
           <div className="input-group password-input">
             <input
-              type={show ? 'text' : 'password'}
+              type={show ? "text" : "password"}
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -166,7 +166,7 @@ const SignUp = () => {
 
           <div className="input-group">
             <input
-              type={show ? 'text' : 'password'}
+              type={show ? "text" : "password"}
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -175,7 +175,7 @@ const SignUp = () => {
           </div>
 
           <div
-            className={`file-upload ${filePreview ? 'has-preview' : ''}`}
+            className={`file-upload ${filePreview ? "has-preview" : ""}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -215,7 +215,7 @@ const SignUp = () => {
             whileTap={{ scale: 0.98 }}
             disabled={loading}
           >
-            {loading ? <BeatLoader color="#fff" size={10} /> : 'Sign Up'}
+            {loading ? <BeatLoader color="#fff" size={10} /> : "Sign Up"}
           </motion.button>
         </form>
 

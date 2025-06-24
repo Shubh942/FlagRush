@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { ChatState } from '../../context/ChatProvider';
-import { Helmet } from 'react-helmet';
-import axios from 'axios';
-import './Discussion.css';
-import { Link, useNavigate } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import DiscussionCard from '../../components/DiscussionCard/DiscussionCard';
+import React, { useEffect, useState } from "react";
+import { ChatState } from "../../context/ChatProvider";
+import { Helmet } from "react-helmet";
+import axios from "axios";
+import "./Discussion.css";
+import { Link, useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import DiscussionCard from "../../components/DiscussionCard/DiscussionCard";
 
 const Discussion = () => {
   const { user, setUser, isUserLoggedIn } = ChatState();
 
-  const [newDiscussion, setNewDiscussion] = useState('');
+  const [newDiscussion, setNewDiscussion] = useState("");
   const [discussion, setDiscussion] = useState([]);
-  const [discussionName, setDiscussionName] = useState('');
-  const [discription, setDiscription] = useState('');
-  const [code, setCode] = useState('');
+  const [discussionName, setDiscussionName] = useState("");
+  const [discription, setDiscription] = useState("");
+  const [code, setCode] = useState("");
   const navigate = useNavigate();
   const handleClick = async () => {
     if (!discussionName) {
-      toast.error('Enter discussion Name', {
+      toast.error("Enter discussion Name", {
         autoClose: 1000,
       });
     } else {
       try {
         const config = {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${user.token}`,
           },
         };
         const { data } = await axios.post(
-          `http://localhost:5000/api/v1/chat/create-discussion`,
+          `https://flagrush-backend-w1n5.onrender.com/api/v1/chat/create-discussion`,
           {
             chatName: discussionName,
             discription: discription,
@@ -40,15 +40,15 @@ const Discussion = () => {
           },
           config
         );
-        toast.success('New discussion added', {
+        toast.success("New discussion added", {
           autoClose: 1000,
         });
         setNewDiscussion(data);
 
         // console.log(data);
-        setCode('');
-        setDiscription('');
-        setDiscussionName('');
+        setCode("");
+        setDiscription("");
+        setDiscussionName("");
       } catch (error) {
         console.log(error);
         toast.error(error.response.data.message, {
@@ -63,14 +63,14 @@ const Discussion = () => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/chat/discussion`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/chat/discussion`,
         config
       );
       setDiscussion(data);
@@ -85,9 +85,9 @@ const Discussion = () => {
   useEffect(() => {
     if (!isUserLoggedIn.current) {
       console.log(isUserLoggedIn.current);
-      navigate('/login');
+      navigate("/login");
     }
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     setUser(userInfo);
 
     pageLoad();

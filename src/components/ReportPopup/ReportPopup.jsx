@@ -16,7 +16,7 @@ const ReportPopup = ({ item, onClose }) => {
         },
       };
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/report/report-discussion`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/report/report-discussion`,
         { content: query, chatId: item._id },
         config
       );
