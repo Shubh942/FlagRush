@@ -1,29 +1,29 @@
-import { React, useState, useRef } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { BeatLoader } from 'react-spinners';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import logo from '../../assets/codenova.png';
-import { ChatState } from '../../context/ChatProvider';
+import { React, useState, useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BeatLoader } from "react-spinners";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import axios from "axios";
+import logo from "../../assets/codenova.png";
+import { ChatState } from "../../context/ChatProvider";
 
 const Registration = () => {
   const [loading, setLoading] = useState(false);
   const { isUserLoggedIn } = ChatState();
 
-  const [githubHandle, setGithubHandle] = useState('');
-  const [codeforcesHandle, setCodeforcesHandle] = useState('');
-  const [codechefHandle, setCodechefHandle] = useState('');
-  const [leetcodeHandle, setLeetcodeHandle] = useState('');
-  const [gfgHandle, setGfgHandle] = useState('');
-  const [college, setCollege] = useState('');
-  const [techStack, setTechStack] = useState('');
+  const [githubHandle, setGithubHandle] = useState("");
+  const [codeforcesHandle, setCodeforcesHandle] = useState("");
+  const [codechefHandle, setCodechefHandle] = useState("");
+  const [leetcodeHandle, setLeetcodeHandle] = useState("");
+  const [gfgHandle, setGfgHandle] = useState("");
+  const [college, setCollege] = useState("");
+  const [techStack, setTechStack] = useState("");
 
   const register = async () => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${isUserLoggedIn.current.token}`,
         },
       };
@@ -31,7 +31,7 @@ const Registration = () => {
       console.log(college);
       // console.log("---------------------------------");
       const { data } = await axios.post(
-        'http://localhost:5000/api/v1/users/register',
+        "https://flagrush-backend-w1n5.onrender.com/api/v1/users/register",
         {
           college: college,
           githubHandle: githubHandle,
@@ -46,7 +46,7 @@ const Registration = () => {
 
       // console.log(data);
       if (data) {
-        toast.success('registration successfull', {
+        toast.success("registration successfull", {
           autoClose: 1000,
         });
       }
@@ -55,7 +55,7 @@ const Registration = () => {
       setLoading(false);
     } catch (err) {
       console.log(err);
-      toast.error('registration failed, Please check the written handles', {
+      toast.error("registration failed, Please check the written handles", {
         autoClose: 1000,
       });
     }
@@ -126,7 +126,7 @@ const Registration = () => {
       </div>
       <div>
         <button type="submit" className="btn-cta-blue" onClick={register}>
-          {loading ? <BeatLoader color="#fff" /> : 'Register'}
+          {loading ? <BeatLoader color="#fff" /> : "Register"}
         </button>
       </div>
       {/* </form> */}

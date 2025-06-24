@@ -1,15 +1,15 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, Outlet, Link, useParams } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import userpic from '../../assets/default.jpg';
-import FriendCard from '../../components/FriendCard/FriendCard';
-import FriendRequest from '../../components/FriendRequest/FriendRequest';
-import { ChatState } from '../../context/ChatProvider';
-import { FaUserFriends } from 'react-icons/fa';
-import { AiTwotoneEdit } from 'react-icons/ai';
-import { Helmet } from 'react-helmet';
-import './Profile.css';
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink, Outlet, Link, useParams } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import userpic from "../../assets/default.jpg";
+import FriendCard from "../../components/FriendCard/FriendCard";
+import FriendRequest from "../../components/FriendRequest/FriendRequest";
+import { ChatState } from "../../context/ChatProvider";
+import { FaUserFriends } from "react-icons/fa";
+import { AiTwotoneEdit } from "react-icons/ai";
+import { Helmet } from "react-helmet";
+import "./Profile.css";
 
 const Me = () => {
   const { slug } = useParams();
@@ -24,12 +24,12 @@ const Me = () => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${isUserLoggedIn.current.token}`,
         },
       };
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/users/${slug}`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/users/${slug}`,
         config
       );
       setViewUser(data.user[0]);
@@ -38,14 +38,14 @@ const Me = () => {
       const isFriend = data.user[0].friends.some(
         (friend) =>
           friend._id ===
-          JSON.parse(localStorage.getItem('userInfo')).data.user._id
+          JSON.parse(localStorage.getItem("userInfo")).data.user._id
       );
       setAlreadyFriend(isFriend);
 
       // Check if friend request already sent
       const hasRequest = data.user[0].friendsRequest.some(
         (req) =>
-          req._id === JSON.parse(localStorage.getItem('userInfo')).data.user._id
+          req._id === JSON.parse(localStorage.getItem("userInfo")).data.user._id
       );
       setRequest(hasRequest);
     } catch (error) {
@@ -57,15 +57,15 @@ const Me = () => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
 
       await axios.post(
-        `http://localhost:5000/api/v1/users/make-friend`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/users/make-friend`,
         { friendId: viewUser._id },
         config
       );
@@ -79,9 +79,9 @@ const Me = () => {
     pageLoad();
   }, [click, openProfile]);
 
-  const currentUserId = JSON.parse(localStorage.getItem('userInfo')).data.user
+  const currentUserId = JSON.parse(localStorage.getItem("userInfo")).data.user
     ._id;
-  const isCurrentUser = currentUserId === (viewUser?._id || '');
+  const isCurrentUser = currentUserId === (viewUser?._id || "");
 
   return (
     <div className="profile-page">
@@ -116,15 +116,15 @@ const Me = () => {
               </div>
             )}
 
-            <h1>{viewUser?.name || ''}</h1>
+            <h1>{viewUser?.name || ""}</h1>
 
             <div className="profile-content-friend">
               <FaUserFriends />
               <h3>Friend of {viewUser?.friends.length || 0} users</h3>
             </div>
 
-            {JSON.parse(localStorage.getItem('userInfo')).data.user.role ===
-              'admin' && (
+            {JSON.parse(localStorage.getItem("userInfo")).data.user.role ===
+              "admin" && (
               <div className="profile-admin">
                 <Link to="/admin-chats">View Chats</Link>
                 <Link to="/view-reports">View Reports</Link>

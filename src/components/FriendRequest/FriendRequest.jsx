@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './FriendRequest.css';
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./FriendRequest.css";
 
 const FriendRequest = ({ item, setClick, click }) => {
   const [color, setColor] = useState(item.isResolved ? item.isResolved : false);
@@ -10,14 +10,14 @@ const FriendRequest = ({ item, setClick, click }) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/users/accept-request`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/users/accept-request`,
         { friendId: item._id, accept: true },
         config
       );
@@ -31,14 +31,14 @@ const FriendRequest = ({ item, setClick, click }) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/users/accept-request`,
+        `https://flagrush-backend-w1n5.onrender.com/api/v1/users/accept-request`,
         { friendId: item._id, accept: false },
         config
       );
@@ -52,12 +52,12 @@ const FriendRequest = ({ item, setClick, click }) => {
     <div className="friend-request-card">
       <div className="request-header">
         <img
-          src={item.photo || '/default-avatar.jpg'}
+          src={item.photo || "/default-avatar.jpg"}
           alt="user"
           className="request-avatar"
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = '/default-avatar.jpg';
+            e.target.src = "/default-avatar.jpg";
           }}
         />
         <p className="request-title">Friend Request</p>

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { ChatState } from '../../../context/ChatProvider';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { ChatState } from "../../../context/ChatProvider";
+import axios from "axios";
 // import ChatNameAvatar from "./ChatNameAvatar/ChatNameAvatar";
 
-import './ChatName.css';
+import "./ChatName.css";
 
-const ENDPOINT = 'http://localhost:5000/';
+const ENDPOINT = "https://flagrush-backend-w1n5.onrender.com/";
 var socket, selectedChatCompare;
 const ChatName = ({ onChatSelect }) => {
   const [loggedUser, setLoggedUser] = useState();
@@ -17,13 +17,13 @@ const ChatName = ({ onChatSelect }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('userInfo')).token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
       };
 
       const { data } = await axios.get(
-        'http://localhost:5000/api/v1/chat',
+        "https://flagrush-backend-w1n5.onrender.com/api/v1/chat",
         config
       );
       setChats(data);
@@ -33,7 +33,7 @@ const ChatName = ({ onChatSelect }) => {
   };
 
   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem('userInfo')));
+    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
   }, []);
 
@@ -52,7 +52,7 @@ const ChatName = ({ onChatSelect }) => {
           return (
             <div
               className={`chat-item ${
-                selectedChat?._id === chat._id ? 'active' : ''
+                selectedChat?._id === chat._id ? "active" : ""
               }`}
               key={chat._id}
               onClick={() => {
@@ -69,7 +69,7 @@ const ChatName = ({ onChatSelect }) => {
                       className="chat-avatar"
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = '/default-avatar.jpg';
+                        e.target.src = "/default-avatar.jpg";
                       }}
                     />
                     {/* <div className="online-status"></div> */}
@@ -78,7 +78,7 @@ const ChatName = ({ onChatSelect }) => {
               </div>
               <div>
                 <div className="chat-name">
-                  {partner?.name || 'Unknown User'}
+                  {partner?.name || "Unknown User"}
                 </div>
                 {/* <div className="last-message">
                   {chat.latestMessage?.content || 'No messages yet'}

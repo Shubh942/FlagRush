@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { BsGoogle, BsGithub, BsLinkedin } from 'react-icons/bs';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { BeatLoader } from 'react-spinners';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { ChatState } from '../../context/ChatProvider';
-import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
-import './Login.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BsGoogle, BsGithub, BsLinkedin } from "react-icons/bs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BeatLoader } from "react-spinners";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { ChatState } from "../../context/ChatProvider";
+import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { isUserLoggedIn } = ChatState();
@@ -24,26 +24,26 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!password || !email) {
-      toast.error('Please fill in all fields', { autoClose: 1000 });
+      toast.error("Please fill in all fields", { autoClose: 1000 });
       return;
     }
 
     try {
       setLoading(true);
       const { data } = await axios.post(
-        'http://localhost:5000/api/v1/users/login',
+        "https://flagrush-backend-w1n5.onrender.com/api/v1/users/login",
         { email, password },
-        { headers: { 'Content-Type': 'application/json' } }
+        { headers: { "Content-Type": "application/json" } }
       );
 
       if (data.token) {
-        localStorage.setItem('userInfo', JSON.stringify(data));
+        localStorage.setItem("userInfo", JSON.stringify(data));
         isUserLoggedIn.current = data;
-        navigate('/discussion');
-        toast.success('Logged in successfully!', { autoClose: 1000 });
+        navigate("/discussion");
+        toast.success("Logged in successfully!", { autoClose: 1000 });
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Login failed', {
+      toast.error(err.response?.data?.message || "Login failed", {
         autoClose: 1000,
       });
     } finally {
@@ -87,7 +87,7 @@ const Login = () => {
 
           <div className="input-group password-input">
             <input
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -113,7 +113,7 @@ const Login = () => {
             whileTap={{ scale: 0.98 }}
             disabled={loading}
           >
-            {loading ? <BeatLoader color="#fff" size={10} /> : 'Log In'}
+            {loading ? <BeatLoader color="#fff" size={10} /> : "Log In"}
           </motion.button>
 
           <div className="social-login">
